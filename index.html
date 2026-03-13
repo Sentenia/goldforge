@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoldForge — Mine · Stake · Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0618;--bg2:#060d1a;--card:rgba(10,6,24,0.6);--border:rgba(148,100,255,0.12);--text:#e8e4f0;--dim:rgba(200,190,230,0.4);--dim2:rgba(200,190,230,0.2);--dim3:rgba(200,190,230,0.1);
+  --pink:#f472b6;--gold:#facc15;--teal:#34d399;--purple:#c084fc;--orange:#fb923c;--burn:#B85C3A;--green:#6B8F71;
+  --pink-bg:rgba(244,114,182,0.06);--gold-bg:rgba(250,204,21,0.04);--teal-bg:rgba(52,211,153,0.05);--purple-bg:rgba(192,132,252,0.05);
+  --pink-bdr:rgba(244,114,182,0.15);--gold-bdr:rgba(250,204,21,0.15);--teal-bdr:rgba(52,211,153,0.15);--purple-bdr:rgba(192,132,252,0.15);
+  --chart-grid:#1F1C17;--chart-text:#504838;--chart-gold:#C8A960;--chart-light:#E8D48B;
+  --mono:'Space Mono',monospace;--sans:'Space Grotesk',sans-serif;
+}
+.light{
+  --bg:#f5f3ef;--bg2:#eae6df;--card:rgba(255,255,255,0.8);--border:rgba(0,0,0,0.08);--text:#1a1a2e;--dim:rgba(0,0,0,0.45);--dim2:rgba(0,0,0,0.25);--dim3:rgba(0,0,0,0.1);
+  --pink:#d63384;--gold:#b8860b;--teal:#0f7b5f;--purple:#7c3aed;--orange:#c2410c;--burn:#a0522d;--green:#2e7d4f;
+  --pink-bg:rgba(214,51,132,0.06);--gold-bg:rgba(184,134,11,0.06);--teal-bg:rgba(15,123,95,0.06);--purple-bg:rgba(124,58,237,0.06);
+  --pink-bdr:rgba(214,51,132,0.2);--gold-bdr:rgba(184,134,11,0.2);--teal-bdr:rgba(15,123,95,0.2);--purple-bdr:rgba(124,58,237,0.2);
+  --chart-grid:rgba(0,0,0,0.06);--chart-text:rgba(0,0,0,0.3);--chart-gold:#8B6914;--chart-light:#9a7d2e;
+}
+body{background:linear-gradient(135deg,var(--bg) 0%,var(--bg2) 100%);color:var(--text);font-family:var(--sans);min-height:100vh;transition:background .3s,color .3s}
+nav{display:flex;align-items:center;justify-content:space-between;padding:12px 32px;border-bottom:1px solid var(--border);background:var(--card);position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+.nav-logo{font-family:var(--mono);font-weight:700;font-size:16px;letter-spacing:2px;cursor:pointer}
+.g1{color:var(--purple)}.g2{color:var(--pink)}.g3{color:var(--orange)}.g4{color:var(--gold)}
+.nav-dot{display:inline-block;width:6px;height:6px;background:var(--teal);border-radius:50%;margin-left:5px;vertical-align:middle}
+.nav-tabs{display:flex;gap:3px}
+.nav-tab{font-size:10px;letter-spacing:2px;padding:7px 18px;border-radius:6px;border:1px solid transparent;cursor:pointer;font-family:var(--mono);font-weight:700;color:var(--dim);background:transparent;transition:all .2s}
+.nav-tab:hover{color:var(--text)}.nav-tab.active{background:var(--purple-bg);border-color:var(--purple-bdr);color:var(--purple)}
+.nav-right{display:flex;gap:8px;align-items:center}
+.theme-btn{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:var(--card);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.theme-btn:hover{border-color:var(--purple)}
+.nav-btn{font-size:10px;letter-spacing:2px;padding:7px 16px;border-radius:6px;border:none;cursor:pointer;font-family:var(--mono);font-weight:700;background:linear-gradient(90deg,#7c3aed,#c026d3);color:#fff}
+.page{display:none;padding:20px 32px 28px;max-width:880px;margin:0 auto}.page.active{display:block}
+.page-header{display:flex;align-items:flex-end;gap:12px;margin-bottom:16px}
+.page-header h1{font-family:var(--mono);font-weight:700;font-size:24px;letter-spacing:3px;background:linear-gradient(90deg,var(--purple),var(--pink),var(--orange),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.page-header p{font-size:10px;color:var(--dim);letter-spacing:1px;padding-bottom:3px}
+
+/* Hero cards */
+.hero-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:stretch;margin-bottom:16px}
+.hero-box{border-radius:14px;padding:24px;text-align:center;transition:background .3s,border .3s}
+.hb-pay{background:var(--pink-bg);border:1px solid var(--pink-bdr)}
+.hb-earn{background:var(--teal-bg);border:1px solid var(--teal-bdr)}
+.hb-label{font-size:11px;letter-spacing:5px;font-family:var(--mono);margin-bottom:8px}
+.hbl-p{color:var(--pink)}.hbl-e{color:var(--teal)}
+.hb-val{font-family:var(--mono);font-weight:700;font-size:40px;line-height:1}
+.hbv-p{color:var(--pink)}.hbv-e{color:var(--teal)}
+.hb-sub{font-size:11px;margin-top:8px;font-family:var(--mono)}
+.hbs-p{color:var(--pink);opacity:.5}.hbs-e{color:var(--teal);opacity:.5}
+.hero-arrow{display:flex;align-items:center;justify-content:center;padding:0 20px;font-size:28px;color:var(--dim3)}
+.roi-bar{text-align:center;margin-bottom:20px}
+.roi-badge{font-family:var(--mono);font-weight:700;font-size:22px;display:inline-block;padding:6px 24px;border-radius:10px}
+.roi-pos{color:var(--teal);background:var(--teal-bg);border:1px solid var(--teal-bdr)}
+.roi-neg{color:#f87171;background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.15)}
+.roi-label{font-size:8px;letter-spacing:3px;color:var(--dim2);font-family:var(--mono);margin-top:4px}
+
+/* Inputs */
+.ig{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.ib{border-radius:12px;padding:12px 14px;transition:background .3s,border .3s}
+.ib-pk{background:var(--pink-bg);border:1px solid var(--pink-bdr)}.ib-gd{background:var(--gold-bg);border:1px solid var(--gold-bdr)}
+.ib-tl{background:var(--teal-bg);border:1px solid var(--teal-bdr)}.ib-pr{background:var(--purple-bg);border:1px solid var(--purple-bdr)}
+.ib-lbl{font-size:8px;letter-spacing:3px;margin-bottom:6px;font-family:var(--mono);display:flex;align-items:center;justify-content:space-between}
+.lp{color:var(--pink)}.lg{color:var(--gold)}.lt{color:var(--teal)}.lv{color:var(--purple)}
+.ri{display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.rl{font-size:10px;color:var(--dim);flex:1}
+.ni{width:85px;font-family:var(--mono);font-size:13px;font-weight:700;background:rgba(0,0,0,0.15);border-radius:5px;padding:4px 6px;outline:none;text-align:center;color:inherit;border:1px solid var(--border);transition:background .3s}
+.light .ni{background:rgba(0,0,0,0.04)}
+.ni:focus{border-color:var(--purple)}
+.ni::-webkit-inner-spin-button{-webkit-appearance:none}
+.mx{font-size:7px;padding:3px 6px;border-radius:3px;cursor:pointer;font-family:var(--mono);font-weight:700;background:var(--pink-bg);color:var(--pink);border:1px solid var(--pink-bdr)}
+.sl{width:100%;-webkit-appearance:none;height:2px;border-radius:1px;outline:none;margin:4px 0 2px;background:var(--dim3)}
+.sl::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;border-radius:50%;cursor:pointer;background:var(--purple)}
+.se{display:flex;justify-content:space-between;font-size:7px;color:var(--dim3)}
+.mb{font-size:11px;font-family:var(--mono);font-weight:700;color:var(--gold);margin-top:3px}
+.isub{font-size:8px;margin-top:3px;color:var(--dim)}
+
+/* Help */
+.hb{width:13px;height:13px;border-radius:50%;border:1px solid var(--border);background:var(--card);font-size:7px;color:var(--dim);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.ht{font-size:8px;color:var(--dim);background:var(--card);border-radius:4px;padding:5px 7px;margin-bottom:5px;line-height:1.4;display:none;border:1px solid var(--border)}.ht.open{display:block}
+
+/* Stat boxes */
+.sr{display:flex;gap:6px;margin-bottom:14px}
+.sb{flex:1;text-align:center;border-radius:10px;padding:10px 6px;transition:background .3s,border .3s}
+.sl2{font-size:7px;letter-spacing:2px;font-family:var(--mono);margin-bottom:2px}
+.sv2{font-size:20px;font-weight:700;font-family:var(--mono);line-height:1}
+.ss2{font-size:7px;font-family:var(--mono);margin-top:2px}
+
+/* Tiers */
+.tg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:14px}
+.tc{border-radius:8px;padding:8px 2px;text-align:center;cursor:pointer;border:1px solid var(--border);background:var(--card);transition:all .15s}
+.tc:hover{border-color:var(--purple-bdr)}.tc.sel{border-color:var(--purple);background:var(--purple-bg);box-shadow:0 0 12px rgba(124,58,237,0.1)}
+.te{font-size:14px}.tl{font-size:11px;font-weight:700;font-family:var(--mono);margin-top:1px}
+.td{font-size:7px;color:var(--dim2);font-family:var(--mono)}.tp{font-size:9px;font-weight:700;font-family:var(--mono);margin-top:3px}.to{font-size:6px;color:var(--dim3);font-family:var(--mono)}
+
+/* Details */
+.db{font-size:8px;letter-spacing:2px;padding:4px 14px;border-radius:5px;border:1px solid var(--border);background:var(--card);color:var(--dim);cursor:pointer;font-family:var(--mono);font-weight:700}
+.dp{display:none;border-radius:10px;padding:12px 16px;background:var(--card);border:1px solid var(--border);margin-bottom:12px}.dp.open{display:block}
+.dr{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--dim3)}
+.dk{font-size:9px;color:var(--dim)}.dv{font-size:10px;font-family:var(--mono);font-weight:700}
+
+/* Status bar */
+.stb{display:flex;gap:4px;margin-bottom:12px}
+.stp{flex:1;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:5px;text-align:center;transition:background .3s}
+.stl{font-size:6px;color:var(--dim2);font-family:var(--mono);letter-spacing:1px;margin-bottom:1px}
+.stv{font-size:11px;font-weight:700;font-family:var(--mono)}
+
+/* Dashboard */
+.dash-wrap{max-width:780px;margin:0 auto}
+.chart{margin-bottom:24px}
+.chart-title{font-size:12px;font-weight:700;color:var(--chart-gold)}
+.chart-sub{font-size:8px;color:var(--dim);font-family:var(--mono);margin-top:2px}
+.chart svg{width:100%;height:auto;display:block;margin-top:5px}
+.chart-legend{display:flex;gap:12px;margin-top:3px;padding-left:50px;flex-wrap:wrap}
+.chart-legend span{font-size:7px;color:var(--dim);font-family:var(--mono);display:flex;align-items:center;gap:4px}
+.chart-legend i{width:8px;height:2px;border-radius:1px;display:inline-block}
+.explain{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:20px;transition:background .3s}
+.explain-title{font-size:10px;font-weight:700;color:var(--chart-gold);margin-bottom:6px;font-family:var(--mono)}
+.explain-body{font-size:9px;color:var(--dim);font-family:var(--mono);line-height:1.7}
+.explain-body .hl{color:var(--chart-gold)}.explain-body .hlb{color:var(--burn)}
+.d-tiers{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:20px}
+.d-tier{background:var(--card);border-radius:7px;padding:8px 3px;text-align:center;border:1px solid var(--border)}
+.toggle-wrap{text-align:center;margin-bottom:14px}
+.toggle-btn{font-size:9px;letter-spacing:2px;padding:6px 20px;border-radius:6px;border:1px solid var(--border);background:var(--card);color:var(--dim);cursor:pointer;font-family:var(--mono);font-weight:700;transition:all .2s}
+.toggle-btn:hover,.toggle-btn.active{border-color:var(--purple);color:var(--purple)}
+.params{display:none;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:16px}.params.show{display:block}
+.params-section{font-size:10px;font-weight:700;color:var(--chart-gold);margin-bottom:10px;font-family:var(--mono)}
+.params-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
+.param{margin-bottom:10px}
+.param-head{display:flex;justify-content:space-between;margin-bottom:2px}
+.param-label{font-size:9px;color:var(--dim);font-family:var(--mono)}
+.param-val{font-size:9px;color:var(--chart-gold);font-family:var(--mono);font-weight:700}
+.param input[type=range]{width:100%;height:3px;-webkit-appearance:none;background:var(--dim3);border-radius:2px;outline:none}
+.param input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--chart-gold);cursor:pointer}
+.hint{font-size:7px;color:var(--dim3);font-family:var(--mono);margin-top:1px}
+.sep{border-top:1px solid var(--border);margin:12px 0;padding-top:12px}
+.tbl{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:9px}
+.tbl th{padding:4px 6px;text-align:left;color:var(--dim2);font-size:7px;letter-spacing:1px;border-bottom:1px solid var(--border)}
+.tbl td{padding:4px 6px;border-bottom:1px solid var(--dim3)}
+
+footer{text-align:center;font-size:7px;color:var(--dim3);letter-spacing:2px;padding:10px 32px;border-top:1px solid var(--border);font-family:var(--mono)}
+@media(max-width:768px){nav{padding:10px 12px;flex-wrap:wrap;gap:5px}.page{padding:12px}.hero-row{grid-template-columns:1fr;gap:8px}.hero-arrow{transform:rotate(90deg);padding:4px 0}.hb-val{font-size:26px}.ig{grid-template-columns:1fr}.tg,.d-tiers{grid-template-columns:repeat(4,1fr)}.sr{flex-wrap:wrap}.params-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-logo"><span class="g1">G</span><span class="g2">O</span><span class="g3">L</span><span class="g4">D</span><span style="color:var(--dim2)">FORGE</span><span class="nav-dot"></span></div>
+  <div class="nav-tabs"><button class="nav-tab active" onclick="showTab('mine')">MINE</button><button class="nav-tab" onclick="showTab('stake')">STAKE</button><button class="nav-tab" onclick="showTab('dash')">DASHBOARD</button></div>
+  <div class="nav-right"><button class="theme-btn" onclick="toggleTheme()" id="theme-icon">🌙</button><button class="nav-btn">CONNECT</button></div>
+</nav>
+
+<!-- ═══ MINE ═══ -->
+<div class="page active" id="page-mine">
+  <div class="page-header"><h1>MINE</h1><p>Burn XEN → Mint GOLD · Longer locks earn exponentially more</p></div>
+  <div class="stb">
+    <div class="stp"><div class="stl">MINTED</div><div class="stv" style="color:var(--purple)" id="m-mt">0%</div></div>
+    <div class="stp"><div class="stl">SUPPLY</div><div class="stv" style="color:var(--gold)" id="m-sp">—</div></div>
+    <div class="stp"><div class="stl">COST/BATCH</div><div class="stv" style="color:var(--teal)" id="m-cb">—</div></div>
+    <div class="stp"><div class="stl">EMISSION</div><div class="stv" style="color:var(--pink)" id="m-em">—</div></div>
+  </div>
+  <div class="hero-row">
+    <div class="hero-box hb-pay"><div class="hb-label hbl-p">YOU PAY</div><div class="hb-val hbv-p" id="mp">$0</div><div class="hb-sub hbs-p" id="mps">ETH + XEN</div></div>
+    <div class="hero-arrow">→</div>
+    <div class="hero-box hb-earn"><div class="hb-label hbl-e">YOU EARN</div><div class="hb-val hbv-e" id="me">0 GOLD</div><div class="hb-sub hbs-e" id="mes">worth $0</div></div>
+  </div>
+  <div class="roi-bar"><div class="roi-badge roi-pos" id="mr">+0% ROI</div><div class="roi-label">RETURN ON INVESTMENT</div></div>
+  <div class="ig">
+    <div class="ib ib-pr"><div class="ib-lbl lv">PROTOCOL DAY <button class="hb" onclick="t('hd')">?</button></div><div class="ht" id="hd">Day 1=launch. Higher=more minted, costlier.</div><div class="ri"><div class="rl">Day</div><input class="ni" type="number" id="di" value="1" min="1" max="5000" oninput="oD()"></div><input type="range" class="sl" id="ds" min="1" max="5000" value="1" oninput="oDS()"><div class="se"><span>1</span><span>5000</span></div></div>
+    <div class="ib ib-pk"><div class="ib-lbl lp">BATCHES <button class="hb" onclick="t('hb1')">?</button></div><div class="ht" id="hb1">Each burns 10M XEN. More=bigger share.</div><div class="ri"><div class="rl">Qty</div><input class="ni" type="number" id="bi" value="10" min="1" max="1000" oninput="oB()"><button class="mx" onclick="sM('b')">MAX</button></div><input type="range" class="sl" id="bs" min="1" max="1000" value="10" oninput="oBS()"><div class="se"><span>1</span><span>1K</span></div><div class="isub" id="xe">= 100M XEN</div></div>
+    <div class="ib ib-gd"><div class="ib-lbl lg">MINER LENGTH <button class="hb" onclick="t('hl1')">?</button></div><div class="ht" id="hl1">Cubic multiplier. 1d=1×, 369d≈1.65×, 888d=10×.</div><div class="ri"><div class="rl">Days</div><input class="ni" type="number" id="li" value="369" min="1" max="888" oninput="oL()"><button class="mx" onclick="sM('l')">MAX</button></div><input type="range" class="sl" id="ls" min="1" max="888" value="369" oninput="oLS()"><div class="se"><span>1d (1×)</span><span>888d (10×)</span></div><div class="mb" id="mmb">1.65×</div></div>
+    <div class="ib ib-tl"><div class="ib-lbl lt">COMPETITION + PRICE</div><div class="ri"><div class="rl">Others</div><input class="ni" type="number" id="ci" value="200" min="0" max="50000" oninput="oC()"></div><input type="range" class="sl" id="cs" min="0" max="10000" value="200" oninput="oCS()"><div class="se"><span>Just you</span><span>10K</span></div><div style="margin-top:6px" class="ri"><div class="rl">GOLD $</div><input class="ni" style="color:var(--teal)" type="number" id="pi" value="0.10" step="0.001" min="0.001" oninput="oP()"></div></div>
+  </div>
+  <div style="text-align:center;margin-bottom:8px"><button class="db" onclick="toggleDet('md')">▼ DETAILS</button></div>
+  <div class="dp" id="md">
+    <div class="dr"><div class="dk">ETH fee</div><div class="dv" style="color:var(--teal)" id="d1">—</div></div>
+    <div class="dr"><div class="dk">XEN burned</div><div class="dv" style="color:var(--pink)" id="d2">—</div></div>
+    <div class="dr"><div class="dk">XEN cost</div><div class="dv" style="color:var(--dim2)" id="d3">—</div></div>
+    <div class="dr"><div class="dk">Multiplier</div><div class="dv" style="color:var(--gold)" id="d4">—</div></div>
+    <div class="dr"><div class="dk">Share</div><div class="dv" style="color:var(--purple)" id="d5">—</div></div>
+    <div class="dr"><div class="dk">Cost/GOLD</div><div class="dv" style="color:var(--teal)" id="d6">—</div></div>
+    <div class="dr"><div class="dk">Matures</div><div class="dv" style="color:var(--purple)" id="d7">—</div></div>
+    <div style="border-top:1px solid var(--border);margin:6px 0;padding-top:6px;font-size:7px;letter-spacing:2px;color:var(--dim3);font-family:var(--mono)">TREASURY SPLIT</div>
+    <div class="dr"><div class="dk">→ Buy & Burn</div><div class="dv" style="color:var(--pink)" id="d8">—</div></div>
+    <div class="dr"><div class="dk">→ Vault</div><div class="dv" style="color:var(--teal)" id="d9">—</div></div>
+    <div class="dr"><div class="dk">→ Stakers</div><div class="dv" style="color:var(--gold)" id="d10">—</div></div>
+    <div class="dr"><div class="dk">→ Miners</div><div class="dv" style="color:var(--purple)" id="d11">—</div></div>
+  </div>
+</div>
+
+<!-- ═══ STAKE ═══ -->
+<div class="page" id="page-stake">
+  <div class="page-header"><h1>STAKE</h1><p>Lock GOLD · Earn ETH · 7 tiers · Rank rewards Day 1</p></div>
+  <div class="tg" id="tg"></div>
+  <div class="hero-row">
+    <div class="hero-box hb-pay"><div class="hb-label hbl-p">YOU STAKE</div><div class="hb-val hbv-p" id="sp">$0</div><div class="hb-sub hbs-p" id="sps">0 GOLD</div></div>
+    <div class="hero-arrow">→</div>
+    <div class="hero-box hb-earn"><div class="hb-label hbl-e">YOU EARN</div><div class="hb-val hbv-e" id="se2">0 ETH</div><div class="hb-sub hbs-e" id="ses">$0/cycle</div></div>
+  </div>
+  <div class="sr">
+    <div class="sb" style="background:var(--purple-bg);border:1px solid var(--purple-bdr)"><div class="sl2" style="color:var(--purple)">RANK</div><div class="sv2" style="color:var(--purple)" id="sr1">1B</div><div class="ss2" style="color:var(--purple);opacity:.4" id="sr1s">Day 1</div></div>
+    <div class="sb" style="background:var(--gold-bg);border:1px solid var(--gold-bdr)"><div class="sl2" style="color:var(--gold)">WEIGHT</div><div class="sv2" style="color:var(--gold)" id="sw1">—</div><div class="ss2" style="color:var(--gold);opacity:.4" id="sw1s">rank×GOLD</div></div>
+    <div class="sb" style="background:var(--pink-bg);border:1px solid var(--pink-bdr)"><div class="sl2" style="color:var(--pink)">PARITY</div><div class="sv2" style="color:var(--pink)" id="sp1">$100</div><div class="ss2" style="color:var(--pink);opacity:.4" id="sp1s">1.0x</div></div>
+  </div>
+  <div class="ig">
+    <div class="ib ib-gd"><div class="ib-lbl lg">GOLD TO STAKE</div><div class="ri"><div class="rl">Amount</div><input class="ni" type="number" id="sa" value="10000" min="1" oninput="cS()"></div><div class="ri"><div class="rl">Price $</div><input class="ni" style="color:var(--teal)" type="number" id="sx" value="0.10" step="0.01" min="0.001" oninput="cS()"></div></div>
+    <div class="ib ib-pr"><div class="ib-lbl lv">ENTRY DAY <button class="hb" onclick="t('he1')">?</button></div><div class="ht" id="he1">Rank=1B Day 1, decays daily. Later=need more GOLD.</div><div class="ri"><div class="rl">Day</div><input class="ni" type="number" id="ed" value="1" min="1" max="3888" oninput="oE()"></div><input type="range" class="sl" id="es" min="1" max="3888" value="1" oninput="oES()"><div class="se"><span>1</span><span>3888</span></div></div>
+    <div class="ib ib-tl" style="grid-column:span 2"><div class="ib-lbl lt">ETH IN TIER POOL (per cycle)</div><div class="ri"><div class="rl">ETH</div><input class="ni" type="number" id="pe" value="10" step="0.1" min="0.1" oninput="cS()"></div><input type="range" class="sl" id="ps" min="1" max="500" value="100" oninput="oPS()"><div class="se"><span>0.1 quiet</span><span>50 viral</span></div></div>
+  </div>
+  <div style="text-align:center;margin-bottom:8px"><button class="db" onclick="toggleDet('sd')">▼ LATE ENTRY TABLE</button></div>
+  <div class="dp" id="sd"><table class="tbl"><thead><tr><th>WHEN</th><th>RANK</th><th>PARITY $</th><th>MULT</th></tr></thead><tbody id="ltbl"></tbody></table></div>
+</div>
+
+<!-- ═══ DASHBOARD ═══ -->
+<div class="page" id="page-dash">
+  <div class="page-header"><h1>DASHBOARD</h1><p>Full tokenomics model · Dual splits · 25-year simulation</p></div>
+  <div class="dash-wrap" id="dash-app"></div>
+</div>
+
+<footer>160,750,000 GOLD · ONE TOKEN PER TROY OZ OF EARTH'S REMAINING GOLD · NOT FINANCIAL ADVICE</footer>
+
+<script>
+// ═══ THEME ═══
+function toggleTheme(){document.body.classList.toggle('light');const l=document.body.classList.contains('light');document.getElementById('theme-icon').textContent=l?'☀':'🌙';if(document.getElementById('page-dash').classList.contains('active'))renderDash()}
+function t(i){document.getElementById(i).classList.toggle('open')}
+function toggleDet(i){document.getElementById(i).classList.toggle('open')}
+function showTab(t){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById('page-'+t).classList.add('active');document.querySelector(`[onclick="showTab('${t}')"]`).classList.add('active');if(t==='dash')renderDash()}
+
+// ═══ CONSTANTS ═══
+const C=160750000,XPB=1e7,XP=0.0000000077,EP=2000,BC=0.0001,CE=2.8,DK=0.22;
+const BS=0.85,BE=0,BM=0.35,BST=10,SS=0.80,SE=0.15;
+const TI=[{d:8,l:"8d",e:"⚡",c:"pk"},{d:28,l:"28d",e:"🌙",c:"pr"},{d:90,l:"90d",e:"🔥",c:"og"},{d:369,l:"369d",e:"⚔",c:"gd"},{d:888,l:"888d",e:"🛡",c:"tl"},{d:1689,l:"1689d",e:"👑",c:"pr"},{d:3888,l:"3888d",e:"💎",c:"gd"}];
+const cMap={pk:'var(--pink)',pr:'var(--purple)',og:'var(--orange)',gd:'var(--gold)',tl:'var(--teal)'};
+const PW=1.65,RS=1e9,RD=0.0008;
+const tR=TI.map(t=>Math.pow(t.d,PW)),tS=tR.reduce((a,b)=>a+b,0),tP=tR.map(w=>w/tS);
+let sT=3;
+
+function fmt(n){return n>=1e9?(n/1e9).toFixed(2)+'B':n>=1e6?(n/1e6).toFixed(2)+'M':n>=1e3?(n/1e3).toFixed(2)+'K':n<1&&n>0?n.toFixed(4):n.toFixed(2)}
+function usd(n){if(n>=1e6)return'$'+(n/1e6).toFixed(2)+'M';if(n>=1e3)return'$'+(n/1e3).toFixed(2)+'K';if(n<0.01&&n>0)return'$'+n.toFixed(4);return'$'+n.toFixed(2)}
+function pct(n){return(n*100).toFixed(1)+'%'}
+function co(n){return Math.round(n).toLocaleString()}
+function mult(d){return 1+9*Math.pow(d/888,3)}
+function gSt(day){let m=0;for(let i=0;i<day/30;i++)m+=(C-m)*(1-Math.exp(-DK/12));const p=m/C,dl=(C-m)*(1-Math.exp(-DK/365)),cb=BC*Math.pow(CE,p);const s1=1/(1+Math.exp(-12*(p-0.4))),sp=SS+(SE-SS)*s1;const s2=1/(1+Math.exp(-BST*(p-BM))),bp=BS+(BE-BS)*s2;return{m,p,dl,cb,sp,mp:1-sp,bp,vp:1-bp}}
+
+// ═══ MINE ═══
+function oDS(){document.getElementById('di').value=document.getElementById('ds').value;cM()}
+function oD(){document.getElementById('ds').value=Math.min(parseInt(document.getElementById('di').value)||1,5000);cM()}
+function oBS(){document.getElementById('bi').value=document.getElementById('bs').value;cM()}
+function oB(){document.getElementById('bs').value=Math.min(parseInt(document.getElementById('bi').value)||1,1000);cM()}
+function oLS(){document.getElementById('li').value=document.getElementById('ls').value;cM()}
+function oL(){document.getElementById('ls').value=Math.min(parseInt(document.getElementById('li').value)||1,888);cM()}
+function oCS(){document.getElementById('ci').value=document.getElementById('cs').value;cM()}
+function oC(){document.getElementById('cs').value=Math.min(parseInt(document.getElementById('ci').value)||0,10000);cM()}
+function oP(){cM()}
+function sM(x){if(x==='b'){document.getElementById('bi').value=1000;document.getElementById('bs').value=1000}else{document.getElementById('li').value=888;document.getElementById('ls').value=888}cM()}
+
+function cM(){
+  const day=Math.max(1,+document.getElementById('di').value||1),b=Math.max(1,+document.getElementById('bi').value||1),lk=Math.max(1,+document.getElementById('li').value||1),comp=Math.max(0,+document.getElementById('ci').value||0),pr=+(document.getElementById('pi').value)||0.10,m=mult(lk);
+  const st=gSt(day),tb=b+comp,sh=b/tb,gold=st.dl*sh*m,gv=gold*pr;
+  const ef=b*st.cb,eu=ef*EP,xb=b*XPB,xu=xb*XP,tc=eu+xu,roi=tc>0?(gv-tc)/tc:0;
+  document.getElementById('mp').textContent=usd(tc);document.getElementById('mps').textContent=ef.toFixed(4)+' ETH + '+fmt(xb)+' XEN';
+  document.getElementById('me').textContent=fmt(gold)+' GOLD';document.getElementById('mes').textContent='worth '+usd(gv);
+  const re=document.getElementById('mr');re.textContent=(roi>=0?'+':'')+(roi*100).toFixed(1)+'% ROI';re.className='roi-badge '+(roi>=0?'roi-pos':'roi-neg');
+  document.getElementById('m-mt').textContent=pct(st.p);document.getElementById('m-sp').textContent=fmt(st.m)+'/160.75M';
+  document.getElementById('m-cb').textContent=st.cb.toFixed(6);document.getElementById('m-em').textContent=fmt(st.dl)+'/d';
+  document.getElementById('mmb').textContent=m.toFixed(2)+'× multiplier';document.getElementById('xe').textContent='= '+co(xb)+' XEN';
+  document.getElementById('d1').textContent=ef.toFixed(4)+' ETH ('+usd(eu)+')';document.getElementById('d2').textContent=fmt(xb);
+  document.getElementById('d3').textContent=usd(xu);document.getElementById('d4').textContent=m.toFixed(2)+'×';
+  document.getElementById('d5').textContent=pct(sh);document.getElementById('d6').textContent=gold>0?usd(tc/gold)+'/GOLD':'—';
+  document.getElementById('d7').textContent='Day '+(day+lk);
+  document.getElementById('d8').textContent=pct(st.bp);document.getElementById('d9').textContent=pct(st.vp);
+  document.getElementById('d10').textContent=pct(st.sp);document.getElementById('d11').textContent=pct(st.mp);
+}
+
+// ═══ STAKE ═══
+function bT(){document.getElementById('tg').innerHTML=TI.map((t,i)=>`<div class="tc ${i===sT?'sel':''}" onclick="selT(${i})"><div class="te">${t.e}</div><div class="tl" style="color:${cMap[t.c]}">${t.l}</div><div class="td">${t.d<365?t.d+'d':(t.d/365).toFixed(1)+'y'}</div><div class="tp" style="color:${cMap[t.c]}">${(tP[i]*100).toFixed(1)}%</div><div class="to">of fees</div></div>`).join('')}
+function selT(i){sT=i;bT();cS()}
+function oE(){document.getElementById('es').value=Math.min(+document.getElementById('ed').value||1,3888);cS()}
+function oES(){document.getElementById('ed').value=document.getElementById('es').value;cS()}
+function oPS(){document.getElementById('pe').value=(+document.getElementById('ps').value/10).toFixed(1);cS()}
+
+function cS(){
+  const tier=TI[sT],amt=Math.max(1,+(document.getElementById('sa').value)||1),pr=+(document.getElementById('sx').value)||0.10,ed=Math.max(1,+document.getElementById('ed').value||1),pe=Math.max(0.1,+(document.getElementById('pe').value)||1);
+  const sv=amt*pr,rk=RS*Math.exp(-RD*(ed-1)),rp=(rk/RS)*100,wt=rk*amt;
+  const aR=RS*Math.exp(-RD*(ed*0.5)),oW=aR*5000*1000,tW=wt+oW,ps=wt/tW,po=pe*ps,pu=po*EP;
+  const gn=(RS/rk)*amt,pc=gn*pr,mx=RS/rk;
+  document.getElementById('sp').textContent=usd(sv);document.getElementById('sps').textContent=co(amt)+' GOLD × '+tier.l;
+  document.getElementById('se2').textContent=po.toFixed(4)+' ETH';document.getElementById('ses').textContent=usd(pu)+'/cycle · '+pct(ps);
+  document.getElementById('sr1').textContent=co(Math.round(rk));document.getElementById('sr1s').textContent='Day '+ed+' · '+rp.toFixed(1)+'%';
+  document.getElementById('sw1').textContent=wt>=1e12?(wt/1e12).toFixed(2)+'T':wt>=1e9?(wt/1e9).toFixed(2)+'B':fmt(wt);document.getElementById('sw1s').textContent=co(Math.round(rk))+' × '+co(amt);
+  document.getElementById('sp1').textContent=usd(pc);document.getElementById('sp1s').textContent=mx.toFixed(1)+'x · '+co(Math.round(gn))+' GOLD';
+  const ent=[{d:1,l:'Day 1'},{d:90,l:'D90'},{d:365,l:'Y1'},{d:730,l:'Y2'},{d:1095,l:'Y3'},{d:1825,l:'Y5'},{d:2555,l:'Y7'}];
+  document.getElementById('ltbl').innerHTML=ent.map((e,i)=>{const r=RS*Math.exp(-RD*(e.d-1)),p=(RS*100)/r;return`<tr><td style="color:${i===0?'var(--purple)':'inherit'};font-weight:${i===0?700:400}">${e.l}</td><td style="color:var(--gold)">${(r/1e6).toFixed(0)}M</td><td style="color:${p>50000?'#f87171':p>500?'var(--gold)':'var(--teal)'};font-weight:700">$${Math.round(p).toLocaleString()}</td><td style="color:var(--dim)">${(p/100).toFixed(1)}x</td></tr>`}).join('');
+}
+
+// ═══ DASHBOARD ═══
+const DTIERS=[{days:8,label:"8d",emoji:"⚡",color:"#f472b6"},{days:28,label:"28d",emoji:"🌙",color:"#c084fc"},{days:90,label:"90d",emoji:"🔥",color:"#fb923c"},{days:369,label:"369d",emoji:"⚔",color:"#facc15"},{days:888,label:"888d",emoji:"🛡",color:"#34d399"},{days:1689,label:"1689d",emoji:"👑",color:"#c084fc"},{days:3888,label:"3888d",emoji:"💎",color:"#facc15"}];
+let DP={decay:0.22,stakerS:0.80,stakerE:0.15,costEsc:2.8,apr:0.038,years:25,bnbS:0.85,bnbE:0,bnbMid:0.35,bnbSteep:10,poolPow:1.65,rankDec:0.0008};
+function dSim(){
+  const steps=DP.years*12,data=[];let minted=0,vault=0,staked=0,cumY=0,cumD=0,gB=0,yC=null,bC=null;
+  for(let i=0;i<=steps;i++){const t=i/12,prog=minted/C,rem=C-minted,em=rem*(1-Math.exp(-DP.decay/12));minted+=em;
+  const cost=0.00005*Math.pow(DP.costEsc,prog),ethIn=em*cost;const s1=1/(1+Math.exp(-12*(prog-0.4))),sPct=DP.stakerS+(DP.stakerE-DP.stakerS)*s1;
+  const s2=1/(1+Math.exp(-DP.bnbSteep*(prog-DP.bnbMid))),bPct=DP.bnbS+(DP.bnbE-DP.bnbS)*s2;const eBnb=ethIn*bPct,eV=ethIn*(1-bPct);vault+=eV;staked=vault;
+  const yld=staked*(DP.apr/12);cumY+=yld;cumD+=eBnb;const burned=cost>0?(eBnb+yld)/cost:0;gB+=burned;const circ=Math.max(0,minted-gB),nav=circ>0?vault/circ:0;
+  if(!yC&&yld>eBnb&&i>2)yC=i;if(!bC&&(1-bPct)>bPct&&i>0)bC=i;
+  data.push({month:i,year:t,label:t%1===0?`Y${Math.floor(t)}`:"",minted:minted/1e6,emission:em/1e3,prog:prog*100,sPct:sPct*100,mPct:(1-sPct)*100,bPct:bPct*100,vPct:(1-bPct)*100,mYield:yld,mDirect:eBnb,cumY,cumD,vault,cost:cost*1e6,circ:circ/1e6,burned:gB/1e6,nav:nav*1e6})}
+  return{data,yC,bC}
+}
+function dLadder(){const days=DTIERS.map(t=>t.days),raw=days.map(d=>Math.pow(d,DP.poolPow)),tot=raw.reduce((a,b)=>a+b,0),pcts=raw.map(w=>(w/tot)*100);
+const S=1e9,rData=[];for(let d=0;d<=3888;d+=8){const r=S*Math.exp(-DP.rankDec*d);rData.push({day:d,year:d/365,label:d%730===0?`Y${Math.floor(d/365)}`:"",rank:r/1e6,mult:Math.min(S/r,500)})}
+const sc=[0,90,365,730,1095,1825,2555].map(d=>{const r=S*Math.exp(-DP.rankDec*d),p=(S*100)/r;return{day:d,label:d===0?"Day 1":d<365?`D${d}`:`Y${(d/365).toFixed(1)}`,rankM:(r/1e6).toFixed(0)+"M",sw:r*100,cost:Math.round(p),mx:(p/100).toFixed(1)}});
+return{pcts,rData,sc}}
+
+function buildDChart(data,lines,opts){
+  const W=700,H=opts.h||180,pad={t:12,r:16,b:28,l:50},cW=W-pad.l-pad.r,cH=H-pad.t-pad.b;
+  const vals=opts.stack?data.map(d=>lines.reduce((s,l)=>s+(d[l.k]||0),0)):lines.flatMap(l=>data.map(d=>d[l.k]||0));
+  const mxY=Math.max(...vals)*1.12||1,xP=i=>pad.l+(i/Math.max(data.length-1,1))*cW,yP=v=>pad.t+cH-(v/mxY)*cH;
+  const fY=opts.fmtY||(v=>v>=1e6?(v/1e6).toFixed(1)+"M":v>=1e3?(v/1e3).toFixed(1)+"K":v>=1?v.toFixed(1):v.toFixed(2));
+  const uid="d"+Math.random().toString(36).slice(2,5);
+  const gridC=getComputedStyle(document.documentElement).getPropertyValue('--chart-grid').trim();
+  const textC=getComputedStyle(document.documentElement).getPropertyValue('--chart-text').trim();
+  const pd=(k,b)=>data.map((d,i)=>{const v=b?(d[b]||0)+(d[k]||0):(d[k]||0);return`${i===0?"M":"L"}${xP(i).toFixed(1)},${yP(v).toFixed(1)}`}).join("");
+  const ad=(k,b)=>{const top=pd(k,b);if(b){return top+[...data].reverse().map((d,i)=>`L${xP(data.length-1-i).toFixed(1)},${yP(d[b]||0).toFixed(1)}`).join("")+"Z"}return top+`L${xP(data.length-1).toFixed(1)},${yP(0).toFixed(1)}L${xP(0).toFixed(1)},${yP(0).toFixed(1)}Z`};
+  let defs=lines.map(l=>`<linearGradient id="${uid}-${l.k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${l.c}" stop-opacity="0.2"/><stop offset="100%" stop-color="${l.c}" stop-opacity="0.01"/></linearGradient>`).join("");
+  let grid=Array.from({length:4},(_,i)=>mxY*((i+1)/4)).map(gv=>`<line x1="${pad.l}" x2="${W-pad.r}" y1="${yP(gv)}" y2="${yP(gv)}" stroke="${gridC}" stroke-width="1"/><text x="${pad.l-6}" y="${yP(gv)+3}" fill="${textC}" font-size="7" text-anchor="end" font-family="var(--mono)">${fY(gv)}</text>`).join("")+`<line x1="${pad.l}" x2="${W-pad.r}" y1="${yP(0)}" y2="${yP(0)}" stroke="${gridC}" stroke-width="1"/>`;
+  let ticks=data.filter(d=>d.label&&(d.month!==undefined?d.month%24===0:d.day%730===0)).map(d=>`<text x="${xP(data.indexOf(d))}" y="${H-5}" fill="${textC}" font-size="7" text-anchor="middle" font-family="var(--mono)">${d.label}</text>`).join("");
+  let anno="";if(opts.anno){const aX=xP(opts.anno.month||0);anno=`<line x1="${aX}" x2="${aX}" y1="${pad.t}" y2="${pad.t+cH}" stroke="var(--chart-gold)" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/><text x="${aX+4}" y="${pad.t+10}" fill="var(--chart-gold)" font-size="6" font-family="var(--mono)" font-weight="600">${opts.anno.label}</text>`}
+  let paths="";if(opts.stack){if(lines.length>=2)paths+=`<path d="${ad(lines[1].k,lines[0].k)}" fill="url(#${uid}-${lines[1].k})"/>`;paths+=`<path d="${ad(lines[0].k)}" fill="url(#${uid}-${lines[0].k})"/>`;paths+=`<path d="${pd(lines[0].k)}" fill="none" stroke="${lines[0].c}" stroke-width="2"/>`;if(lines.length>=2)paths+=`<path d="${pd(lines[1].k,lines[0].k)}" fill="none" stroke="${lines[1].c}" stroke-width="2"/>`}else{lines.forEach(l=>{if(opts.area)paths+=`<path d="${ad(l.k)}" fill="url(#${uid}-${l.k})"/>`;paths+=`<path d="${pd(l.k)}" fill="none" stroke="${l.c}" stroke-width="2" stroke-linejoin="round"/>`})}
+  let yLabel=`<text x="10" y="${pad.t+cH/2}" fill="${textC}" font-size="7" text-anchor="middle" font-family="var(--mono)" transform="rotate(-90,10,${pad.t+cH/2})">${opts.yL||""}</text>`;
+  return`<div class="chart"><div class="chart-title">${opts.title}</div>${opts.sub?`<div class="chart-sub">${opts.sub}</div>`:""}<svg viewBox="0 0 ${W} ${H}"><defs>${defs}</defs>${grid}${ticks}${anno}${paths}${yLabel}</svg><div class="chart-legend">${lines.map(l=>`<span><i style="background:${l.c}"></i>${l.n}</span>`).join("")}</div></div>`
+}
+
+function renderDash(){
+  const{data,yC,bC}=dSim(),{pcts,rData,sc}=dLadder();const f=data[data.length-1],ycY=yC?(yC/12).toFixed(1):"—",bcY=bC?(bC/12).toFixed(1):"—";
+  const ycA=yC?{month:yC,label:`YIELD>DIRECT Y${ycY}`}:null,bcA=bC?{month:bC,label:`VAULT>BNB Y${bcY}`}:null;
+  const gc="var(--chart-gold)",lc="var(--chart-light)";
+  let h=`<div class="explain"><div class="explain-title">THE CORE MECHANIC: TWO PARALLEL CURVES</div><div class="explain-body"><p style="margin-bottom:4px">GoldForge runs on <span class="hl">two dynamic splits</span>: start aggressive, decay toward permanence. Both driven by mint progress.</p><p style="margin-bottom:3px"><span class="hl">Split 1 — Staker vs Miner:</span> 80% to stakers early → shifts to miners as costs rise.</p><p><span class="hlb">Split 2 — BNB vs Vault:</span> 85% to buy & burn early → shifts to permanent vault. Yield burns GOLD forever.</p></div></div>`;
+  h+=buildDChart(data,[{k:"sPct",n:"Stakers",c:"#C8A960"},{k:"mPct",n:"Miners",c:"#6B8F71"}],{title:"STAKER vs MINER SPLIT",sub:"Fee distribution shifts as supply matures",yL:"%",h:160});
+  h+=buildDChart(data,[{k:"bPct",n:"Buy & Burn",c:"#B85C3A"},{k:"vPct",n:"Vault",c:"#C8A960"}],{title:"BUY & BURN vs VAULT",sub:"Treasury deployment — aggressive burns taper into endowment",yL:"%",h:160,anno:bcA});
+  h+=buildDChart(data,[{k:"emission",n:"Monthly (K)",c:"#C8A960"}],{title:"TOKEN EMISSION",sub:"50% by ~Y3, 80% by ~Y7, 95% by ~Y13",yL:"K tokens",area:true,h:160});
+  h+=buildDChart(data,[{k:"mYield",n:"Yield (forever)",c:"#6B8F71"},{k:"mDirect",n:"Direct BNB",c:"#B85C3A"}],{title:"MONTHLY BUY & BURN",sub:"Yield overtakes direct burns at the crossover",yL:"ETH/mo",h:170,anno:ycA});
+  h+=buildDChart(data,[{k:"cumY",n:"From Yield",c:"#6B8F71"},{k:"cumD",n:"Direct",c:"#B85C3A"}],{title:"CUMULATIVE BUY & BURN",sub:"Green stream never stops",yL:"ETH",h:170,stack:true,anno:ycA});
+  h+=buildDChart(data,[{k:"vault",n:"Vault ETH",c:"#C8A960"}],{title:"VAULT GROWTH",sub:"Permanently staked endowment",yL:"ETH",h:160,area:true});
+  h+=buildDChart(data,[{k:"minted",n:"Minted",c:"#504838"},{k:"circ",n:"Circulating",c:"#C8A960"}],{title:"CIRCULATING SUPPLY",sub:"Gap widens as burns compress supply",yL:"M",h:160});
+  h+=buildDChart(data,[{k:"nav",n:"NAV (μETH)",c:"#E8D48B"}],{title:"NAV PER TOKEN",sub:"Vault backing per circulating GOLD",yL:"μETH",h:160,area:true});
+  h+=`<div class="explain"><div class="explain-title">STAKE LADDER: 7 TIERS</div><div class="explain-body">Longer locks earn exponentially more. Rank starts at 1B Day 1, decays daily.</div></div>`;
+  h+=`<div class="d-tiers">${DTIERS.map((t,i)=>`<div class="d-tier"><div style="font-size:14px">${t.emoji}</div><div style="font-size:11px;font-weight:700;color:${t.color};font-family:var(--mono)">${t.label}</div><div style="font-size:7px;color:var(--dim2);font-family:var(--mono)">${t.days<365?t.days+'d':(t.days/365).toFixed(1)+'y'}</div><div style="font-size:10px;font-weight:700;color:${t.color};font-family:var(--mono);margin-top:3px">${pcts[i].toFixed(1)}%</div></div>`).join("")}</div>`;
+  h+=buildDChart(rData,[{k:"rank",n:"Rank (M)",c:"#C8A960"}],{title:"RANK DECAY",sub:"Late stakers get lower ranks",yL:"M",h:160,area:true});
+  h+=buildDChart(rData,[{k:"mult",n:"Multiplier",c:"#B85C3A"}],{title:"COST TO MATCH DAY 1",sub:"X more $ needed for parity",yL:"X",h:160,area:true,fmtY:v=>v.toFixed(0)+"x"});
+  h+=`<div class="explain"><div class="explain-title">LATE ENTRY COST</div><div class="explain-body" style="margin-bottom:8px">$ to match Day 1 staker's $100 position</div><table class="tbl"><thead><tr><th>WHEN</th><th>RANK</th><th>PARITY $</th><th>MULT</th></tr></thead><tbody>${sc.map((s,i)=>`<tr><td style="color:${i===0?'var(--chart-gold)':'inherit'};font-weight:${i===0?700:400}">${s.label}</td><td style="color:var(--chart-light)">${s.rankM}</td><td style="color:${s.cost>500?'var(--burn)':s.cost>200?'var(--chart-gold)':'var(--green)'};font-weight:700">$${s.cost.toLocaleString()}</td><td style="color:var(--dim)">${s.mx}x</td></tr>`).join("")}</tbody></table></div>`;
+  h+=`<div style="text-align:center;font-size:7px;color:var(--dim3);font-family:var(--mono);margin-top:16px">GOLDFORGE TOKENOMICS v5 · SIMULATION ONLY · NOT FINANCIAL ADVICE</div>`;
+  document.getElementById('dash-app').innerHTML=h
+}
+
+// ═══ INIT ═══
+bT();cM();cS();
+</script>
+</body>
+</html>

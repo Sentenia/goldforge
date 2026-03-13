@@ -8,8 +8,6 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:linear-gradient(135deg,#0a0618 0%,#060d1a 40%,#001210 100%);color:#e8e4f0;font-family:'Space Grotesk',sans-serif;min-height:100vh}
-
-/* Nav */
 nav{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;border-bottom:1px solid rgba(148,100,255,0.15);background:rgba(10,6,24,0.85);position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
 .nav-logo{font-family:'Space Mono',monospace;font-weight:700;font-size:17px;letter-spacing:2px;cursor:pointer}
 .g1{color:#c084fc}.g2{color:#f472b6}.g3{color:#fb923c}.g4{color:#facc15}
@@ -18,615 +16,310 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 4
 .nav-tab{font-size:11px;letter-spacing:2px;padding:8px 22px;border-radius:6px;border:1px solid transparent;cursor:pointer;font-family:'Space Mono',monospace;font-weight:700;color:rgba(200,190,230,0.4);background:transparent;transition:all .2s}
 .nav-tab:hover{color:rgba(200,190,230,0.7)}
 .nav-tab.active{background:rgba(148,100,255,0.15);border-color:rgba(148,100,255,0.3);color:#c084fc}
-.nav-btn{font-size:11px;letter-spacing:2px;padding:8px 20px;border-radius:6px;border:none;cursor:pointer;font-family:'Space Mono',monospace;font-weight:700;background:linear-gradient(90deg,#7c3aed,#c026d3);color:#fff;transition:opacity .2s}
-.nav-btn:hover{opacity:0.85}
-
-/* Page sections */
-.page{display:none;padding:24px 40px 32px}
-.page.active{display:block}
+.nav-btn{font-size:11px;letter-spacing:2px;padding:8px 20px;border-radius:6px;border:none;cursor:pointer;font-family:'Space Mono',monospace;font-weight:700;background:linear-gradient(90deg,#7c3aed,#c026d3);color:#fff}
+.page{display:none;padding:24px 40px 32px;max-width:900px;margin:0 auto}.page.active{display:block}
 .page-header{display:flex;align-items:flex-end;gap:14px;margin-bottom:20px}
 .page-header h1{font-family:'Space Mono',monospace;font-weight:700;font-size:28px;letter-spacing:4px;background:linear-gradient(90deg,#c084fc,#f472b6,#fb923c,#facc15);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.page-header p{font-size:11px;color:rgba(200,190,230,0.4);letter-spacing:2px;padding-bottom:4px}
-
-/* Layout */
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:0}
-.left-col{padding-right:28px;border-right:1px solid rgba(148,100,255,0.12);display:flex;flex-direction:column;gap:12px}
-.right-col{padding-left:28px;display:flex;flex-direction:column}
-
-/* Blocks */
-.input-block{border-radius:14px;padding:18px 20px}
-.block-pink{background:linear-gradient(135deg,rgba(244,114,182,0.08),rgba(192,38,211,0.04));border:1px solid rgba(244,114,182,0.2)}
-.block-gold{background:linear-gradient(135deg,rgba(250,204,21,0.06),rgba(251,146,60,0.04));border:1px solid rgba(250,204,21,0.2)}
-.block-teal{background:linear-gradient(135deg,rgba(52,211,153,0.07),rgba(6,182,212,0.04));border:1px solid rgba(52,211,153,0.2)}
-.block-purple{background:linear-gradient(135deg,rgba(192,132,252,0.07),rgba(244,114,182,0.04));border:1px solid rgba(192,132,252,0.2)}
-.block-label{font-size:10px;letter-spacing:3px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;font-family:'Space Mono',monospace}
-.lbl-pink{color:rgba(244,114,182,0.6)}.lbl-gold{color:rgba(250,204,21,0.6)}.lbl-teal{color:rgba(52,211,153,0.6)}.lbl-purple{color:rgba(192,132,252,0.6)}
-.help-btn{width:16px;height:16px;border-radius:50%;border:1px solid rgba(148,100,255,0.3);background:rgba(10,6,24,0.6);font-size:9px;color:rgba(200,190,230,0.4);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.help-text{font-size:11px;color:rgba(200,190,230,0.5);background:rgba(0,0,0,0.3);border-radius:6px;padding:8px 10px;margin-bottom:10px;line-height:1.6;display:none;border:1px solid rgba(148,100,255,0.1)}
-.help-text.open{display:block}
-
-/* Inputs */
-.row-input{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:10px}
-.row-label{font-size:12px;color:rgba(200,190,230,0.5);flex:1}
-.num-input{width:110px;font-family:'Space Mono',monospace;font-size:15px;font-weight:700;background:rgba(0,0,0,0.4);border-radius:8px;padding:6px 10px;outline:none;text-align:center}
+.page-header p{font-size:11px;color:rgba(200,190,230,0.4);letter-spacing:1px;padding-bottom:4px}
+.hero-row{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;margin-bottom:20px}
+.hero-box{border-radius:16px;padding:28px 32px;text-align:center}
+.hero-box-pay{background:linear-gradient(135deg,rgba(244,114,182,0.06),rgba(192,38,211,0.03));border:1px solid rgba(244,114,182,0.2)}
+.hero-box-earn{background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(6,182,212,0.04));border:1px solid rgba(52,211,153,0.3)}
+.hero-box-label{font-size:12px;letter-spacing:5px;font-family:'Space Mono',monospace;margin-bottom:10px}
+.hbl-pay{color:rgba(244,114,182,0.5)}.hbl-earn{color:rgba(52,211,153,0.5)}
+.hero-box-amount{font-family:'Space Mono',monospace;font-weight:700;font-size:44px;line-height:1}
+.hba-pay{color:#f472b6}.hba-earn{color:#34d399}
+.hero-box-sub{font-size:12px;margin-top:10px;font-family:'Space Mono',monospace}
+.hbs-pay{color:rgba(244,114,182,0.35)}.hbs-earn{color:rgba(52,211,153,0.35)}
+.hero-arrow{display:flex;align-items:center;justify-content:center;padding:0 24px;font-size:32px;color:rgba(148,100,255,0.25)}
+.hero-roi{text-align:center;margin-bottom:24px}
+.hero-roi-val{font-family:'Space Mono',monospace;font-weight:700;font-size:26px;display:inline-block;padding:8px 28px;border-radius:12px}
+.roi-pos{color:#34d399;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2)}
+.roi-neg{color:#f87171;background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2)}
+.roi-label{font-size:9px;letter-spacing:3px;color:rgba(200,190,230,0.2);font-family:'Space Mono',monospace;margin-top:6px}
+.inputs-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.input-block{border-radius:14px;padding:14px 16px}
+.block-pink{background:linear-gradient(135deg,rgba(244,114,182,0.05),rgba(192,38,211,0.02));border:1px solid rgba(244,114,182,0.12)}
+.block-gold{background:linear-gradient(135deg,rgba(250,204,21,0.04),rgba(251,146,60,0.02));border:1px solid rgba(250,204,21,0.12)}
+.block-teal{background:linear-gradient(135deg,rgba(52,211,153,0.04),rgba(6,182,212,0.02));border:1px solid rgba(52,211,153,0.12)}
+.block-purple{background:linear-gradient(135deg,rgba(192,132,252,0.04),rgba(244,114,182,0.02));border:1px solid rgba(192,132,252,0.12)}
+.block-label{font-size:9px;letter-spacing:3px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;font-family:'Space Mono',monospace}
+.lbl-pink{color:rgba(244,114,182,0.45)}.lbl-gold{color:rgba(250,204,21,0.45)}.lbl-teal{color:rgba(52,211,153,0.45)}.lbl-purple{color:rgba(192,132,252,0.45)}
+.help-btn{width:14px;height:14px;border-radius:50%;border:1px solid rgba(148,100,255,0.2);background:rgba(10,6,24,0.4);font-size:8px;color:rgba(200,190,230,0.25);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.help-text{font-size:9px;color:rgba(200,190,230,0.35);background:rgba(0,0,0,0.2);border-radius:5px;padding:6px 8px;margin-bottom:6px;line-height:1.5;display:none;border:1px solid rgba(148,100,255,0.06)}.help-text.open{display:block}
+.row-input{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.row-label{font-size:11px;color:rgba(200,190,230,0.35);flex:1}
+.num-input{width:90px;font-family:'Space Mono',monospace;font-size:14px;font-weight:700;background:rgba(0,0,0,0.3);border-radius:6px;padding:5px 8px;outline:none;text-align:center}
 .num-input::-webkit-inner-spin-button{-webkit-appearance:none}
-.ni-pink{color:#f472b6;border:1px solid rgba(244,114,182,0.3)}.ni-pink:focus{border-color:#f472b6}
-.ni-gold{color:#facc15;border:1px solid rgba(250,204,21,0.3)}.ni-gold:focus{border-color:#facc15}
-.ni-teal{color:#34d399;border:1px solid rgba(52,211,153,0.3)}.ni-teal:focus{border-color:#34d399}
-.ni-purple{color:#c084fc;border:1px solid rgba(192,132,252,0.3)}.ni-purple:focus{border-color:#c084fc}
-.max-btn{font-size:9px;letter-spacing:1px;padding:5px 10px;border-radius:5px;cursor:pointer;font-family:'Space Mono',monospace;font-weight:700}
-.mb-pink{background:rgba(244,114,182,0.1);color:#f472b6;border:1px solid rgba(244,114,182,0.25)}.mb-pink:hover{background:rgba(244,114,182,0.2)}
-.mb-gold{background:rgba(250,204,21,0.1);color:#facc15;border:1px solid rgba(250,204,21,0.25)}.mb-gold:hover{background:rgba(250,204,21,0.2)}
-
-/* Slider */
-.slider{width:100%;-webkit-appearance:none;height:3px;border-radius:2px;outline:none;margin:8px 0 4px;background:rgba(255,255,255,0.06)}
-.slider::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;cursor:pointer}
-.s-pink::-webkit-slider-thumb{background:#f472b6}
-.s-gold::-webkit-slider-thumb{background:#facc15}
-.s-teal::-webkit-slider-thumb{background:#34d399}
-.s-purple::-webkit-slider-thumb{background:#c084fc}
-.slider-ends{display:flex;justify-content:space-between;font-size:10px;color:rgba(200,190,230,0.2);letter-spacing:1px}
-.input-sub{font-size:11px;margin-top:7px;letter-spacing:1px}
-.sub-pink{color:rgba(244,114,182,0.4)}.sub-gold{color:rgba(250,204,21,0.4)}.sub-teal{color:rgba(52,211,153,0.4)}
-
-/* Cards */
-.hero-card{border-radius:14px;padding:16px 20px;margin-bottom:12px}
-.hc-teal{background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(6,182,212,0.04));border:1px solid rgba(52,211,153,0.25)}
-.hc-gold{background:linear-gradient(135deg,rgba(250,204,21,0.06),rgba(251,146,60,0.04));border:1px solid rgba(250,204,21,0.25)}
-.hc-purple{background:linear-gradient(135deg,rgba(192,132,252,0.07),rgba(244,114,182,0.04));border:1px solid rgba(192,132,252,0.2)}
-.hero-label{font-size:10px;letter-spacing:3px;font-family:'Space Mono',monospace;margin-bottom:6px}
-.hl-teal{color:rgba(52,211,153,0.5)}.hl-gold{color:rgba(250,204,21,0.5)}.hl-purple{color:rgba(192,132,252,0.5)}
-.hero-value{font-family:'Space Mono',monospace;font-weight:700;font-size:32px;line-height:1}
-.hv-teal{color:#34d399}.hv-gold{color:#facc15}.hv-purple{color:#c084fc}
-.hero-sub{font-size:11px;margin-top:5px}
-.hs-teal{color:rgba(52,211,153,0.4)}.hs-gold{color:rgba(250,204,21,0.4)}.hs-purple{color:rgba(192,132,252,0.4)}
-.hero-breakdown{display:flex;gap:16px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05)}
-.hb-item{flex:1}
-.hb-label{font-size:9px;letter-spacing:2px;color:rgba(200,190,230,0.25);margin-bottom:3px}
-.hb-val{font-family:'Space Mono',monospace;font-size:13px;font-weight:700}
-
-/* Summary rows */
-.sum-label{font-size:10px;letter-spacing:3px;color:rgba(200,190,230,0.3);font-family:'Space Mono',monospace;margin-bottom:4px;padding-bottom:12px;border-bottom:1px solid rgba(148,100,255,0.12)}
-.sum-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(148,100,255,0.08)}
-.s-key{font-size:12px;color:rgba(200,190,230,0.4);display:flex;align-items:center;gap:8px}
-.s-val{font-family:'Space Mono',monospace;font-size:14px;font-weight:700}
-.sv-gold{color:#facc15}.sv-teal{color:#34d399}.sv-purple{color:#c084fc}.sv-muted{color:rgba(200,190,230,0.3)}
-.sv-pos{color:#34d399}.sv-neg{color:#f87171}
-.divline{border:none;border-top:1px solid rgba(148,100,255,0.1);margin:14px 0}
-.det-label{font-size:10px;letter-spacing:3px;color:rgba(200,190,230,0.2);font-family:'Space Mono',monospace;margin-bottom:10px}
-.det-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(148,100,255,0.05)}
-.d-key{font-size:11px;color:rgba(200,190,230,0.25);letter-spacing:1px}
-.d-val{font-size:12px;font-family:'Space Mono',monospace;font-weight:700}
-.dv-gold{color:rgba(250,204,21,0.5)}.dv-pink{color:rgba(244,114,182,0.5)}.dv-teal{color:rgba(52,211,153,0.5)}.dv-purple{color:rgba(192,132,252,0.5)}.dv-muted{color:rgba(200,190,230,0.15)}
-
-/* Stake tier selector */
-.tier-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:16px}
-.tier-card{border-radius:10px;padding:10px 4px;text-align:center;cursor:pointer;border:1px solid rgba(148,100,255,0.12);background:rgba(10,6,24,0.4);transition:all .2s}
-.tier-card:hover{border-color:rgba(148,100,255,0.3);background:rgba(148,100,255,0.06)}
-.tier-card.selected{border-color:#c084fc;background:rgba(192,132,252,0.1);box-shadow:0 0 20px rgba(192,132,252,0.15)}
-.tier-emoji{font-size:18px}
-.tier-label{font-size:13px;font-weight:700;font-family:'Space Mono',monospace;margin-top:2px}
-.tier-days{font-size:8px;color:rgba(200,190,230,0.3);font-family:'Space Mono',monospace}
-.tier-pct{font-size:11px;font-weight:700;font-family:'Space Mono',monospace;margin-top:6px}
-.tier-pctlabel{font-size:7px;color:rgba(200,190,230,0.15);font-family:'Space Mono',monospace}
-
-/* Protocol status bar */
-.status-bar{display:flex;gap:8px;margin-bottom:16px}
-.status-pill{flex:1;background:rgba(10,6,24,0.6);border:1px solid rgba(148,100,255,0.1);border-radius:8px;padding:8px 10px;text-align:center}
-.sp-label{font-size:8px;color:rgba(200,190,230,0.25);font-family:'Space Mono',monospace;letter-spacing:1px;margin-bottom:3px}
-.sp-val{font-size:14px;font-weight:700;font-family:'Space Mono',monospace}
-
-/* Price inputs */
-.price-row{display:flex;align-items:baseline;gap:4px;margin-bottom:10px}
-.price-sym{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:#34d399}
-.price-input{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:#34d399;background:transparent;border:none;outline:none;width:150px}
-.price-input::-webkit-inner-spin-button{-webkit-appearance:none}
-.live-tag{font-size:9px;padding:2px 10px;border-radius:10px;border:1px solid rgba(52,211,153,0.2);background:rgba(52,211,153,0.06);color:rgba(52,211,153,0.5);letter-spacing:2px;display:inline-block;margin-top:5px}
-.prices-strip{display:flex;gap:8px;margin-top:8px}
-.price-pill{font-size:10px;padding:3px 10px;border-radius:10px;letter-spacing:1px;font-family:'Space Mono',monospace}
-.pp-eth{background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.25);color:rgba(99,102,241,0.7)}
-.pp-xen{background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.2);color:rgba(251,146,60,0.6)}
-.pp-prog{background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.2);color:rgba(192,132,252,0.6)}
-
-/* Misc */
-.mult-badge{font-size:13px;font-family:'Space Mono',monospace;font-weight:700;color:#facc15;margin-top:5px;display:inline-block}
-.roi-hint{margin-top:auto;padding-top:16px;font-size:10px;color:rgba(200,190,230,0.2);line-height:2;letter-spacing:0.5px}
-.roi-hint a{color:rgba(192,132,252,0.4);text-decoration:underline}
-footer{text-align:center;font-size:9px;color:rgba(148,100,255,0.15);letter-spacing:2px;padding:10px 40px;border-top:1px solid rgba(148,100,255,0.08);font-family:'Space Mono',monospace}
-
-/* Dashboard embed */
-.dash-frame{width:100%;border:none;border-radius:14px;min-height:80vh;background:rgba(0,0,0,0.2)}
-.dash-note{font-size:11px;color:rgba(200,190,230,0.3);text-align:center;margin-top:8px;font-family:'Space Mono',monospace}
-
-@media(max-width:768px){
-  nav{padding:12px 16px;flex-wrap:wrap;gap:8px}
-  .page{padding:16px}
-  .two-col{grid-template-columns:1fr;gap:20px}
-  .left-col{padding-right:0;border-right:none}
-  .right-col{padding-left:0}
-  .tier-grid{grid-template-columns:repeat(4,1fr)}
-  .status-bar{flex-wrap:wrap}
-}
+.ni-pink{color:#f472b6;border:1px solid rgba(244,114,182,0.2)}.ni-gold{color:#facc15;border:1px solid rgba(250,204,21,0.2)}
+.ni-teal{color:#34d399;border:1px solid rgba(52,211,153,0.2)}.ni-purple{color:#c084fc;border:1px solid rgba(192,132,252,0.2)}
+.max-btn{font-size:8px;letter-spacing:1px;padding:3px 7px;border-radius:4px;cursor:pointer;font-family:'Space Mono',monospace;font-weight:700}
+.mb-pink{background:rgba(244,114,182,0.06);color:#f472b6;border:1px solid rgba(244,114,182,0.15)}
+.mb-gold{background:rgba(250,204,21,0.06);color:#facc15;border:1px solid rgba(250,204,21,0.15)}
+.slider{width:100%;-webkit-appearance:none;height:3px;border-radius:2px;outline:none;margin:5px 0 2px;background:rgba(255,255,255,0.04)}
+.slider::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;cursor:pointer}
+.s-pink::-webkit-slider-thumb{background:#f472b6}.s-gold::-webkit-slider-thumb{background:#facc15}.s-teal::-webkit-slider-thumb{background:#34d399}.s-purple::-webkit-slider-thumb{background:#c084fc}
+.slider-ends{display:flex;justify-content:space-between;font-size:8px;color:rgba(200,190,230,0.12)}
+.input-sub{font-size:9px;margin-top:4px}.sub-pink{color:rgba(244,114,182,0.3)}.sub-gold{color:rgba(250,204,21,0.3)}
+.mult-badge{font-size:12px;font-family:'Space Mono',monospace;font-weight:700;color:#facc15;margin-top:3px;display:inline-block}
+.stat-row{display:flex;gap:8px;margin-bottom:16px}
+.stat-box{flex:1;text-align:center;border-radius:10px;padding:12px 8px}
+.stat-label{font-size:7px;letter-spacing:2px;font-family:'Space Mono',monospace;margin-bottom:3px}
+.stat-val{font-size:22px;font-weight:700;font-family:'Space Mono',monospace;line-height:1}
+.stat-sub{font-size:8px;font-family:'Space Mono',monospace;margin-top:3px}
+.det-btn{font-size:9px;letter-spacing:2px;padding:5px 18px;border-radius:6px;border:1px solid rgba(148,100,255,0.15);background:rgba(148,100,255,0.04);color:rgba(200,190,230,0.3);cursor:pointer;font-family:'Space Mono',monospace;font-weight:700}
+.det-btn:hover{border-color:rgba(148,100,255,0.3)}
+.details-panel{display:none;border-radius:12px;padding:14px 18px;background:rgba(10,6,24,0.4);border:1px solid rgba(148,100,255,0.06);margin-bottom:14px}
+.details-panel.open{display:block}
+.det-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(148,100,255,0.04)}
+.d-key{font-size:10px;color:rgba(200,190,230,0.25)}.d-val{font-size:11px;font-family:'Space Mono',monospace;font-weight:700}
+.dv-gold{color:rgba(250,204,21,0.45)}.dv-pink{color:rgba(244,114,182,0.45)}.dv-teal{color:rgba(52,211,153,0.45)}.dv-purple{color:rgba(192,132,252,0.45)}.dv-muted{color:rgba(200,190,230,0.12)}
+.tier-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:18px}
+.tier-card{border-radius:9px;padding:9px 3px;text-align:center;cursor:pointer;border:1px solid rgba(148,100,255,0.08);background:rgba(10,6,24,0.3);transition:all .15s}
+.tier-card:hover{border-color:rgba(148,100,255,0.2)}.tier-card.sel{border-color:#c084fc;background:rgba(192,132,252,0.08);box-shadow:0 0 14px rgba(192,132,252,0.1)}
+.tier-emoji{font-size:16px}.tier-label{font-size:12px;font-weight:700;font-family:'Space Mono',monospace;margin-top:1px}
+.tier-days{font-size:7px;color:rgba(200,190,230,0.2);font-family:'Space Mono',monospace}
+.tier-pct{font-size:10px;font-weight:700;font-family:'Space Mono',monospace;margin-top:4px}.tier-of{font-size:6px;color:rgba(200,190,230,0.1);font-family:'Space Mono',monospace}
+.status-bar{display:flex;gap:5px;margin-bottom:14px}
+.status-pill{flex:1;background:rgba(10,6,24,0.4);border:1px solid rgba(148,100,255,0.06);border-radius:7px;padding:6px;text-align:center}
+.sp-label{font-size:7px;color:rgba(200,190,230,0.18);font-family:'Space Mono',monospace;letter-spacing:1px;margin-bottom:1px}
+.sp-val{font-size:12px;font-weight:700;font-family:'Space Mono',monospace}
+footer{text-align:center;font-size:8px;color:rgba(148,100,255,0.1);letter-spacing:2px;padding:12px 40px;border-top:1px solid rgba(148,100,255,0.05);font-family:'Space Mono',monospace}
+@media(max-width:768px){nav{padding:10px 14px;flex-wrap:wrap;gap:6px}.page{padding:14px}.hero-row{grid-template-columns:1fr;gap:10px}.hero-arrow{transform:rotate(90deg);padding:6px 0}.hero-box-amount{font-size:28px}.inputs-grid{grid-template-columns:1fr}.tier-grid{grid-template-columns:repeat(4,1fr)}.stat-row{flex-wrap:wrap}}
 </style>
 </head>
 <body>
-
-<!-- NAV -->
 <nav>
   <div class="nav-logo"><span class="g1">G</span><span class="g2">O</span><span class="g3">L</span><span class="g4">D</span><span style="color:rgba(200,190,230,0.25)">FORGE</span><span class="nav-dot"></span></div>
-  <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showTab('mine')">MINE</button>
-    <button class="nav-tab" onclick="showTab('stake')">STAKE</button>
-    <button class="nav-tab" onclick="showTab('dash')">DASHBOARD</button>
-  </div>
+  <div class="nav-tabs"><button class="nav-tab active" onclick="showTab('mine')">MINE</button><button class="nav-tab" onclick="showTab('stake')">STAKE</button><button class="nav-tab" onclick="showTab('dash')">DASHBOARD</button></div>
   <button class="nav-btn">CONNECT WALLET</button>
 </nav>
 
-<!-- ═══════════════════════════════════ -->
-<!-- MINE TAB -->
-<!-- ═══════════════════════════════════ -->
+<!-- ═══ MINE ═══ -->
 <div class="page active" id="page-mine">
-  <div class="page-header">
-    <h1>MINE</h1>
-    <p>Burn XEN → Mint GOLD · Cost escalates as supply approaches 160.75M cap</p>
-  </div>
-
-  <!-- Protocol status -->
+  <div class="page-header"><h1>MINE</h1><p>Burn XEN → Mint GOLD · Longer locks earn exponentially more</p></div>
   <div class="status-bar">
     <div class="status-pill"><div class="sp-label">MINTED</div><div class="sp-val" style="color:#c084fc" id="m-minted">0%</div></div>
-    <div class="status-pill"><div class="sp-label">SUPPLY</div><div class="sp-val" style="color:#facc15" id="m-supply">0 / 160.75M</div></div>
-    <div class="status-pill"><div class="sp-label">CURRENT COST</div><div class="sp-val" style="color:#34d399" id="m-cost">0.0001 ETH</div></div>
-    <div class="status-pill"><div class="sp-label">DAILY EMISSION</div><div class="sp-val" style="color:#f472b6" id="m-emission">—</div></div>
+    <div class="status-pill"><div class="sp-label">SUPPLY</div><div class="sp-val" style="color:#facc15" id="m-supply">—</div></div>
+    <div class="status-pill"><div class="sp-label">COST/BATCH</div><div class="sp-val" style="color:#34d399" id="m-cost">—</div></div>
+    <div class="status-pill"><div class="sp-label">EMISSION</div><div class="sp-val" style="color:#f472b6" id="m-emission">—</div></div>
+  </div>
+  <div class="hero-row">
+    <div class="hero-box hero-box-pay"><div class="hero-box-label hbl-pay">YOU PAY</div><div class="hero-box-amount hba-pay" id="m-pay">$0</div><div class="hero-box-sub hbs-pay" id="m-pay-sub">ETH fee + XEN burned</div></div>
+    <div class="hero-arrow">→</div>
+    <div class="hero-box hero-box-earn"><div class="hero-box-label hbl-earn">YOU EARN</div><div class="hero-box-amount hba-earn" id="m-earn">0 GOLD</div><div class="hero-box-sub hbs-earn" id="m-earn-sub">worth $0</div></div>
+  </div>
+  <div class="hero-roi"><div class="hero-roi-val roi-pos" id="m-roi">+0% ROI</div><div class="roi-label">RETURN ON INVESTMENT</div></div>
+
+  <div class="inputs-grid">
+    <div class="input-block block-purple">
+      <div class="block-label lbl-purple">PROTOCOL DAY <button class="help-btn" onclick="t('hd')">?</button></div>
+      <div class="help-text" id="hd">Day 1 = launch. Higher = more minted, costlier, lower emission.</div>
+      <div class="row-input"><div class="row-label">Day</div><input class="num-input ni-purple" type="number" id="day-in" value="1" min="1" max="5000" oninput="onDay()"></div>
+      <input type="range" class="slider s-purple" id="day-sl" min="1" max="5000" value="1" oninput="onDaySl()">
+      <div class="slider-ends"><span>Day 1</span><span>5000</span></div>
+    </div>
+    <div class="input-block block-pink">
+      <div class="block-label lbl-pink">BATCHES <button class="help-btn" onclick="t('hb')">?</button></div>
+      <div class="help-text" id="hb">Each burns 10M XEN. More = bigger share of emission.</div>
+      <div class="row-input"><div class="row-label">Batches</div><input class="num-input ni-pink" type="number" id="batch-in" value="10" min="1" max="1000" oninput="onBatch()"><button class="max-btn mb-pink" onclick="setMax('b')">MAX</button></div>
+      <input type="range" class="slider s-pink" id="batch-sl" min="1" max="1000" value="10" oninput="onBatchSl()">
+      <div class="slider-ends"><span>1</span><span>1,000</span></div>
+      <div class="input-sub sub-pink" id="xen-eq">= 100M XEN</div>
+    </div>
+    <div class="input-block block-gold">
+      <div class="block-label lbl-gold">MINER LENGTH <button class="help-btn" onclick="t('hl')">?</button></div>
+      <div class="help-text" id="hl">Cubic multiplier. 1 day = 1×. 369 days ≈ 1.65×. 888 days = 10×. Lock longer, earn way more GOLD.</div>
+      <div class="row-input"><div class="row-label">Days</div><input class="num-input ni-gold" type="number" id="lock-in" value="369" min="1" max="888" oninput="onLock()"><button class="max-btn mb-gold" onclick="setMax('l')">MAX</button></div>
+      <input type="range" class="slider s-gold" id="lock-sl" min="1" max="888" value="369" oninput="onLockSl()">
+      <div class="slider-ends"><span>1 day (1×)</span><span>888 days (10×)</span></div>
+      <div class="mult-badge" id="mult-badge">1.65× multiplier</div>
+    </div>
+    <div class="input-block block-teal">
+      <div class="block-label lbl-teal">COMPETITION + PRICE</div>
+      <div class="row-input"><div class="row-label">Other batches</div><input class="num-input ni-teal" type="number" id="comp-in" value="200" min="0" max="50000" oninput="onComp()"></div>
+      <input type="range" class="slider s-teal" id="comp-sl" min="0" max="10000" value="200" oninput="onCompSl()">
+      <div class="slider-ends"><span>Just you</span><span>10K</span></div>
+      <div style="margin-top:8px;display:flex;align-items:baseline;gap:3px">
+        <span style="font-size:10px;color:rgba(200,190,230,0.35)">GOLD $</span>
+        <input type="number" id="price-in" value="0.10" step="0.001" min="0.001" oninput="onPrice()" style="font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:#34d399;background:rgba(0,0,0,0.2);border:1px solid rgba(52,211,153,0.2);border-radius:5px;padding:3px 6px;outline:none;width:70px;text-align:center">
+      </div>
+    </div>
   </div>
 
-  <div class="two-col">
-    <div class="left-col">
-
-      <!-- Mint progress simulator -->
-      <div class="input-block block-purple">
-        <div class="block-label lbl-purple">PROTOCOL DAY (SIMULATOR) <button class="help-btn" onclick="t('hday')">?</button></div>
-        <div class="help-text" id="hday">Simulates how the protocol looks at different stages. Day 1 = launch. Higher days = more supply minted, higher costs, lower emissions. At launch this will show real on-chain data.</div>
-        <div class="row-input">
-          <div class="row-label">Current protocol day</div>
-          <input class="num-input ni-purple" type="number" id="day-in" value="1" min="1" max="5000" oninput="onDay()">
-        </div>
-        <input type="range" class="slider s-purple" id="day-sl" min="1" max="5000" value="1" oninput="onDaySl()">
-        <div class="slider-ends"><span>Day 1 (launch)</span><span>Day 5000</span></div>
-      </div>
-
-      <!-- Batches -->
-      <div class="input-block block-pink">
-        <div class="block-label lbl-pink">MINER POWER <button class="help-btn" onclick="t('h1')">?</button></div>
-        <div class="help-text" id="h1">Each batch burns 10,000,000 XEN. More batches = larger share of that day's GOLD emission. You compete with all other miners that day.</div>
-        <div class="row-input">
-          <div class="row-label">Batches to burn</div>
-          <input class="num-input ni-pink" type="number" id="batch-in" value="10" min="1" max="1000" oninput="onBatch()">
-          <button class="max-btn mb-pink" onclick="setMax('batch')">MAX</button>
-        </div>
-        <input type="range" class="slider s-pink" id="batch-sl" min="1" max="1000" value="10" oninput="onBatchSl()">
-        <div class="slider-ends"><span>1</span><span>1,000</span></div>
-        <div class="input-sub sub-pink" id="xen-equiv">= 100,000,000 XEN burned</div>
-      </div>
-
-      <!-- Competition -->
-      <div class="input-block block-gold">
-        <div class="block-label lbl-gold">DAILY COMPETITION <button class="help-btn" onclick="t('h2')">?</button></div>
-        <div class="help-text" id="h2">How many total batches other miners create that day. More competition = smaller share of emission. Early days might be 50-500, viral days could hit 5000+.</div>
-        <div class="row-input">
-          <div class="row-label">Other miners' batches today</div>
-          <input class="num-input ni-gold" type="number" id="comp-in" value="200" min="0" max="50000" oninput="onComp()">
-        </div>
-        <input type="range" class="slider s-gold" id="comp-sl" min="0" max="10000" value="200" oninput="onCompSl()">
-        <div class="slider-ends"><span>0 (just you)</span><span>10,000</span></div>
-      </div>
-
-      <!-- Price -->
-      <div class="input-block block-teal">
-        <div class="block-label lbl-teal">GOLD MARKET PRICE <button class="help-btn" onclick="t('h3')">?</button></div>
-        <div class="help-text" id="h3">Speculative price for modeling ROI. Will auto-update from DEX at launch.</div>
-        <div class="price-row">
-          <div class="price-sym">$</div>
-          <input class="price-input" type="number" id="price-in" value="0.10" step="0.001" min="0.001" oninput="onPriceIn()">
-        </div>
-        <input type="range" class="slider s-teal" id="price-sl" min="1" max="1000" value="333" oninput="onPriceSl()">
-        <div class="slider-ends"><span>$0.01</span><span>$100</span></div>
-        <div class="live-tag">MANUAL · LIVE AT LAUNCH</div>
-        <div class="prices-strip">
-          <div class="price-pill pp-eth">ETH $2,000</div>
-          <div class="price-pill pp-xen">XEN $0.0000000077</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="right-col">
-      <div class="sum-label">ESTIMATED MINING RESULT</div>
-
-      <div class="hero-card hc-teal">
-        <div class="hero-label hl-teal">GOLD YOU'LL RECEIVE</div>
-        <div class="hero-value hv-teal" id="m-hero-gold">—</div>
-        <div class="hero-sub hs-teal" id="m-hero-sub">your share of today's emission</div>
-        <div class="hero-breakdown">
-          <div class="hb-item"><div class="hb-label">GOLD VALUE</div><div class="hb-val" style="color:#facc15" id="m-hb-val">—</div></div>
-          <div class="hb-item"><div class="hb-label">YOUR COST</div><div class="hb-val" style="color:rgba(200,190,230,0.3)" id="m-hb-cost">—</div></div>
-          <div class="hb-item"><div class="hb-label">ROI</div><div class="hb-val sv-pos" id="m-hb-roi">—</div></div>
-        </div>
-      </div>
-
-      <div class="sum-row"><div class="s-key">Your share of emission</div><div class="s-val sv-purple" id="m-share">—</div></div>
-      <div class="sum-row"><div class="s-key">Today's total emission</div><div class="s-val sv-muted" id="m-total-em">—</div></div>
-      <div class="sum-row"><div class="s-key">Mint cost per GOLD</div><div class="s-val sv-teal" id="m-cost-per">—</div></div>
-      <div class="sum-row"><div class="s-key">ETH fee (total)</div><div class="s-val sv-muted" id="m-eth-fee">—</div></div>
-      <div class="sum-row"><div class="s-key">XEN burned</div><div class="s-val sv-muted" id="m-xen-burn">—</div></div>
-      <div class="sum-row"><div class="s-key">XEN cost (USD)</div><div class="s-val sv-muted" id="m-xen-cost">—</div></div>
-
-      <div class="divline"></div>
-      <div class="det-label">TREASURY SPLIT (AT CURRENT MINT PROGRESS)</div>
-      <div class="det-row"><div class="d-key">TO BUY & BURN</div><div class="d-val dv-pink" id="m-to-bnb">—</div></div>
-      <div class="det-row"><div class="d-key">TO VAULT (STAKED)</div><div class="d-val dv-teal" id="m-to-vault">—</div></div>
-      <div class="det-row"><div class="d-key">TO STAKER PAYOUTS</div><div class="d-val dv-gold" id="m-to-stakers">—</div></div>
-      <div class="det-row"><div class="d-key">TO MINER REWARDS</div><div class="d-val dv-purple" id="m-to-miners">—</div></div>
-
-      <div class="roi-hint">
-        When ROI is positive, mining is cheaper than buying on DEX.<br>
-        When negative, just <a href="#">buy GOLD on Uniswap</a> instead.
-      </div>
-    </div>
+  <div style="text-align:center;margin-bottom:10px"><button class="det-btn" onclick="toggleDet('mdet')">▼ DETAILS & TREASURY SPLIT</button></div>
+  <div class="details-panel" id="mdet">
+    <div class="det-row"><div class="d-key">ETH fee</div><div class="d-val dv-teal" id="md-eth">—</div></div>
+    <div class="det-row"><div class="d-key">XEN burned</div><div class="d-val dv-pink" id="md-xen">—</div></div>
+    <div class="det-row"><div class="d-key">XEN cost</div><div class="d-val dv-muted" id="md-xusd">—</div></div>
+    <div class="det-row"><div class="d-key">Multiplier</div><div class="d-val dv-gold" id="md-m">—</div></div>
+    <div class="det-row"><div class="d-key">Share of emission</div><div class="d-val dv-purple" id="md-sh">—</div></div>
+    <div class="det-row"><div class="d-key">Matures day</div><div class="d-val dv-purple" id="md-mat">—</div></div>
+    <div class="det-row"><div class="d-key">Cost per GOLD</div><div class="d-val dv-teal" id="md-cpg">—</div></div>
+    <div style="border-top:1px solid rgba(148,100,255,0.06);margin:8px 0;padding-top:8px;font-size:8px;letter-spacing:2px;color:rgba(200,190,230,0.15);font-family:'Space Mono',monospace">TREASURY AT CURRENT PROGRESS</div>
+    <div class="det-row"><div class="d-key">→ Buy & Burn</div><div class="d-val dv-pink" id="md-bnb">—</div></div>
+    <div class="det-row"><div class="d-key">→ Vault</div><div class="d-val dv-teal" id="md-v">—</div></div>
+    <div class="det-row"><div class="d-key">→ Stakers</div><div class="d-val dv-gold" id="md-s">—</div></div>
+    <div class="det-row"><div class="d-key">→ Miners</div><div class="d-val dv-purple" id="md-mi">—</div></div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════ -->
-<!-- STAKE TAB -->
-<!-- ═══════════════════════════════════ -->
+<!-- ═══ STAKE ═══ -->
 <div class="page" id="page-stake">
-  <div class="page-header">
-    <h1>STAKE</h1>
-    <p>Lock GOLD · Earn ETH · 7 payout tiers · Rank rewards early believers</p>
+  <div class="page-header"><h1>STAKE</h1><p>Lock GOLD · Earn ETH · 7 tiers · Rank rewards Day 1 believers</p></div>
+  <div class="tier-grid" id="tier-grid"></div>
+  <div class="hero-row">
+    <div class="hero-box hero-box-pay"><div class="hero-box-label hbl-pay">YOU STAKE</div><div class="hero-box-amount hba-pay" id="s-pay">$0</div><div class="hero-box-sub hbs-pay" id="s-pay-sub">0 GOLD locked</div></div>
+    <div class="hero-arrow">→</div>
+    <div class="hero-box hero-box-earn"><div class="hero-box-label hbl-earn">YOU EARN</div><div class="hero-box-amount hba-earn" id="s-earn">0 ETH</div><div class="hero-box-sub hbs-earn" id="s-earn-sub">$0 per cycle</div></div>
   </div>
 
-  <!-- Tier selector -->
-  <div class="tier-grid" id="tier-grid"></div>
-
-  <div class="two-col">
-    <div class="left-col">
-      <!-- Stake amount -->
-      <div class="input-block block-gold">
-        <div class="block-label lbl-gold">STAKE AMOUNT</div>
-        <div class="row-input">
-          <div class="row-label">GOLD to stake</div>
-          <input class="num-input ni-gold" type="number" id="stake-amt" value="10000" min="1" oninput="calcStake()">
-        </div>
-        <div class="row-input">
-          <div class="row-label">GOLD price (est.)</div>
-          <input class="num-input ni-teal" type="number" id="stake-price" value="0.10" step="0.01" min="0.001" oninput="calcStake()">
-        </div>
-        <div class="input-sub sub-gold" id="stake-usd">= $1,000.00 staked</div>
-      </div>
-
-      <!-- Entry day -->
-      <div class="input-block block-purple">
-        <div class="block-label lbl-purple">YOUR ENTRY DAY <button class="help-btn" onclick="t('hentry')">?</button></div>
-        <div class="help-text" id="hentry">Your rank starts at 1 Billion on Day 1 and decays daily. The later you enter, the lower your rank — and the more GOLD you need to stake to match early believers.</div>
-        <div class="row-input">
-          <div class="row-label">Protocol day you stake</div>
-          <input class="num-input ni-purple" type="number" id="entry-day" value="1" min="1" max="3888" oninput="onEntry()">
-        </div>
-        <input type="range" class="slider s-purple" id="entry-sl" min="1" max="3888" value="1" oninput="onEntrySl()">
-        <div class="slider-ends"><span>Day 1</span><span>Day 3888</span></div>
-      </div>
-
-      <!-- Pool activity -->
-      <div class="input-block block-teal">
-        <div class="block-label lbl-teal">POOL ACTIVITY <button class="help-btn" onclick="t('hpool')">?</button></div>
-        <div class="help-text" id="hpool">Estimated ETH flowing into your tier's payout pool per cycle. More active mining = bigger pools. This is speculative — real data at launch.</div>
-        <div class="row-input">
-          <div class="row-label">ETH in your tier's pool per cycle</div>
-          <input class="num-input ni-teal" type="number" id="pool-eth" value="10" step="0.1" min="0.1" oninput="calcStake()">
-        </div>
-        <input type="range" class="slider s-teal" id="pool-sl" min="1" max="500" value="100" oninput="onPoolSl()">
-        <div class="slider-ends"><span>0.1 ETH</span><span>50 ETH</span></div>
-      </div>
+  <div class="stat-row">
+    <div class="stat-box" style="background:rgba(192,132,252,0.05);border:1px solid rgba(192,132,252,0.12)">
+      <div class="stat-label" style="color:rgba(192,132,252,0.35)">YOUR RANK</div>
+      <div class="stat-val" style="color:#c084fc" id="s-rank">1,000,000,000</div>
+      <div class="stat-sub" style="color:rgba(192,132,252,0.25)" id="s-rsub">Day 1 · 100%</div>
     </div>
-
-    <div class="right-col">
-      <div class="sum-label">STAKING SUMMARY</div>
-
-      <!-- Rank card -->
-      <div class="hero-card hc-purple">
-        <div class="hero-label hl-purple">YOUR RANK</div>
-        <div class="hero-value hv-purple" id="st-rank">1,000,000,000</div>
-        <div class="hero-sub hs-purple" id="st-rank-sub">Day 1 · 100% of max rank</div>
-      </div>
-
-      <!-- Share weight -->
-      <div class="hero-card hc-gold">
-        <div class="hero-label hl-gold">YOUR SHARE WEIGHT</div>
-        <div class="hero-value hv-gold" id="st-weight">—</div>
-        <div class="hero-sub hs-gold" id="st-weight-sub">rank × GOLD staked</div>
-      </div>
-
-      <!-- Estimated payout -->
-      <div class="hero-card hc-teal">
-        <div class="hero-label hl-teal">ESTIMATED PAYOUT PER CYCLE</div>
-        <div class="hero-value hv-teal" id="st-payout">—</div>
-        <div class="hero-sub hs-teal" id="st-payout-sub">your share of this tier's ETH pool</div>
-      </div>
-
-      <div class="sum-row"><div class="s-key">Selected tier</div><div class="s-val sv-purple" id="st-tier">—</div></div>
-      <div class="sum-row"><div class="s-key">Tier fee allocation</div><div class="s-val sv-gold" id="st-alloc">—</div></div>
-      <div class="sum-row"><div class="s-key">Lock duration</div><div class="s-val sv-muted" id="st-lock">—</div></div>
-      <div class="sum-row"><div class="s-key">Cycles you'll catch</div><div class="s-val sv-teal" id="st-cycles">—</div></div>
-      <div class="sum-row"><div class="s-key">Total est. ETH earned</div><div class="s-val sv-teal" id="st-total-eth">—</div></div>
-
-      <div class="divline"></div>
-      <div class="det-label">DAY-1 PARITY</div>
-      <div class="det-row"><div class="d-key">COST FOR DAY-1 MATCH</div><div class="d-val dv-gold" id="st-parity-cost">—</div></div>
-      <div class="det-row"><div class="d-key">GOLD NEEDED</div><div class="d-val dv-gold" id="st-parity-gold">—</div></div>
-      <div class="det-row"><div class="d-key">MULTIPLIER vs DAY 1</div><div class="d-val dv-pink" id="st-parity-mult">—</div></div>
+    <div class="stat-box" style="background:rgba(250,204,21,0.03);border:1px solid rgba(250,204,21,0.12)">
+      <div class="stat-label" style="color:rgba(250,204,21,0.35)">SHARE WEIGHT</div>
+      <div class="stat-val" style="color:#facc15" id="s-wt">—</div>
+      <div class="stat-sub" style="color:rgba(250,204,21,0.25)" id="s-wsub">rank × GOLD</div>
     </div>
+    <div class="stat-box" style="background:rgba(244,114,182,0.03);border:1px solid rgba(244,114,182,0.12)">
+      <div class="stat-label" style="color:rgba(244,114,182,0.35)">DAY-1 PARITY</div>
+      <div class="stat-val" style="color:#f472b6" id="s-par">$100</div>
+      <div class="stat-sub" style="color:rgba(244,114,182,0.25)" id="s-psub">1.0x</div>
+    </div>
+  </div>
+
+  <div class="inputs-grid">
+    <div class="input-block block-gold">
+      <div class="block-label lbl-gold">GOLD TO STAKE</div>
+      <div class="row-input"><div class="row-label">Amount</div><input class="num-input ni-gold" type="number" id="stake-amt" value="10000" min="1" oninput="calcStake()"></div>
+      <div class="row-input"><div class="row-label">Price $</div><input class="num-input ni-teal" type="number" id="stake-price" value="0.10" step="0.01" min="0.001" oninput="calcStake()"></div>
+    </div>
+    <div class="input-block block-purple">
+      <div class="block-label lbl-purple">ENTRY DAY <button class="help-btn" onclick="t('he')">?</button></div>
+      <div class="help-text" id="he">Rank = 1B on Day 1, decays daily. Later entry = lower rank = stake more GOLD to match.</div>
+      <div class="row-input"><div class="row-label">Day</div><input class="num-input ni-purple" type="number" id="entry-day" value="1" min="1" max="3888" oninput="onEntry()"></div>
+      <input type="range" class="slider s-purple" id="entry-sl" min="1" max="3888" value="1" oninput="onEntrySl()">
+      <div class="slider-ends"><span>Day 1</span><span>3888</span></div>
+    </div>
+    <div class="input-block block-teal" style="grid-column:span 2">
+      <div class="block-label lbl-teal">ETH IN YOUR TIER'S POOL (per cycle)</div>
+      <div class="row-input"><div class="row-label">ETH</div><input class="num-input ni-teal" type="number" id="pool-eth" value="10" step="0.1" min="0.1" oninput="calcStake()"></div>
+      <input type="range" class="slider s-teal" id="pool-sl" min="1" max="500" value="100" oninput="onPoolSl()">
+      <div class="slider-ends"><span>0.1 (quiet)</span><span>50 (viral)</span></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:10px"><button class="det-btn" onclick="toggleDet('sdet')">▼ LATE ENTRY TABLE</button></div>
+  <div class="details-panel" id="sdet">
+    <table style="width:100%;border-collapse:collapse;font-family:'Space Mono',monospace;font-size:10px">
+      <thead><tr style="border-bottom:1px solid rgba(148,100,255,0.08)"><th style="padding:4px 8px;text-align:left;color:rgba(200,190,230,0.2);font-size:7px;letter-spacing:1px">WHEN</th><th style="padding:4px 8px;text-align:left;color:rgba(200,190,230,0.2);font-size:7px;letter-spacing:1px">RANK</th><th style="padding:4px 8px;text-align:left;color:rgba(200,190,230,0.2);font-size:7px;letter-spacing:1px">PARITY $</th><th style="padding:4px 8px;text-align:left;color:rgba(200,190,230,0.2);font-size:7px;letter-spacing:1px">MULT</th></tr></thead>
+      <tbody id="late-tbl"></tbody>
+    </table>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════ -->
-<!-- DASHBOARD TAB -->
-<!-- ═══════════════════════════════════ -->
+<!-- ═══ DASHBOARD ═══ -->
 <div class="page" id="page-dash">
-  <div class="page-header">
-    <h1>DASHBOARD</h1>
-    <p>Full tokenomics model · Dual dynamic splits · 25-year simulation</p>
-  </div>
+  <div class="page-header"><h1>DASHBOARD</h1><p>Full tokenomics model · 25-year simulation</p></div>
   <div style="text-align:center;padding:40px 0">
     <div style="font-size:48px;margin-bottom:16px">📊</div>
     <div style="font-size:14px;color:rgba(200,190,230,0.5);max-width:400px;margin:0 auto;line-height:1.8">
-      The full interactive tokenomics dashboard is available at:<br>
+      Full interactive dashboard:<br>
       <a href="https://sentenia.github.io/goldforge/" target="_blank" style="color:#c084fc;font-family:'Space Mono',monospace;font-size:16px;font-weight:700">sentenia.github.io/goldforge</a>
-      <br><br>
-      <span style="font-size:11px;color:rgba(200,190,230,0.25)">Features: emission curves, dual dynamic splits, vault composition,<br>buy & burn streams, NAV per token, stake ladder visualization</span>
     </div>
   </div>
 </div>
 
-<footer>ETH $2,000 · XEN $0.0000000077 · 10M XEN/BATCH · CAP 160,750,000 GOLD · ONE TOKEN PER TROY OZ OF EARTH'S REMAINING GOLD</footer>
+<footer>ETH $2,000 · XEN $0.0000000077 · 10M XEN/BATCH · CAP 160,750,000 GOLD</footer>
 
 <script>
-// ═══ CONSTANTS ═══
-const CAP = 160_750_000;
-const XPB = 10_000_000;       // XEN per batch
-const XEN_PRICE = 0.0000000077;
-const ETH_PRICE = 2000;
-const BASE_COST = 0.0001;     // ETH per batch at day 1
-const COST_ESC = 2.8;         // escalation multiplier at 100% mint
-const DECAY = 0.22;           // annual emission decay rate
+const C=160750000,XPB=1e7,XP=0.0000000077,EP=2000,BC=0.0001,CE=2.8,DK=0.22;
+const BS=0.85,BE=0,BM=0.35,BST=10,SS=0.80,SE=0.15;
+const TI=[{d:8,l:"8d",e:"⚡",c:"#f472b6"},{d:28,l:"28d",e:"🌙",c:"#c084fc"},{d:90,l:"90d",e:"🔥",c:"#fb923c"},{d:369,l:"369d",e:"⚔",c:"#facc15"},{d:888,l:"888d",e:"🛡",c:"#34d399"},{d:1689,l:"1689d",e:"👑",c:"#c084fc"},{d:3888,l:"3888d",e:"💎",c:"#facc15"}];
+const PW=1.65,RS=1e9,RD=0.0008;
+const tR=TI.map(t=>Math.pow(t.d,PW)),tS=tR.reduce((a,b)=>a+b,0),tP=tR.map(w=>w/tS);
+let sT=3;
+function t(i){document.getElementById(i).classList.toggle('open')}
+function toggleDet(i){document.getElementById(i).classList.toggle('open')}
+function showTab(t){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById('page-'+t).classList.add('active');document.querySelector(`[onclick="showTab('${t}')"]`).classList.add('active')}
+function fmt(n){return n>=1e9?(n/1e9).toFixed(2)+'B':n>=1e6?(n/1e6).toFixed(2)+'M':n>=1e3?(n/1e3).toFixed(2)+'K':n<1&&n>0?n.toFixed(4):n.toFixed(2)}
+function usd(n){if(n>=1e6)return'$'+(n/1e6).toFixed(2)+'M';if(n>=1e3)return'$'+(n/1e3).toFixed(2)+'K';if(n<0.01&&n>0)return'$'+n.toFixed(4);return'$'+n.toFixed(2)}
+function pct(n){return(n*100).toFixed(1)+'%'}
+function co(n){return Math.round(n).toLocaleString()}
+function mult(d){return 1+9*Math.pow(d/888,3)}
+function gS(day){let m=0;for(let i=0;i<day/30;i++)m+=(C-m)*(1-Math.exp(-DK/12));const p=m/C,r=C-m,dl=r*(1-Math.exp(-DK/365)),cb=BC*Math.pow(CE,p);const s1=1/(1+Math.exp(-12*(p-0.4))),sp=SS+(SE-SS)*s1;const s2=1/(1+Math.exp(-BST*(p-BM))),bp=BS+(BE-BS)*s2;return{m,p,dl,cb,sp,mp:1-sp,bp,vp:1-bp}}
 
-// Treasury split params
-const BNB_START = 0.85, BNB_END = 0.0, BNB_MID = 0.35, BNB_STEEP = 10;
-const STAKER_START = 0.80, STAKER_END = 0.15;
+function onDaySl(){document.getElementById('day-in').value=document.getElementById('day-sl').value;calcMine()}
+function onDay(){document.getElementById('day-sl').value=Math.min(parseInt(document.getElementById('day-in').value)||1,5000);calcMine()}
+function onBatchSl(){document.getElementById('batch-in').value=document.getElementById('batch-sl').value;calcMine()}
+function onBatch(){document.getElementById('batch-sl').value=Math.min(parseInt(document.getElementById('batch-in').value)||1,1000);calcMine()}
+function onLockSl(){document.getElementById('lock-in').value=document.getElementById('lock-sl').value;calcMine()}
+function onLock(){document.getElementById('lock-sl').value=Math.min(parseInt(document.getElementById('lock-in').value)||1,888);calcMine()}
+function onCompSl(){document.getElementById('comp-in').value=document.getElementById('comp-sl').value;calcMine()}
+function onComp(){document.getElementById('comp-sl').value=Math.min(parseInt(document.getElementById('comp-in').value)||0,10000);calcMine()}
+function onPrice(){calcMine()}
+function setMax(x){if(x==='b'){document.getElementById('batch-in').value=1000;document.getElementById('batch-sl').value=1000}else{document.getElementById('lock-in').value=888;document.getElementById('lock-sl').value=888}calcMine()}
 
-// Stake ladder
-const TIERS = [
-  {days:8,label:"8d",emoji:"⚡",color:"#f472b6"},
-  {days:28,label:"28d",emoji:"🌙",color:"#c084fc"},
-  {days:90,label:"90d",emoji:"🔥",color:"#fb923c"},
-  {days:369,label:"369d",emoji:"⚔",color:"#facc15"},
-  {days:888,label:"888d",emoji:"🛡",color:"#34d399"},
-  {days:1689,label:"1689d",emoji:"👑",color:"#c084fc"},
-  {days:3888,label:"3888d",emoji:"💎",color:"#facc15"},
-];
-const POOL_POWER = 1.65;
-const RANK_START = 1_000_000_000;
-const RANK_DECAY = 0.0008;
-
-// Compute tier pool percentages
-const tierRaw = TIERS.map(t => Math.pow(t.days, POOL_POWER));
-const tierTotal = tierRaw.reduce((a,b) => a+b, 0);
-const tierPcts = tierRaw.map(w => w / tierTotal);
-
-let selectedTier = 3; // default 369d
-
-// ═══ HELPERS ═══
-function t(id) { document.getElementById(id).classList.toggle('open'); }
-function fmt(n) { return n>=1e9?(n/1e9).toFixed(2)+'B':n>=1e6?(n/1e6).toFixed(2)+'M':n>=1e3?(n/1e3).toFixed(2)+'K':n<1&&n>0?n.toFixed(4):n.toFixed(2); }
-function usd(n) { if(n>=1e6)return'$'+(n/1e6).toFixed(2)+'M';if(n>=1e3)return'$'+(n/1e3).toFixed(2)+'K';if(n<0.01&&n>0)return'$'+n.toFixed(4);return'$'+n.toFixed(2); }
-function pct(n) { return (n*100).toFixed(1)+'%'; }
-function fmtRank(n) { return n>=1e9?(n/1e9).toFixed(3)+'B':n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?(n/1e3).toFixed(1)+'K':n.toFixed(0); }
-function commas(n) { return Math.round(n).toLocaleString(); }
-function s2p(v) { return parseFloat((Math.pow(10,(v/1000)*4-2)).toFixed(6)); }
-function p2s(p) { return Math.round(((Math.log10(Math.max(p,0.01))+2)/4)*1000); }
-
-// ═══ PROTOCOL STATE from day ═══
-function getProtocolState(day) {
-  // Simulate emission up to this day (monthly steps, interpolated)
-  let minted = 0;
-  const months = day / 30;
-  for (let i = 0; i < months; i++) {
-    const rem = CAP - minted;
-    minted += rem * (1 - Math.exp(-DECAY / 12));
-  }
-  const progress = minted / CAP;
-
-  // Today's emission (daily)
-  const remaining = CAP - minted;
-  const dailyEmission = remaining * (1 - Math.exp(-DECAY / 365));
-
-  // Current cost per batch (escalating)
-  const costPerBatch = BASE_COST * Math.pow(COST_ESC, progress);
-
-  // Splits
-  const sig1 = 1 / (1 + Math.exp(-12 * (progress - 0.4)));
-  const stakerPct = STAKER_START + (STAKER_END - STAKER_START) * sig1;
-
-  const sig2 = 1 / (1 + Math.exp(-BNB_STEEP * (progress - BNB_MID)));
-  const bnbPct = BNB_START + (BNB_END - BNB_START) * sig2;
-
-  return { minted, progress, dailyEmission, costPerBatch, stakerPct, minerPct: 1-stakerPct, bnbPct, vaultPct: 1-bnbPct };
+function calcMine(){
+  const day=Math.max(1,parseInt(document.getElementById('day-in').value)||1),b=Math.max(1,parseInt(document.getElementById('batch-in').value)||1),lk=Math.max(1,parseInt(document.getElementById('lock-in').value)||1),comp=Math.max(0,parseInt(document.getElementById('comp-in').value)||0),pr=parseFloat(document.getElementById('price-in').value)||0.10,m=mult(lk);
+  const st=gS(day),tb=b+comp,sh=b/tb,gold=st.dl*sh*m,gv=gold*pr;
+  const ef=b*st.cb,eu=ef*EP,xb=b*XPB,xu=xb*XP,tc=eu+xu;
+  const roi=tc>0?(gv-tc)/tc:0;
+  document.getElementById('m-pay').textContent=usd(tc);
+  document.getElementById('m-pay-sub').textContent=ef.toFixed(4)+' ETH + '+fmt(xb)+' XEN';
+  document.getElementById('m-earn').textContent=fmt(gold)+' GOLD';
+  document.getElementById('m-earn-sub').textContent='worth '+usd(gv);
+  const re=document.getElementById('m-roi');re.textContent=(roi>=0?'+':'')+(roi*100).toFixed(1)+'% ROI';re.className='hero-roi-val '+(roi>=0?'roi-pos':'roi-neg');
+  document.getElementById('m-minted').textContent=pct(st.p);
+  document.getElementById('m-supply').textContent=fmt(st.m)+'/160.75M';
+  document.getElementById('m-cost').textContent=st.cb.toFixed(6)+' ETH';
+  document.getElementById('m-emission').textContent=fmt(st.dl)+'/day';
+  document.getElementById('mult-badge').textContent=m.toFixed(2)+'× multiplier';
+  document.getElementById('xen-eq').textContent='= '+co(xb)+' XEN';
+  document.getElementById('md-eth').textContent=ef.toFixed(4)+' ETH ('+usd(eu)+')';
+  document.getElementById('md-xen').textContent=fmt(xb)+' XEN';
+  document.getElementById('md-xusd').textContent=usd(xu);
+  document.getElementById('md-m').textContent=m.toFixed(2)+'×';
+  document.getElementById('md-sh').textContent=pct(sh);
+  document.getElementById('md-mat').textContent='Day '+(day+lk);
+  document.getElementById('md-cpg').textContent=gold>0?usd(tc/gold)+'/GOLD':'—';
+  document.getElementById('md-bnb').textContent=pct(st.bp);
+  document.getElementById('md-v').textContent=pct(st.vp);
+  document.getElementById('md-s').textContent=pct(st.sp);
+  document.getElementById('md-mi').textContent=pct(st.mp);
 }
 
-// ═══ TAB SWITCHING ═══
-function showTab(tab) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('page-'+tab).classList.add('active');
-  document.querySelector(`[onclick="showTab('${tab}')"]`).classList.add('active');
+function buildT(){document.getElementById('tier-grid').innerHTML=TI.map((t,i)=>`<div class="tier-card ${i===sT?'sel':''}" onclick="selT(${i})"><div class="tier-emoji">${t.e}</div><div class="tier-label" style="color:${t.c}">${t.l}</div><div class="tier-days">${t.d<365?t.d+'d':(t.d/365).toFixed(1)+'y'}</div><div class="tier-pct" style="color:${t.c}">${(tP[i]*100).toFixed(1)}%</div><div class="tier-of">of fees</div></div>`).join('')}
+function selT(i){sT=i;buildT();calcStake()}
+function onEntry(){document.getElementById('entry-sl').value=Math.min(parseInt(document.getElementById('entry-day').value)||1,3888);calcStake()}
+function onEntrySl(){document.getElementById('entry-day').value=document.getElementById('entry-sl').value;calcStake()}
+function onPoolSl(){document.getElementById('pool-eth').value=(parseInt(document.getElementById('pool-sl').value)/10).toFixed(1);calcStake()}
+
+function calcStake(){
+  const tier=TI[sT],amt=Math.max(1,parseFloat(document.getElementById('stake-amt').value)||1),pr=parseFloat(document.getElementById('stake-price').value)||0.10,ed=Math.max(1,parseInt(document.getElementById('entry-day').value)||1),pe=Math.max(0.1,parseFloat(document.getElementById('pool-eth').value)||1);
+  const sv=amt*pr,rk=RS*Math.exp(-RD*(ed-1)),rp=(rk/RS)*100,wt=rk*amt;
+  const aR=RS*Math.exp(-RD*(ed*0.5)),oW=aR*5000*1000,tW=wt+oW,ps=wt/tW;
+  const po=pe*ps,pu=po*EP;
+  const gn=(RS/rk)*amt,pc=gn*pr,mx=RS/rk;
+  document.getElementById('s-pay').textContent=usd(sv);
+  document.getElementById('s-pay-sub').textContent=co(amt)+' GOLD × '+tier.l;
+  document.getElementById('s-earn').textContent=po.toFixed(4)+' ETH';
+  document.getElementById('s-earn-sub').textContent=usd(pu)+' per cycle · '+pct(ps)+' of pool';
+  document.getElementById('s-rank').textContent=co(Math.round(rk));
+  document.getElementById('s-rsub').textContent='Day '+ed+' · '+rp.toFixed(1)+'%';
+  document.getElementById('s-wt').textContent=wt>=1e12?(wt/1e12).toFixed(2)+'T':wt>=1e9?(wt/1e9).toFixed(2)+'B':fmt(wt);
+  document.getElementById('s-wsub').textContent=co(Math.round(rk))+' × '+co(amt);
+  document.getElementById('s-par').textContent=usd(pc);
+  document.getElementById('s-psub').textContent=mx.toFixed(1)+'x · '+co(Math.round(gn))+' GOLD';
+  const ent=[{d:1,l:'Day 1'},{d:90,l:'D90'},{d:365,l:'Y1'},{d:730,l:'Y2'},{d:1095,l:'Y3'},{d:1825,l:'Y5'},{d:2555,l:'Y7'}];
+  document.getElementById('late-tbl').innerHTML=ent.map((e,i)=>{const r=RS*Math.exp(-RD*(e.d-1)),p=(RS*100)/r;return`<tr style="border-bottom:1px solid rgba(148,100,255,0.04)"><td style="padding:4px 8px;color:${i===0?'#c084fc':'#e8e4f0'};font-weight:${i===0?700:400}">${e.l}</td><td style="padding:4px 8px;color:#facc15">${(r/1e6).toFixed(0)}M</td><td style="padding:4px 8px;color:${p>50000?'#f87171':p>500?'#facc15':'#34d399'};font-weight:700">$${Math.round(p).toLocaleString()}</td><td style="padding:4px 8px;color:rgba(200,190,230,0.25)">${(p/100).toFixed(1)}x</td></tr>`}).join('');
 }
 
-// ═══ MINE CALCULATIONS ═══
-function onDaySl() { document.getElementById('day-in').value = document.getElementById('day-sl').value; calcMine(); }
-function onDay() { document.getElementById('day-sl').value = Math.min(parseInt(document.getElementById('day-in').value)||1, 5000); calcMine(); }
-function onBatchSl() { document.getElementById('batch-in').value = document.getElementById('batch-sl').value; calcMine(); }
-function onBatch() { document.getElementById('batch-sl').value = Math.min(parseInt(document.getElementById('batch-in').value)||1, 1000); calcMine(); }
-function onCompSl() { document.getElementById('comp-in').value = document.getElementById('comp-sl').value; calcMine(); }
-function onComp() { document.getElementById('comp-sl').value = Math.min(parseInt(document.getElementById('comp-in').value)||0, 10000); calcMine(); }
-function onPriceSl() { document.getElementById('price-in').value = s2p(parseInt(document.getElementById('price-sl').value)); calcMine(); calcStake(); }
-function onPriceIn() { document.getElementById('price-sl').value = p2s(parseFloat(document.getElementById('price-in').value)||0.1); calcMine(); calcStake(); }
-function setMax(x) { if(x==='batch'){document.getElementById('batch-in').value=1000;document.getElementById('batch-sl').value=1000;} calcMine(); }
-
-function calcMine() {
-  const day = Math.max(1, parseInt(document.getElementById('day-in').value) || 1);
-  const batches = Math.max(1, parseInt(document.getElementById('batch-in').value) || 1);
-  const comp = Math.max(0, parseInt(document.getElementById('comp-in').value) || 0);
-  const price = parseFloat(document.getElementById('price-in').value) || 0.10;
-
-  const state = getProtocolState(day);
-  const totalBatches = batches + comp;
-  const yourShare = batches / totalBatches;
-  const yourGold = state.dailyEmission * yourShare;
-  const goldValue = yourGold * price;
-
-  const ethFee = batches * state.costPerBatch;
-  const ethFeeUSD = ethFee * ETH_PRICE;
-  const xenBurned = batches * XPB;
-  const xenCostUSD = xenBurned * XEN_PRICE;
-  const totalCost = ethFeeUSD + xenCostUSD;
-  const roi = totalCost > 0 ? (goldValue - totalCost) / totalCost : 0;
-  const roiStr = (roi >= 0 ? '+' : '') + (roi * 100).toFixed(1) + '%';
-
-  // Status bar
-  document.getElementById('m-minted').textContent = pct(state.progress);
-  document.getElementById('m-supply').textContent = fmt(state.minted) + ' / 160.75M';
-  document.getElementById('m-cost').textContent = state.costPerBatch.toFixed(6) + ' ETH/batch';
-  document.getElementById('m-emission').textContent = fmt(state.dailyEmission) + ' GOLD/day';
-
-  // Hero card
-  document.getElementById('m-hero-gold').textContent = fmt(yourGold) + ' GOLD';
-  document.getElementById('m-hero-sub').textContent = pct(yourShare) + ' of today\'s ' + fmt(state.dailyEmission) + ' emission';
-  document.getElementById('m-hb-val').textContent = usd(goldValue);
-  document.getElementById('m-hb-cost').textContent = usd(totalCost);
-  document.getElementById('m-hb-roi').textContent = roiStr;
-  document.getElementById('m-hb-roi').className = 'hb-val ' + (roi >= 0 ? 'sv-pos' : 'sv-neg');
-
-  // Summary rows
-  document.getElementById('m-share').textContent = pct(yourShare);
-  document.getElementById('m-total-em').textContent = fmt(state.dailyEmission) + ' GOLD';
-  document.getElementById('m-cost-per').textContent = '$' + (totalCost / Math.max(yourGold, 0.001)).toFixed(4) + '/GOLD';
-  document.getElementById('m-eth-fee').textContent = ethFee.toFixed(4) + ' ETH (' + usd(ethFeeUSD) + ')';
-  document.getElementById('m-xen-burn').textContent = fmt(xenBurned) + ' XEN';
-  document.getElementById('m-xen-cost').textContent = usd(xenCostUSD);
-
-  // Treasury split
-  document.getElementById('m-to-bnb').textContent = pct(state.bnbPct) + ' → ' + usd(ethFeeUSD * state.bnbPct);
-  document.getElementById('m-to-vault').textContent = pct(state.vaultPct) + ' → ' + usd(ethFeeUSD * state.vaultPct);
-  document.getElementById('m-to-stakers').textContent = pct(state.stakerPct) + ' of fees';
-  document.getElementById('m-to-miners').textContent = pct(state.minerPct) + ' of fees';
-
-  // XEN sub
-  document.getElementById('xen-equiv').textContent = '= ' + commas(xenBurned) + ' XEN (' + usd(xenCostUSD) + ')';
-}
-
-// ═══ STAKE CALCULATIONS ═══
-function buildTierGrid() {
-  const grid = document.getElementById('tier-grid');
-  grid.innerHTML = TIERS.map((t, i) => `
-    <div class="tier-card ${i===selectedTier?'selected':''}" onclick="selectTier(${i})">
-      <div class="tier-emoji">${t.emoji}</div>
-      <div class="tier-label" style="color:${t.color}">${t.label}</div>
-      <div class="tier-days">${t.days < 365 ? t.days+' days' : (t.days/365).toFixed(1)+' yrs'}</div>
-      <div class="tier-pct" style="color:${t.color}">${(tierPcts[i]*100).toFixed(1)}%</div>
-      <div class="tier-pctlabel">of fees</div>
-    </div>
-  `).join('');
-}
-
-function selectTier(i) {
-  selectedTier = i;
-  buildTierGrid();
-  calcStake();
-}
-
-function onEntry() { document.getElementById('entry-sl').value = Math.min(parseInt(document.getElementById('entry-day').value)||1, 3888); calcStake(); }
-function onEntrySl() { document.getElementById('entry-day').value = document.getElementById('entry-sl').value; calcStake(); }
-function onPoolSl() {
-  const v = parseInt(document.getElementById('pool-sl').value);
-  document.getElementById('pool-eth').value = (v / 10).toFixed(1);
-  calcStake();
-}
-
-function calcStake() {
-  const tier = TIERS[selectedTier];
-  const amt = Math.max(1, parseFloat(document.getElementById('stake-amt').value) || 1);
-  const price = parseFloat(document.getElementById('stake-price').value) || parseFloat(document.getElementById('price-in').value) || 0.10;
-  const entryDay = Math.max(1, parseInt(document.getElementById('entry-day').value) || 1);
-  const poolETH = Math.max(0.1, parseFloat(document.getElementById('pool-eth').value) || 1);
-
-  const stakeUSD = amt * price;
-  document.getElementById('stake-usd').textContent = '= ' + usd(stakeUSD) + ' staked';
-
-  // Rank at entry day
-  const rank = RANK_START * Math.exp(-RANK_DECAY * (entryDay - 1));
-  const rankPctOfMax = (rank / RANK_START) * 100;
-
-  // Share weight
-  const weight = rank * amt;
-
-  // Assume total pool weight (simplified: 1000 other stakers averaging rank*5000 GOLD)
-  const avgOtherRank = RANK_START * Math.exp(-RANK_DECAY * (entryDay * 0.5)); // avg entered halfway
-  const otherWeight = avgOtherRank * 5000 * 1000; // 1000 stakers × 5000 GOLD avg
-  const totalWeight = weight + otherWeight;
-  const yourPoolShare = weight / totalWeight;
-
-  // Payout per cycle
-  const payoutPerCycle = poolETH * yourPoolShare;
-  const payoutPerCycleUSD = payoutPerCycle * ETH_PRICE;
-
-  // How many cycles you catch (tier days / cycle length)
-  // Cycle length = tier days (you catch 1 full cycle payout)
-  // But if staking for max (3888), you catch all shorter cycles too
-  // Simplified: you earn 1 payout for your chosen tier
-  const cyclesCaught = 1; // simplified for now
-  const totalETH = payoutPerCycle * cyclesCaught;
-  const totalETHusd = totalETH * ETH_PRICE;
-
-  // Day 1 parity
-  const day1Rank = RANK_START;
-  const day1Weight = day1Rank * amt;
-  const goldForParity = (day1Rank / rank) * amt;
-  const costForParity = goldForParity * price;
-  const multiplier = day1Rank / rank;
-
-  // Update UI
-  document.getElementById('st-rank').textContent = commas(Math.round(rank));
-  document.getElementById('st-rank-sub').textContent = `Day ${entryDay} · ${rankPctOfMax.toFixed(1)}% of max rank`;
-
-  document.getElementById('st-weight').textContent = fmtRank(weight);
-  document.getElementById('st-weight-sub').textContent = commas(Math.round(rank)) + ' × ' + commas(amt) + ' GOLD';
-
-  document.getElementById('st-payout').textContent = payoutPerCycle.toFixed(4) + ' ETH';
-  document.getElementById('st-payout-sub').textContent = usd(payoutPerCycleUSD) + ' · ' + pct(yourPoolShare) + ' of pool';
-
-  document.getElementById('st-tier').textContent = tier.emoji + ' ' + tier.label + ' (' + (tier.days < 365 ? tier.days + ' days' : (tier.days/365).toFixed(1) + ' yrs') + ')';
-  document.getElementById('st-alloc').textContent = (tierPcts[selectedTier] * 100).toFixed(1) + '% of all staker fees';
-  document.getElementById('st-lock').textContent = tier.days + ' days';
-  document.getElementById('st-cycles').textContent = cyclesCaught.toString();
-  document.getElementById('st-total-eth').textContent = totalETH.toFixed(4) + ' ETH (' + usd(totalETHusd) + ')';
-
-  document.getElementById('st-parity-cost').textContent = usd(costForParity);
-  document.getElementById('st-parity-gold').textContent = commas(Math.round(goldForParity)) + ' GOLD';
-  document.getElementById('st-parity-mult').textContent = multiplier.toFixed(1) + 'x more than Day 1';
-}
-
-// ═══ INIT ═══
-document.getElementById('price-sl').value = p2s(0.10);
-buildTierGrid();
-calcMine();
-calcStake();
+buildT();calcMine();calcStake();
 </script>
 </body>
 </html>

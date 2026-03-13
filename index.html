@@ -8,144 +8,177 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:linear-gradient(135deg,#0a0618 0%,#060d1a 40%,#001210 100%);color:#e8e4f0;font-family:'Space Grotesk',sans-serif;min-height:100vh}
+:root{--mono:'Space Mono',monospace;--pink:#f472b6;--gold:#facc15;--teal:#34d399;--purp:#c084fc;--burn:#fb923c;--dim:rgba(200,190,230,0.4);--dimmer:rgba(200,190,230,0.2);--dimmest:rgba(200,190,230,0.1);--border:rgba(148,100,255,0.15)}
 
-/* Nav */
-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 40px;border-bottom:1px solid rgba(148,100,255,0.15);background:rgba(10,6,24,0.85);position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
-.nav-logo{font-family:'Space Mono',monospace;font-weight:700;font-size:17px;letter-spacing:2px;cursor:pointer}
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;border-bottom:1px solid var(--border);background:rgba(10,6,24,0.8);position:sticky;top:0;z-index:100}
+.nav-logo{font-family:var(--mono);font-weight:700;font-size:17px;letter-spacing:2px}
 .g1{color:#c084fc}.g2{color:#f472b6}.g3{color:#fb923c}.g4{color:#facc15}
-.nav-dot{display:inline-block;width:7px;height:7px;background:#34d399;border-radius:50%;margin-left:6px;vertical-align:middle}
-.nav-tabs{display:flex;gap:4px}
-.nav-tab{font-size:11px;letter-spacing:2px;padding:8px 22px;border-radius:6px;border:1px solid transparent;cursor:pointer;font-family:'Space Mono',monospace;font-weight:700;color:rgba(200,190,230,0.4);background:transparent;transition:all .2s}
-.nav-tab:hover{color:rgba(200,190,230,0.7)}
-.nav-tab.active{background:rgba(148,100,255,0.15);border-color:rgba(148,100,255,0.3);color:#c084fc}
-.nav-btn{font-size:11px;letter-spacing:2px;padding:8px 20px;border-radius:6px;border:none;cursor:pointer;font-family:'Space Mono',monospace;font-weight:700;background:linear-gradient(90deg,#7c3aed,#c026d3);color:#fff;transition:opacity .2s}
-.nav-btn:hover{opacity:0.85}
+.nav-dot{display:inline-block;width:7px;height:7px;background:var(--teal);border-radius:50%;margin-left:6px;vertical-align:middle}
+.nav-tabs{display:flex;gap:0}
+.tab-btn{font-size:11px;letter-spacing:2px;padding:8px 22px;cursor:pointer;font-family:var(--mono);font-weight:700;background:transparent;color:rgba(200,190,230,0.35);border:1px solid transparent;border-radius:6px;transition:all .2s}
+.tab-btn:hover{color:var(--purp)}
+.tab-btn.active{background:rgba(148,100,255,0.12);color:var(--purp);border-color:rgba(148,100,255,0.3)}
+.nav-btn{font-size:11px;letter-spacing:2px;padding:8px 20px;border-radius:6px;border:none;cursor:pointer;font-family:var(--mono);font-weight:700;background:linear-gradient(90deg,#7c3aed,#c026d3);color:#fff}
 
-/* Page sections */
-.page{display:none;padding:24px 40px 32px}
-.page.active{display:block}
-.page-header{display:flex;align-items:flex-end;gap:14px;margin-bottom:20px}
-.page-header h1{font-family:'Space Mono',monospace;font-weight:700;font-size:28px;letter-spacing:4px;background:linear-gradient(90deg,#c084fc,#f472b6,#fb923c,#facc15);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.page-header p{font-size:11px;color:rgba(200,190,230,0.4);letter-spacing:2px;padding-bottom:4px}
+/* TAB CONTENT */
+.tab-page{display:none;animation:fadeIn .3s ease}
+.tab-page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-/* Layout */
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:0}
+/* PAGE HEADER */
+.page-header{padding:24px 40px 0;display:flex;align-items:flex-end;gap:14px}
+.page-header h1{font-family:var(--mono);font-weight:700;font-size:28px;letter-spacing:4px;background:linear-gradient(90deg,#c084fc,#f472b6,#fb923c,#facc15);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.page-header p{font-size:11px;color:var(--dim);letter-spacing:2px;padding-bottom:4px}
+
+/* SHARED */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:0;padding:20px 40px 32px}
 .left-col{padding-right:28px;border-right:1px solid rgba(148,100,255,0.12);display:flex;flex-direction:column;gap:12px}
 .right-col{padding-left:28px;display:flex;flex-direction:column}
-
-/* Blocks */
 .input-block{border-radius:14px;padding:18px 20px}
 .block-pink{background:linear-gradient(135deg,rgba(244,114,182,0.08),rgba(192,38,211,0.04));border:1px solid rgba(244,114,182,0.2)}
 .block-gold{background:linear-gradient(135deg,rgba(250,204,21,0.06),rgba(251,146,60,0.04));border:1px solid rgba(250,204,21,0.2)}
 .block-teal{background:linear-gradient(135deg,rgba(52,211,153,0.07),rgba(6,182,212,0.04));border:1px solid rgba(52,211,153,0.2)}
-.block-purple{background:linear-gradient(135deg,rgba(192,132,252,0.07),rgba(244,114,182,0.04));border:1px solid rgba(192,132,252,0.2)}
-.block-label{font-size:10px;letter-spacing:3px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;font-family:'Space Mono',monospace}
-.lbl-pink{color:rgba(244,114,182,0.6)}.lbl-gold{color:rgba(250,204,21,0.6)}.lbl-teal{color:rgba(52,211,153,0.6)}.lbl-purple{color:rgba(192,132,252,0.6)}
-.help-btn{width:16px;height:16px;border-radius:50%;border:1px solid rgba(148,100,255,0.3);background:rgba(10,6,24,0.6);font-size:9px;color:rgba(200,190,230,0.4);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.block-purp{background:linear-gradient(135deg,rgba(192,132,252,0.07),rgba(244,114,182,0.04));border:1px solid rgba(192,132,252,0.2)}
+.block-label{font-size:10px;letter-spacing:3px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;font-family:var(--mono)}
+.lbl-pink{color:rgba(244,114,182,0.6)}.lbl-gold{color:rgba(250,204,21,0.6)}.lbl-teal{color:rgba(52,211,153,0.6)}.lbl-purp{color:rgba(192,132,252,0.6)}
+.help-btn{width:16px;height:16px;border-radius:50%;border:1px solid rgba(148,100,255,0.3);background:rgba(10,6,24,0.6);font-size:9px;color:var(--dim);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .help-text{font-size:11px;color:rgba(200,190,230,0.5);background:rgba(0,0,0,0.3);border-radius:6px;padding:8px 10px;margin-bottom:10px;line-height:1.6;display:none;border:1px solid rgba(148,100,255,0.1)}
 .help-text.open{display:block}
-
-/* Inputs */
 .row-input{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:10px}
 .row-label{font-size:12px;color:rgba(200,190,230,0.5);flex:1}
-.num-input{width:110px;font-family:'Space Mono',monospace;font-size:15px;font-weight:700;background:rgba(0,0,0,0.4);border-radius:8px;padding:6px 10px;outline:none;text-align:center}
+.num-input{width:90px;font-family:var(--mono);font-size:15px;font-weight:700;background:rgba(0,0,0,0.4);border-radius:8px;padding:6px 10px;outline:none;text-align:center}
 .num-input::-webkit-inner-spin-button{-webkit-appearance:none}
-.ni-pink{color:#f472b6;border:1px solid rgba(244,114,182,0.3)}.ni-pink:focus{border-color:#f472b6}
-.ni-gold{color:#facc15;border:1px solid rgba(250,204,21,0.3)}.ni-gold:focus{border-color:#facc15}
-.ni-teal{color:#34d399;border:1px solid rgba(52,211,153,0.3)}.ni-teal:focus{border-color:#34d399}
-.ni-purple{color:#c084fc;border:1px solid rgba(192,132,252,0.3)}.ni-purple:focus{border-color:#c084fc}
-.max-btn{font-size:9px;letter-spacing:1px;padding:5px 10px;border-radius:5px;cursor:pointer;font-family:'Space Mono',monospace;font-weight:700}
-.mb-pink{background:rgba(244,114,182,0.1);color:#f472b6;border:1px solid rgba(244,114,182,0.25)}.mb-pink:hover{background:rgba(244,114,182,0.2)}
-.mb-gold{background:rgba(250,204,21,0.1);color:#facc15;border:1px solid rgba(250,204,21,0.25)}.mb-gold:hover{background:rgba(250,204,21,0.2)}
-
-/* Slider */
+.ni-pink{color:var(--pink);border:1px solid rgba(244,114,182,0.3)}.ni-pink:focus{border-color:var(--pink)}
+.ni-gold{color:var(--gold);border:1px solid rgba(250,204,21,0.3)}.ni-gold:focus{border-color:var(--gold)}
+.ni-purp{color:var(--purp);border:1px solid rgba(192,132,252,0.3)}.ni-purp:focus{border-color:var(--purp)}
+.max-btn{font-size:9px;letter-spacing:1px;padding:5px 10px;border-radius:5px;cursor:pointer;font-family:var(--mono);font-weight:700}
+.mb-pink{background:rgba(244,114,182,0.1);color:var(--pink);border:1px solid rgba(244,114,182,0.25)}
+.mb-gold{background:rgba(250,204,21,0.1);color:var(--gold);border:1px solid rgba(250,204,21,0.25)}
 .slider{width:100%;-webkit-appearance:none;height:3px;border-radius:2px;outline:none;margin:8px 0 4px;background:rgba(255,255,255,0.06)}
-.slider::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;cursor:pointer}
-.s-pink::-webkit-slider-thumb{background:#f472b6}
-.s-gold::-webkit-slider-thumb{background:#facc15}
-.s-teal::-webkit-slider-thumb{background:#34d399}
-.s-purple::-webkit-slider-thumb{background:#c084fc}
-.slider-ends{display:flex;justify-content:space-between;font-size:10px;color:rgba(200,190,230,0.2);letter-spacing:1px}
+.slider.s-pink::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;background:var(--pink);border-radius:50%;cursor:pointer}
+.slider.s-gold::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;background:var(--gold);border-radius:50%;cursor:pointer}
+.slider.s-teal::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;background:var(--teal);border-radius:50%;cursor:pointer}
+.slider.s-purp::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;background:var(--purp);border-radius:50%;cursor:pointer}
+.slider-ends{display:flex;justify-content:space-between;font-size:10px;color:var(--dimmer);letter-spacing:1px}
 .input-sub{font-size:11px;margin-top:7px;letter-spacing:1px}
-.sub-pink{color:rgba(244,114,182,0.4)}.sub-gold{color:rgba(250,204,21,0.4)}.sub-teal{color:rgba(52,211,153,0.4)}
-
-/* Cards */
-.hero-card{border-radius:14px;padding:16px 20px;margin-bottom:12px}
-.hc-teal{background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(6,182,212,0.04));border:1px solid rgba(52,211,153,0.25)}
-.hc-gold{background:linear-gradient(135deg,rgba(250,204,21,0.06),rgba(251,146,60,0.04));border:1px solid rgba(250,204,21,0.25)}
-.hc-purple{background:linear-gradient(135deg,rgba(192,132,252,0.07),rgba(244,114,182,0.04));border:1px solid rgba(192,132,252,0.2)}
-.hero-label{font-size:10px;letter-spacing:3px;font-family:'Space Mono',monospace;margin-bottom:6px}
-.hl-teal{color:rgba(52,211,153,0.5)}.hl-gold{color:rgba(250,204,21,0.5)}.hl-purple{color:rgba(192,132,252,0.5)}
-.hero-value{font-family:'Space Mono',monospace;font-weight:700;font-size:32px;line-height:1}
-.hv-teal{color:#34d399}.hv-gold{color:#facc15}.hv-purple{color:#c084fc}
-.hero-sub{font-size:11px;margin-top:5px}
-.hs-teal{color:rgba(52,211,153,0.4)}.hs-gold{color:rgba(250,204,21,0.4)}.hs-purple{color:rgba(192,132,252,0.4)}
-.hero-breakdown{display:flex;gap:16px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05)}
-.hb-item{flex:1}
-.hb-label{font-size:9px;letter-spacing:2px;color:rgba(200,190,230,0.25);margin-bottom:3px}
-.hb-val{font-family:'Space Mono',monospace;font-size:13px;font-weight:700}
-
-/* Summary rows */
-.sum-label{font-size:10px;letter-spacing:3px;color:rgba(200,190,230,0.3);font-family:'Space Mono',monospace;margin-bottom:4px;padding-bottom:12px;border-bottom:1px solid rgba(148,100,255,0.12)}
-.sum-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(148,100,255,0.08)}
-.s-key{font-size:12px;color:rgba(200,190,230,0.4);display:flex;align-items:center;gap:8px}
-.s-val{font-family:'Space Mono',monospace;font-size:14px;font-weight:700}
-.sv-gold{color:#facc15}.sv-teal{color:#34d399}.sv-purple{color:#c084fc}.sv-muted{color:rgba(200,190,230,0.3)}
-.sv-pos{color:#34d399}.sv-neg{color:#f87171}
-.divline{border:none;border-top:1px solid rgba(148,100,255,0.1);margin:14px 0}
-.det-label{font-size:10px;letter-spacing:3px;color:rgba(200,190,230,0.2);font-family:'Space Mono',monospace;margin-bottom:10px}
-.det-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(148,100,255,0.05)}
-.d-key{font-size:11px;color:rgba(200,190,230,0.25);letter-spacing:1px}
-.d-val{font-size:12px;font-family:'Space Mono',monospace;font-weight:700}
-.dv-gold{color:rgba(250,204,21,0.5)}.dv-pink{color:rgba(244,114,182,0.5)}.dv-teal{color:rgba(52,211,153,0.5)}.dv-purple{color:rgba(192,132,252,0.5)}.dv-muted{color:rgba(200,190,230,0.15)}
-
-/* Stake tier selector */
-.tier-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:16px}
-.tier-card{border-radius:10px;padding:10px 4px;text-align:center;cursor:pointer;border:1px solid rgba(148,100,255,0.12);background:rgba(10,6,24,0.4);transition:all .2s}
-.tier-card:hover{border-color:rgba(148,100,255,0.3);background:rgba(148,100,255,0.06)}
-.tier-card.selected{border-color:#c084fc;background:rgba(192,132,252,0.1);box-shadow:0 0 20px rgba(192,132,252,0.15)}
-.tier-emoji{font-size:18px}
-.tier-label{font-size:13px;font-weight:700;font-family:'Space Mono',monospace;margin-top:2px}
-.tier-days{font-size:8px;color:rgba(200,190,230,0.3);font-family:'Space Mono',monospace}
-.tier-pct{font-size:11px;font-weight:700;font-family:'Space Mono',monospace;margin-top:6px}
-.tier-pctlabel{font-size:7px;color:rgba(200,190,230,0.15);font-family:'Space Mono',monospace}
-
-/* Protocol status bar */
-.status-bar{display:flex;gap:8px;margin-bottom:16px}
-.status-pill{flex:1;background:rgba(10,6,24,0.6);border:1px solid rgba(148,100,255,0.1);border-radius:8px;padding:8px 10px;text-align:center}
-.sp-label{font-size:8px;color:rgba(200,190,230,0.25);font-family:'Space Mono',monospace;letter-spacing:1px;margin-bottom:3px}
-.sp-val{font-size:14px;font-weight:700;font-family:'Space Mono',monospace}
-
-/* Price inputs */
+.sub-pink{color:rgba(244,114,182,0.4)}
+.mult-badge{font-size:13px;font-family:var(--mono);font-weight:700;color:var(--gold);margin-top:5px;display:inline-block}
 .price-row{display:flex;align-items:baseline;gap:4px;margin-bottom:10px}
-.price-sym{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:#34d399}
-.price-input{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:#34d399;background:transparent;border:none;outline:none;width:150px}
+.price-sym{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--teal)}
+.price-input{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--teal);background:transparent;border:none;outline:none;width:150px}
 .price-input::-webkit-inner-spin-button{-webkit-appearance:none}
 .live-tag{font-size:9px;padding:2px 10px;border-radius:10px;border:1px solid rgba(52,211,153,0.2);background:rgba(52,211,153,0.06);color:rgba(52,211,153,0.5);letter-spacing:2px;display:inline-block;margin-top:5px}
 .prices-strip{display:flex;gap:8px;margin-top:8px}
-.price-pill{font-size:10px;padding:3px 10px;border-radius:10px;letter-spacing:1px;font-family:'Space Mono',monospace}
+.price-pill{font-size:10px;padding:3px 10px;border-radius:10px;letter-spacing:1px;font-family:var(--mono)}
 .pp-eth{background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.25);color:rgba(99,102,241,0.7)}
 .pp-xen{background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.2);color:rgba(251,146,60,0.6)}
-.pp-prog{background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.2);color:rgba(192,132,252,0.6)}
+.sum-label{font-size:10px;letter-spacing:3px;color:rgba(200,190,230,0.3);font-family:var(--mono);margin-bottom:4px;padding-bottom:12px;border-bottom:1px solid rgba(148,100,255,0.12)}
+.hero-card{border-radius:14px;padding:16px 20px;margin-bottom:12px}
+.hc-teal{background:linear-gradient(135deg,rgba(52,211,153,0.08),rgba(6,182,212,0.04));border:1px solid rgba(52,211,153,0.25)}
+.hc-gold{background:linear-gradient(135deg,rgba(250,204,21,0.06),rgba(251,146,60,0.04));border:1px solid rgba(250,204,21,0.2)}
+.hero-label{font-size:10px;letter-spacing:3px;font-family:var(--mono);margin-bottom:6px}
+.hl-teal{color:rgba(52,211,153,0.5)}.hl-gold{color:rgba(250,204,21,0.5)}.hl-purp{color:rgba(192,132,252,0.5)}
+.hero-value{font-family:var(--mono);font-weight:700;font-size:36px;line-height:1}
+.hv-teal{color:var(--teal)}.hv-gold{color:var(--gold)}.hv-purp{color:var(--purp)}
+.hero-sub{font-size:11px;margin-top:5px}
+.hs-teal{color:rgba(52,211,153,0.4)}.hs-gold{color:rgba(250,204,21,0.4)}
+.hero-breakdown{display:flex;gap:16px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(52,211,153,0.1)}
+.hb-item{flex:1}
+.hb-label{font-size:9px;letter-spacing:2px;color:rgba(200,190,230,0.25);margin-bottom:3px}
+.hb-val{font-family:var(--mono);font-size:13px;font-weight:700}
+.hb-gold{color:var(--gold)}.hb-teal{color:var(--teal)}.hb-muted{color:rgba(200,190,230,0.3)}
+.grank-card{border-radius:14px;padding:14px 18px;margin-bottom:12px;background:linear-gradient(135deg,rgba(192,132,252,0.07),rgba(244,114,182,0.04));border:1px solid rgba(192,132,252,0.2)}
+.grank-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.grank-title{font-size:10px;letter-spacing:3px;color:rgba(192,132,252,0.6);font-family:var(--mono)}
+.grank-toggle{font-size:9px;padding:3px 10px;border-radius:10px;border:1px solid rgba(192,132,252,0.25);background:rgba(192,132,252,0.08);color:rgba(192,132,252,0.6);cursor:pointer;font-family:var(--mono);letter-spacing:1px}
+.grank-value{font-family:var(--mono);font-weight:700;font-size:22px;color:var(--purp)}
+.grank-sub{font-size:11px;color:rgba(192,132,252,0.4);margin-top:4px}
+.grank-slider-row{margin-top:10px;padding-top:10px;border-top:1px solid rgba(192,132,252,0.1)}
+.grank-slider-label{font-size:10px;color:rgba(192,132,252,0.4);margin-bottom:6px;display:flex;justify-content:space-between}
+.grank-note{font-size:10px;color:rgba(192,132,252,0.3);margin-top:8px;line-height:1.6;font-style:italic}
+.sum-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(148,100,255,0.08)}
+.sum-row:last-of-type{border-bottom:none}
+.s-key{font-size:12px;color:var(--dim);display:flex;align-items:center;gap:8px}
+.s-val{font-family:var(--mono);font-size:14px;font-weight:700}
+.sv-gold{color:var(--gold)}.sv-muted{color:rgba(200,190,230,0.3)}.sv-pos{color:var(--teal);font-size:18px}.sv-neg{color:#f87171;font-size:18px}
+.divline{border:none;border-top:1px solid rgba(148,100,255,0.1);margin:14px 0}
+.det-label{font-size:10px;letter-spacing:3px;color:var(--dimmer);font-family:var(--mono);margin-bottom:10px}
+.det-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(148,100,255,0.05)}
+.d-key{font-size:11px;color:rgba(200,190,230,0.25);letter-spacing:1px}
+.d-val{font-size:12px;font-family:var(--mono);font-weight:700}
+.dv-gold{color:rgba(250,204,21,0.4)}.dv-pink{color:rgba(244,114,182,0.4)}.dv-teal{color:rgba(52,211,153,0.4)}.dv-muted{color:rgba(200,190,230,0.15)}
+.roi-hint{margin-top:auto;padding-top:16px;font-size:10px;color:var(--dimmer);line-height:2;letter-spacing:0.5px}
+.roi-hint a{color:rgba(192,132,252,0.4);text-decoration:underline;cursor:pointer}
+footer{text-align:center;font-size:9px;color:rgba(148,100,255,0.15);letter-spacing:2px;padding:10px 40px;border-top:1px solid rgba(148,100,255,0.08);font-family:var(--mono)}
 
-/* Misc */
-.mult-badge{font-size:13px;font-family:'Space Mono',monospace;font-weight:700;color:#facc15;margin-top:5px;display:inline-block}
-.roi-hint{margin-top:auto;padding-top:16px;font-size:10px;color:rgba(200,190,230,0.2);line-height:2;letter-spacing:0.5px}
-.roi-hint a{color:rgba(192,132,252,0.4);text-decoration:underline}
-footer{text-align:center;font-size:9px;color:rgba(148,100,255,0.15);letter-spacing:2px;padding:10px 40px;border-top:1px solid rgba(148,100,255,0.08);font-family:'Space Mono',monospace}
+/* STAKE TAB */
+.stake-wrap{padding:20px 40px 32px}
+.tier-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:28px}
+.tier-card{border-radius:12px;padding:14px 8px;text-align:center;background:linear-gradient(135deg,rgba(250,204,21,0.04),rgba(192,132,252,0.03));border:1px solid rgba(250,204,21,0.12);transition:all .2s;cursor:pointer}
+.tier-card:hover,.tier-card.sel{border-color:var(--gold);background:linear-gradient(135deg,rgba(250,204,21,0.1),rgba(192,132,252,0.06))}
+.tier-emoji{font-size:20px}.tier-label{font-size:14px;font-weight:700;font-family:var(--mono);margin-top:4px}
+.tier-days{font-size:9px;color:var(--dim);font-family:var(--mono);margin-top:2px}
+.tier-pct{font-size:16px;font-weight:700;font-family:var(--mono);margin-top:8px}.tier-of{font-size:8px;color:rgba(200,190,230,0.15);font-family:var(--mono)}
+.stake-cols{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.stake-left{padding-right:28px;border-right:1px solid rgba(148,100,255,0.12)}
+.stake-right{padding-left:28px}
+.rank-big{font-family:var(--mono);font-weight:700;font-size:32px;color:var(--purp);margin:8px 0 4px}
+.rank-sub{font-size:11px;color:rgba(192,132,252,0.4);font-family:var(--mono)}
+.scenario-tbl{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:10px;margin-top:16px}
+.scenario-tbl th{padding:6px 8px;text-align:left;color:rgba(200,190,230,0.25);font-weight:500;font-size:8px;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid rgba(148,100,255,0.12)}
+.scenario-tbl td{padding:6px 8px;border-bottom:1px solid rgba(148,100,255,0.05)}
 
-/* Dashboard embed */
-.dash-frame{width:100%;border:none;border-radius:14px;min-height:80vh;background:rgba(0,0,0,0.2)}
-.dash-note{font-size:11px;color:rgba(200,190,230,0.3);text-align:center;margin-top:8px;font-family:'Space Mono',monospace}
+/* DASHBOARD TAB */
+.dash-wrap{padding:20px 40px 32px}
+.dash-intro{text-align:center;margin-bottom:28px}
+.dash-intro .tagline{font-size:12px;color:var(--dim);max-width:560px;margin:8px auto 0;line-height:1.6}
+.pillars{display:flex;gap:8px;margin-bottom:24px}
+.pillar{flex:1;border-radius:12px;padding:14px;background:rgba(10,6,24,0.5);border:1px solid var(--border)}
+.pillar-head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.pillar-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;font-family:var(--mono)}
+.pillar-title{font-size:13px;font-weight:700}
+.pillar-desc{font-size:9px;color:var(--dim);font-family:var(--mono);line-height:1.6}
+.dash-stats{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.dash-stat{flex:1;min-width:140px;border-radius:10px;padding:14px 16px;background:rgba(10,6,24,0.5);border:1px solid var(--border)}
+.ds-label{font-size:8px;color:rgba(200,190,230,0.25);font-family:var(--mono);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
+.ds-val{font-size:20px;font-weight:700;font-family:var(--mono)}
+.ds-sub{font-size:9px;color:rgba(200,190,230,0.25);font-family:var(--mono);margin-top:3px}
+.explain{border-radius:10px;padding:16px 18px;margin-bottom:24px;background:rgba(10,6,24,0.5);border:1px solid var(--border)}
+.explain-t{font-size:11px;font-weight:700;color:var(--gold);margin-bottom:8px;font-family:var(--mono)}
+.explain-b{font-size:10px;color:var(--dim);font-family:var(--mono);line-height:1.8}
+.chart{margin-bottom:24px}
+.ch-title{font-size:13px;font-weight:700;color:var(--gold)}
+.ch-sub{font-size:9px;color:rgba(200,190,230,0.3);font-family:var(--mono);margin-top:2px}
+.ch-legend{display:flex;gap:14px;margin-top:4px;padding-left:54px;flex-wrap:wrap}
+.ch-legend span{font-size:8px;color:rgba(200,190,230,0.3);font-family:var(--mono);display:flex;align-items:center;gap:5px}
+.ch-legend i{width:10px;height:3px;border-radius:1px;display:inline-block}
+.adv-toggle{text-align:center;margin:24px 0 16px}
+.adv-btn{background:transparent;color:var(--purp);border:1px solid rgba(192,132,252,0.3);border-radius:8px;padding:10px 28px;cursor:pointer;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:1px;transition:all .2s}
+.adv-btn:hover,.adv-btn.on{background:rgba(192,132,252,0.12)}
+.adv-panel{display:none;border-radius:12px;padding:20px 24px;background:rgba(10,6,24,0.5);border:1px solid var(--border);margin-bottom:24px}
+.adv-panel.show{display:block}
+.adv-section{font-size:10px;font-weight:700;font-family:var(--mono);margin-bottom:12px}
+.adv-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
+.adv-sep{border-top:1px solid var(--border);margin:14px 0;padding-top:14px}
+.ap{margin-bottom:12px}
+.ap-head{display:flex;justify-content:space-between;margin-bottom:2px}
+.ap-lbl{font-size:9px;color:var(--dim);font-family:var(--mono)}
+.ap-val{font-size:9px;color:var(--gold);font-family:var(--mono);font-weight:700}
+.ap input[type=range]{width:100%;height:3px;-webkit-appearance:none;background:rgba(255,255,255,0.06);border-radius:2px;outline:none}
+.ap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--gold);cursor:pointer}
+.ap .hint{font-size:7px;color:rgba(200,190,230,0.15);font-family:var(--mono);margin-top:1px}
 
-@media(max-width:768px){
-  nav{padding:12px 16px;flex-wrap:wrap;gap:8px}
-  .page{padding:16px}
-  .two-col{grid-template-columns:1fr;gap:20px}
-  .left-col{padding-right:0;border-right:none}
-  .right-col{padding-left:0}
+@media(max-width:700px){
+  .two-col,.stake-cols{grid-template-columns:1fr}
+  .left-col,.stake-left{padding-right:0;border-right:none;margin-bottom:20px}
+  .right-col,.stake-right{padding-left:0}
   .tier-grid{grid-template-columns:repeat(4,1fr)}
-  .status-bar{flex-wrap:wrap}
+  .pillars{flex-direction:column}
+  nav{padding:12px 16px;flex-wrap:wrap;gap:8px}
+  .page-header,.stake-wrap,.dash-wrap{padding-left:16px;padding-right:16px}
+  .two-col{padding-left:16px;padding-right:16px}
+  .adv-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -155,140 +188,121 @@ footer{text-align:center;font-size:9px;color:rgba(148,100,255,0.15);letter-spaci
 <nav>
   <div class="nav-logo"><span class="g1">G</span><span class="g2">O</span><span class="g3">L</span><span class="g4">D</span><span style="color:rgba(200,190,230,0.25)">FORGE</span><span class="nav-dot"></span></div>
   <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showTab('mine')">MINE</button>
-    <button class="nav-tab" onclick="showTab('stake')">STAKE</button>
-    <button class="nav-tab" onclick="showTab('dash')">DASHBOARD</button>
+    <button class="tab-btn active" onclick="switchTab('mine')">MINE</button>
+    <button class="tab-btn" onclick="switchTab('stake')">STAKE</button>
+    <button class="tab-btn" onclick="switchTab('dash')">DASHBOARD</button>
   </div>
   <button class="nav-btn">CONNECT WALLET</button>
 </nav>
 
-<!-- ═══════════════════════════════════ -->
+<!-- ═══════════════════════════════════════ -->
 <!-- MINE TAB -->
-<!-- ═══════════════════════════════════ -->
-<div class="page active" id="page-mine">
-  <div class="page-header">
-    <h1>MINE</h1>
-    <p>Burn XEN → Mint GOLD · Cost escalates as supply approaches 160.75M cap</p>
+<!-- ═══════════════════════════════════════ -->
+<div class="tab-page active" id="page-mine">
+<div class="page-header">
+  <h1>MINE</h1>
+  <p>Burn XEN → Mint GOLD · Cost escalates as supply approaches 160.75M cap</p>
+</div>
+<div class="two-col">
+  <div class="left-col">
+    <div class="input-block block-pink">
+      <div class="block-label lbl-pink">MINER POWER <button class="help-btn" onclick="t('h1')">?</button></div>
+      <div class="help-text" id="h1">Each batch burns 10,000,000 XEN. More batches = larger share of that day's GOLD emission.</div>
+      <div class="row-input">
+        <div class="row-label">Batches to burn</div>
+        <input class="num-input ni-pink" type="number" id="batch-in" value="10" min="1" oninput="onBatch()">
+        <button class="max-btn mb-pink" onclick="setMax('batch')">MAX</button>
+      </div>
+      <input type="range" class="slider s-pink" id="batch-sl" min="1" max="1000" value="10" oninput="onBatchSl()">
+      <div class="slider-ends"><span>1</span><span>1,000</span></div>
+      <div class="input-sub sub-pink" id="xen-equiv">= 100,000,000 XEN burned</div>
+    </div>
+    <div class="input-block block-gold">
+      <div class="block-label lbl-gold">MINER LENGTH <button class="help-btn" onclick="t('h2')">?</button></div>
+      <div class="help-text" id="h2">Lock duration 1–888 days. Cubic multiplier — accelerates sharply near 888.</div>
+      <div class="row-input">
+        <div class="row-label">Days locked</div>
+        <input class="num-input ni-gold" type="number" id="lock-in" value="369" min="1" max="888" oninput="onLock()">
+        <button class="max-btn mb-gold" onclick="setMax('lock')">MAX</button>
+      </div>
+      <input type="range" class="slider s-gold" id="lock-sl" min="1" max="888" value="369" oninput="onLockSl()">
+      <div class="slider-ends"><span>1 day</span><span>888 days</span></div>
+      <div class="mult-badge" id="mult-badge">1.65× multiplier</div>
+    </div>
+    <div class="input-block block-teal">
+      <div class="block-label lbl-teal">GOLD MARKET PRICE <button class="help-btn" onclick="t('h3')">?</button></div>
+      <div class="help-text" id="h3">Speculative price for modeling ROI. Live price at launch.</div>
+      <div class="price-row"><div class="price-sym">$</div><input class="price-input" type="number" id="price-in" value="0.10" step="0.001" min="0.001" oninput="onPriceIn()"></div>
+      <input type="range" class="slider s-teal" id="price-sl" min="1" max="1000" value="333" oninput="onPriceSl()">
+      <div class="slider-ends"><span>$0.01</span><span>$100</span></div>
+      <div class="live-tag">MANUAL · LIVE AT LAUNCH</div>
+      <div class="prices-strip"><div class="price-pill pp-eth">ETH $2,000</div><div class="price-pill pp-xen">XEN $0.0000000077</div></div>
+    </div>
   </div>
-
-  <!-- Protocol status -->
-  <div class="status-bar">
-    <div class="status-pill"><div class="sp-label">MINTED</div><div class="sp-val" style="color:#c084fc" id="m-minted">0%</div></div>
-    <div class="status-pill"><div class="sp-label">SUPPLY</div><div class="sp-val" style="color:#facc15" id="m-supply">0 / 160.75M</div></div>
-    <div class="status-pill"><div class="sp-label">CURRENT COST</div><div class="sp-val" style="color:#34d399" id="m-cost">0.0001 ETH</div></div>
-    <div class="status-pill"><div class="sp-label">DAILY EMISSION</div><div class="sp-val" style="color:#f472b6" id="m-emission">—</div></div>
-  </div>
-
-  <div class="two-col">
-    <div class="left-col">
-
-      <!-- Mint progress simulator -->
-      <div class="input-block block-purple">
-        <div class="block-label lbl-purple">PROTOCOL DAY (SIMULATOR) <button class="help-btn" onclick="t('hday')">?</button></div>
-        <div class="help-text" id="hday">Simulates how the protocol looks at different stages. Day 1 = launch. Higher days = more supply minted, higher costs, lower emissions. At launch this will show real on-chain data.</div>
-        <div class="row-input">
-          <div class="row-label">Current protocol day</div>
-          <input class="num-input ni-purple" type="number" id="day-in" value="1" min="1" max="5000" oninput="onDay()">
-        </div>
-        <input type="range" class="slider s-purple" id="day-sl" min="1" max="5000" value="1" oninput="onDaySl()">
-        <div class="slider-ends"><span>Day 1 (launch)</span><span>Day 5000</span></div>
-      </div>
-
-      <!-- Batches -->
-      <div class="input-block block-pink">
-        <div class="block-label lbl-pink">MINER POWER <button class="help-btn" onclick="t('h1')">?</button></div>
-        <div class="help-text" id="h1">Each batch burns 10,000,000 XEN. More batches = larger share of that day's GOLD emission. You compete with all other miners that day.</div>
-        <div class="row-input">
-          <div class="row-label">Batches to burn</div>
-          <input class="num-input ni-pink" type="number" id="batch-in" value="10" min="1" max="1000" oninput="onBatch()">
-          <button class="max-btn mb-pink" onclick="setMax('batch')">MAX</button>
-        </div>
-        <input type="range" class="slider s-pink" id="batch-sl" min="1" max="1000" value="10" oninput="onBatchSl()">
-        <div class="slider-ends"><span>1</span><span>1,000</span></div>
-        <div class="input-sub sub-pink" id="xen-equiv">= 100,000,000 XEN burned</div>
-      </div>
-
-      <!-- Competition -->
-      <div class="input-block block-gold">
-        <div class="block-label lbl-gold">DAILY COMPETITION <button class="help-btn" onclick="t('h2')">?</button></div>
-        <div class="help-text" id="h2">How many total batches other miners create that day. More competition = smaller share of emission. Early days might be 50-500, viral days could hit 5000+.</div>
-        <div class="row-input">
-          <div class="row-label">Other miners' batches today</div>
-          <input class="num-input ni-gold" type="number" id="comp-in" value="200" min="0" max="50000" oninput="onComp()">
-        </div>
-        <input type="range" class="slider s-gold" id="comp-sl" min="0" max="10000" value="200" oninput="onCompSl()">
-        <div class="slider-ends"><span>0 (just you)</span><span>10,000</span></div>
-      </div>
-
-      <!-- Price -->
-      <div class="input-block block-teal">
-        <div class="block-label lbl-teal">GOLD MARKET PRICE <button class="help-btn" onclick="t('h3')">?</button></div>
-        <div class="help-text" id="h3">Speculative price for modeling ROI. Will auto-update from DEX at launch.</div>
-        <div class="price-row">
-          <div class="price-sym">$</div>
-          <input class="price-input" type="number" id="price-in" value="0.10" step="0.001" min="0.001" oninput="onPriceIn()">
-        </div>
-        <input type="range" class="slider s-teal" id="price-sl" min="1" max="1000" value="333" oninput="onPriceSl()">
-        <div class="slider-ends"><span>$0.01</span><span>$100</span></div>
-        <div class="live-tag">MANUAL · LIVE AT LAUNCH</div>
-        <div class="prices-strip">
-          <div class="price-pill pp-eth">ETH $2,000</div>
-          <div class="price-pill pp-xen">XEN $0.0000000077</div>
-        </div>
+  <div class="right-col">
+    <div class="sum-label">SUMMARY & ESTIMATED ROI</div>
+    <div class="hero-card hc-teal">
+      <div class="hero-label hl-teal">TOTAL VALUE AT MATURITY</div>
+      <div class="hero-value hv-teal" id="hero-total">—</div>
+      <div class="hero-sub hs-teal" id="hero-sub">GOLD value + estimated gRank ETH bonuses</div>
+      <div class="hero-breakdown">
+        <div class="hb-item"><div class="hb-label">GOLD VALUE</div><div class="hb-val hb-gold" id="hb-gold">—</div></div>
+        <div class="hb-item"><div class="hb-label">gRANK ETH</div><div class="hb-val hb-teal" id="hb-grank">—</div></div>
+        <div class="hb-item"><div class="hb-label">YOU PUT IN</div><div class="hb-val hb-muted" id="hb-cost">—</div></div>
       </div>
     </div>
-
-    <div class="right-col">
-      <div class="sum-label">ESTIMATED MINING RESULT</div>
-
-      <div class="hero-card hc-teal">
-        <div class="hero-label hl-teal">GOLD YOU'LL RECEIVE</div>
-        <div class="hero-value hv-teal" id="m-hero-gold">—</div>
-        <div class="hero-sub hs-teal" id="m-hero-sub">your share of today's emission</div>
-        <div class="hero-breakdown">
-          <div class="hb-item"><div class="hb-label">GOLD VALUE</div><div class="hb-val" style="color:#facc15" id="m-hb-val">—</div></div>
-          <div class="hb-item"><div class="hb-label">YOUR COST</div><div class="hb-val" style="color:rgba(200,190,230,0.3)" id="m-hb-cost">—</div></div>
-          <div class="hb-item"><div class="hb-label">ROI</div><div class="hb-val sv-pos" id="m-hb-roi">—</div></div>
-        </div>
+    <div class="grank-card">
+      <div class="grank-header"><div class="grank-title">gRANK BONUS ESTIMATOR</div><button class="grank-toggle" onclick="toggleGrank()">▼ HOW IT WORKS</button></div>
+      <div class="grank-value" id="grank-eth">—</div>
+      <div class="grank-sub" id="grank-sub">estimated ETH earned while your miner is locked</div>
+      <div class="grank-slider-row">
+        <div class="grank-slider-label"><span>new batches/day assumption</span><span id="grank-vol-label">200 batches/day</span></div>
+        <input type="range" class="slider s-pink" id="grank-sl" min="10" max="2000" value="200" oninput="onGrankSl()">
+        <div class="slider-ends"><span>quiet</span><span>viral</span></div>
       </div>
-
-      <div class="sum-row"><div class="s-key">Your share of emission</div><div class="s-val sv-purple" id="m-share">—</div></div>
-      <div class="sum-row"><div class="s-key">Today's total emission</div><div class="s-val sv-muted" id="m-total-em">—</div></div>
-      <div class="sum-row"><div class="s-key">Mint cost per GOLD</div><div class="s-val sv-teal" id="m-cost-per">—</div></div>
-      <div class="sum-row"><div class="s-key">ETH fee (total)</div><div class="s-val sv-muted" id="m-eth-fee">—</div></div>
-      <div class="sum-row"><div class="s-key">XEN burned</div><div class="s-val sv-muted" id="m-xen-burn">—</div></div>
-      <div class="sum-row"><div class="s-key">XEN cost (USD)</div><div class="s-val sv-muted" id="m-xen-cost">—</div></div>
-
-      <div class="divline"></div>
-      <div class="det-label">TREASURY SPLIT (AT CURRENT MINT PROGRESS)</div>
-      <div class="det-row"><div class="d-key">TO BUY & BURN</div><div class="d-val dv-pink" id="m-to-bnb">—</div></div>
-      <div class="det-row"><div class="d-key">TO VAULT (STAKED)</div><div class="d-val dv-teal" id="m-to-vault">—</div></div>
-      <div class="det-row"><div class="d-key">TO STAKER PAYOUTS</div><div class="d-val dv-gold" id="m-to-stakers">—</div></div>
-      <div class="det-row"><div class="d-key">TO MINER REWARDS</div><div class="d-val dv-purple" id="m-to-miners">—</div></div>
-
-      <div class="roi-hint">
-        When ROI is positive, mining is cheaper than buying on DEX.<br>
-        When negative, just <a href="#">buy GOLD on Uniswap</a> instead.
-      </div>
+      <div class="grank-note" id="grank-explain" style="display:none">When you open a miner you receive a gRank position. Every miner that opens after you pays 4% of their ETH fee into a pool distributed to all open miners — weighted by batch count. The longer you're locked, the more gRank events you catch.</div>
     </div>
+    <div class="sum-row"><div class="s-key">Est. GOLD at end of miner</div><div class="s-val sv-gold" id="r-gold">—</div></div>
+    <div class="sum-row"><div class="s-key">ETH to start miner</div><div class="s-val sv-muted" id="r-eth">—</div></div>
+    <div class="sum-row"><div class="s-key">Est. ROI % (GOLD only)</div><div class="s-val sv-pos" id="r-roi">—</div></div>
+    <div class="sum-row"><div class="s-key">Est. ROI % (GOLD + gRank)</div><div class="s-val sv-pos" id="r-roi-full">—</div></div>
+    <div class="divline"></div>
+    <div class="det-label">MINER DETAILS</div>
+    <div class="det-row"><div class="d-key">GOLD PRICE</div><div class="d-val dv-teal" id="d-price">—</div></div>
+    <div class="det-row"><div class="d-key">TIME MULTIPLIER</div><div class="d-val dv-gold" id="d-mult">—</div></div>
+    <div class="det-row"><div class="d-key">MATURES ON</div><div class="d-val dv-pink" id="d-day">—</div></div>
+    <div class="det-row"><div class="d-key">XEN BURNED</div><div class="d-val dv-pink" id="d-xen">—</div></div>
+    <div class="det-row"><div class="d-key">XEN COST (USD)</div><div class="d-val dv-muted" id="d-xenusd">—</div></div>
+    <div class="roi-hint">whenever ROI is positive (+), it's better to mine here;<br>whenever ROI is negative (−), it's better to <a href="#">buy on Uniswap</a>.</div>
   </div>
 </div>
+</div>
 
-<!-- ═══════════════════════════════════ -->
+<!-- ═══════════════════════════════════════ -->
 <!-- STAKE TAB -->
-<!-- ═══════════════════════════════════ -->
-<div class="page" id="page-stake">
-  <div class="page-header">
-    <h1>STAKE</h1>
-    <p>Lock GOLD · Earn ETH · 7 payout tiers · Rank rewards early believers</p>
-  </div>
-
-  <!-- Tier selector -->
+<!-- ═══════════════════════════════════════ -->
+<div class="tab-page" id="page-stake">
+<div class="page-header">
+  <h1>STAKE</h1>
+  <p>Lock GOLD · Earn ETH · 7 payout tiers · Rank rewards early believers</p>
+</div>
+<div class="stake-wrap">
   <div class="tier-grid" id="tier-grid"></div>
-
-  <div class="two-col">
-    <div class="left-col">
-      <!-- Stake amount -->
+  <div class="stake-cols">
+    <div class="stake-left">
+      <div class="input-block block-purp">
+        <div class="block-label lbl-purp">YOUR RANK</div>
+        <div style="font-size:10px;color:rgba(192,132,252,0.4);font-family:var(--mono);margin-bottom:10px;line-height:1.6">
+          Rank starts at 1 Billion on Day 1 and decays daily. Later entrants get lower ranks. Stake more GOLD to compensate.
+        </div>
+        <div class="rank-big" id="stake-rank">1,000,000,000</div>
+        <div class="rank-sub" id="stake-rank-sub">Day 1 rank · maximum share weight</div>
+        <div style="margin-top:14px">
+          <div class="grank-slider-label"><span>Entry day</span><span id="entry-day-label">Day 1</span></div>
+          <input type="range" class="slider s-purp" id="entry-sl" min="0" max="3888" value="0" oninput="onEntry()">
+          <div class="slider-ends"><span>Day 1</span><span>Day 3888</span></div>
+        </div>
+      </div>
       <div class="input-block block-gold">
         <div class="block-label lbl-gold">STAKE AMOUNT</div>
         <div class="row-input">
@@ -297,336 +311,319 @@ footer{text-align:center;font-size:9px;color:rgba(148,100,255,0.15);letter-spaci
         </div>
         <div class="row-input">
           <div class="row-label">GOLD price (est.)</div>
-          <input class="num-input ni-teal" type="number" id="stake-price" value="0.10" step="0.01" min="0.001" oninput="calcStake()">
+          <input class="num-input ni-gold" type="number" id="stake-price" value="0.10" step="0.01" oninput="calcStake()">
         </div>
-        <div class="input-sub sub-gold" id="stake-usd">= $1,000.00 staked</div>
-      </div>
-
-      <!-- Entry day -->
-      <div class="input-block block-purple">
-        <div class="block-label lbl-purple">YOUR ENTRY DAY <button class="help-btn" onclick="t('hentry')">?</button></div>
-        <div class="help-text" id="hentry">Your rank starts at 1 Billion on Day 1 and decays daily. The later you enter, the lower your rank — and the more GOLD you need to stake to match early believers.</div>
-        <div class="row-input">
-          <div class="row-label">Protocol day you stake</div>
-          <input class="num-input ni-purple" type="number" id="entry-day" value="1" min="1" max="3888" oninput="onEntry()">
-        </div>
-        <input type="range" class="slider s-purple" id="entry-sl" min="1" max="3888" value="1" oninput="onEntrySl()">
-        <div class="slider-ends"><span>Day 1</span><span>Day 3888</span></div>
-      </div>
-
-      <!-- Pool activity -->
-      <div class="input-block block-teal">
-        <div class="block-label lbl-teal">POOL ACTIVITY <button class="help-btn" onclick="t('hpool')">?</button></div>
-        <div class="help-text" id="hpool">Estimated ETH flowing into your tier's payout pool per cycle. More active mining = bigger pools. This is speculative — real data at launch.</div>
-        <div class="row-input">
-          <div class="row-label">ETH in your tier's pool per cycle</div>
-          <input class="num-input ni-teal" type="number" id="pool-eth" value="10" step="0.1" min="0.1" oninput="calcStake()">
-        </div>
-        <input type="range" class="slider s-teal" id="pool-sl" min="1" max="500" value="100" oninput="onPoolSl()">
-        <div class="slider-ends"><span>0.1 ETH</span><span>50 ETH</span></div>
       </div>
     </div>
-
-    <div class="right-col">
-      <div class="sum-label">STAKING SUMMARY</div>
-
-      <!-- Rank card -->
-      <div class="hero-card hc-purple">
-        <div class="hero-label hl-purple">YOUR RANK</div>
-        <div class="hero-value hv-purple" id="st-rank">1,000,000,000</div>
-        <div class="hero-sub hs-purple" id="st-rank-sub">Day 1 · 100% of max rank</div>
+    <div class="stake-right">
+      <div class="hero-card hc-gold" style="border-color:rgba(192,132,252,0.2);background:linear-gradient(135deg,rgba(192,132,252,0.07),rgba(250,204,21,0.04))">
+        <div class="hero-label hl-purp">YOUR SHARE WEIGHT</div>
+        <div class="hero-value hv-purp" id="share-weight">—</div>
+        <div class="hero-sub" style="color:rgba(192,132,252,0.4)" id="share-sub">rank × stake amount</div>
       </div>
-
-      <!-- Share weight -->
       <div class="hero-card hc-gold">
-        <div class="hero-label hl-gold">YOUR SHARE WEIGHT</div>
-        <div class="hero-value hv-gold" id="st-weight">—</div>
-        <div class="hero-sub hs-gold" id="st-weight-sub">rank × GOLD staked</div>
+        <div class="hero-label hl-gold">COST FOR DAY-1 PARITY</div>
+        <div class="hero-value hv-gold" id="parity-cost">$1,000</div>
+        <div class="hero-sub hs-gold" id="parity-sub">How much GOLD a late entrant must buy to match your Day 1 weight</div>
       </div>
-
-      <!-- Estimated payout -->
-      <div class="hero-card hc-teal">
-        <div class="hero-label hl-teal">ESTIMATED PAYOUT PER CYCLE</div>
-        <div class="hero-value hv-teal" id="st-payout">—</div>
-        <div class="hero-sub hs-teal" id="st-payout-sub">your share of this tier's ETH pool</div>
-      </div>
-
-      <div class="sum-row"><div class="s-key">Selected tier</div><div class="s-val sv-purple" id="st-tier">—</div></div>
-      <div class="sum-row"><div class="s-key">Tier fee allocation</div><div class="s-val sv-gold" id="st-alloc">—</div></div>
-      <div class="sum-row"><div class="s-key">Lock duration</div><div class="s-val sv-muted" id="st-lock">—</div></div>
-      <div class="sum-row"><div class="s-key">Cycles you'll catch</div><div class="s-val sv-teal" id="st-cycles">—</div></div>
-      <div class="sum-row"><div class="s-key">Total est. ETH earned</div><div class="s-val sv-teal" id="st-total-eth">—</div></div>
-
-      <div class="divline"></div>
-      <div class="det-label">DAY-1 PARITY</div>
-      <div class="det-row"><div class="d-key">COST FOR DAY-1 MATCH</div><div class="d-val dv-gold" id="st-parity-cost">—</div></div>
-      <div class="det-row"><div class="d-key">GOLD NEEDED</div><div class="d-val dv-gold" id="st-parity-gold">—</div></div>
-      <div class="det-row"><div class="d-key">MULTIPLIER vs DAY 1</div><div class="d-val dv-pink" id="st-parity-mult">—</div></div>
+      <div class="det-label" style="margin-top:16px">LATE ENTRY COST TABLE</div>
+      <table class="scenario-tbl" id="scenario-tbl"></table>
     </div>
   </div>
 </div>
+</div>
 
-<!-- ═══════════════════════════════════ -->
+<!-- ═══════════════════════════════════════ -->
 <!-- DASHBOARD TAB -->
-<!-- ═══════════════════════════════════ -->
-<div class="page" id="page-dash">
-  <div class="page-header">
-    <h1>DASHBOARD</h1>
-    <p>Full tokenomics model · Dual dynamic splits · 25-year simulation</p>
-  </div>
-  <div style="text-align:center;padding:40px 0">
-    <div style="font-size:48px;margin-bottom:16px">📊</div>
-    <div style="font-size:14px;color:rgba(200,190,230,0.5);max-width:400px;margin:0 auto;line-height:1.8">
-      The full interactive tokenomics dashboard is available at:<br>
-      <a href="https://sentenia.github.io/goldforge/" target="_blank" style="color:#c084fc;font-family:'Space Mono',monospace;font-size:16px;font-weight:700">sentenia.github.io/goldforge</a>
-      <br><br>
-      <span style="font-size:11px;color:rgba(200,190,230,0.25)">Features: emission curves, dual dynamic splits, vault composition,<br>buy & burn streams, NAV per token, stake ladder visualization</span>
-    </div>
-  </div>
+<!-- ═══════════════════════════════════════ -->
+<div class="tab-page" id="page-dash">
+<div class="page-header">
+  <h1>DASHBOARD</h1>
+  <p>Full tokenomics simulation · Dual dynamic splits · 25 year model</p>
+</div>
+<div class="dash-wrap" id="dash-content"></div>
 </div>
 
-<footer>ETH $2,000 · XEN $0.0000000077 · 10M XEN/BATCH · CAP 160,750,000 GOLD · ONE TOKEN PER TROY OZ OF EARTH'S REMAINING GOLD</footer>
+<footer id="footer-bar">ETH $2,000 · XEN $0.0000000077 · 10M XEN PER BATCH · HARD CAP 160,750,000 GOLD · 4% gRANK POOL · ONE TOKEN PER TROY OZ</footer>
 
 <script>
-// ═══ CONSTANTS ═══
-const CAP = 160_750_000;
-const XPB = 10_000_000;       // XEN per batch
-const XEN_PRICE = 0.0000000077;
-const ETH_PRICE = 2000;
-const BASE_COST = 0.0001;     // ETH per batch at day 1
-const COST_ESC = 2.8;         // escalation multiplier at 100% mint
-const DECAY = 0.22;           // annual emission decay rate
-
-// Treasury split params
-const BNB_START = 0.85, BNB_END = 0.0, BNB_MID = 0.35, BNB_STEEP = 10;
-const STAKER_START = 0.80, STAKER_END = 0.15;
-
-// Stake ladder
-const TIERS = [
-  {days:8,label:"8d",emoji:"⚡",color:"#f472b6"},
-  {days:28,label:"28d",emoji:"🌙",color:"#c084fc"},
-  {days:90,label:"90d",emoji:"🔥",color:"#fb923c"},
-  {days:369,label:"369d",emoji:"⚔",color:"#facc15"},
-  {days:888,label:"888d",emoji:"🛡",color:"#34d399"},
-  {days:1689,label:"1689d",emoji:"👑",color:"#c084fc"},
-  {days:3888,label:"3888d",emoji:"💎",color:"#facc15"},
-];
-const POOL_POWER = 1.65;
-const RANK_START = 1_000_000_000;
-const RANK_DECAY = 0.0008;
-
-// Compute tier pool percentages
-const tierRaw = TIERS.map(t => Math.pow(t.days, POOL_POWER));
-const tierTotal = tierRaw.reduce((a,b) => a+b, 0);
-const tierPcts = tierRaw.map(w => w / tierTotal);
-
-let selectedTier = 3; // default 369d
-
-// ═══ HELPERS ═══
-function t(id) { document.getElementById(id).classList.toggle('open'); }
-function fmt(n) { return n>=1e9?(n/1e9).toFixed(2)+'B':n>=1e6?(n/1e6).toFixed(2)+'M':n>=1e3?(n/1e3).toFixed(2)+'K':n<1&&n>0?n.toFixed(4):n.toFixed(2); }
-function usd(n) { if(n>=1e6)return'$'+(n/1e6).toFixed(2)+'M';if(n>=1e3)return'$'+(n/1e3).toFixed(2)+'K';if(n<0.01&&n>0)return'$'+n.toFixed(4);return'$'+n.toFixed(2); }
-function pct(n) { return (n*100).toFixed(1)+'%'; }
-function fmtRank(n) { return n>=1e9?(n/1e9).toFixed(3)+'B':n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?(n/1e3).toFixed(1)+'K':n.toFixed(0); }
-function commas(n) { return Math.round(n).toLocaleString(); }
-function s2p(v) { return parseFloat((Math.pow(10,(v/1000)*4-2)).toFixed(6)); }
-function p2s(p) { return Math.round(((Math.log10(Math.max(p,0.01))+2)/4)*1000); }
-
-// ═══ PROTOCOL STATE from day ═══
-function getProtocolState(day) {
-  // Simulate emission up to this day (monthly steps, interpolated)
-  let minted = 0;
-  const months = day / 30;
-  for (let i = 0; i < months; i++) {
-    const rem = CAP - minted;
-    minted += rem * (1 - Math.exp(-DECAY / 12));
-  }
-  const progress = minted / CAP;
-
-  // Today's emission (daily)
-  const remaining = CAP - minted;
-  const dailyEmission = remaining * (1 - Math.exp(-DECAY / 365));
-
-  // Current cost per batch (escalating)
-  const costPerBatch = BASE_COST * Math.pow(COST_ESC, progress);
-
-  // Splits
-  const sig1 = 1 / (1 + Math.exp(-12 * (progress - 0.4)));
-  const stakerPct = STAKER_START + (STAKER_END - STAKER_START) * sig1;
-
-  const sig2 = 1 / (1 + Math.exp(-BNB_STEEP * (progress - BNB_MID)));
-  const bnbPct = BNB_START + (BNB_END - BNB_START) * sig2;
-
-  return { minted, progress, dailyEmission, costPerBatch, stakerPct, minerPct: 1-stakerPct, bnbPct, vaultPct: 1-bnbPct };
-}
-
-// ═══ TAB SWITCHING ═══
-function showTab(tab) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+// ═══════════════════════════════════════
+// TAB SWITCHING
+// ═══════════════════════════════════════
+function switchTab(tab) {
+  document.querySelectorAll('.tab-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('page-'+tab).classList.add('active');
-  document.querySelector(`[onclick="showTab('${tab}')"]`).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b => { if(b.textContent.toLowerCase().includes(tab.slice(0,3))) b.classList.add('active'); });
+  if(tab==='dash' && !window._dashRendered) { renderDash(); window._dashRendered=true; }
+  if(tab==='stake' && !window._stakeRendered) { renderStake(); window._stakeRendered=true; }
 }
 
-// ═══ MINE CALCULATIONS ═══
-function onDaySl() { document.getElementById('day-in').value = document.getElementById('day-sl').value; calcMine(); }
-function onDay() { document.getElementById('day-sl').value = Math.min(parseInt(document.getElementById('day-in').value)||1, 5000); calcMine(); }
-function onBatchSl() { document.getElementById('batch-in').value = document.getElementById('batch-sl').value; calcMine(); }
-function onBatch() { document.getElementById('batch-sl').value = Math.min(parseInt(document.getElementById('batch-in').value)||1, 1000); calcMine(); }
-function onCompSl() { document.getElementById('comp-in').value = document.getElementById('comp-sl').value; calcMine(); }
-function onComp() { document.getElementById('comp-sl').value = Math.min(parseInt(document.getElementById('comp-in').value)||0, 10000); calcMine(); }
-function onPriceSl() { document.getElementById('price-in').value = s2p(parseInt(document.getElementById('price-sl').value)); calcMine(); calcStake(); }
-function onPriceIn() { document.getElementById('price-sl').value = p2s(parseFloat(document.getElementById('price-in').value)||0.1); calcMine(); calcStake(); }
-function setMax(x) { if(x==='batch'){document.getElementById('batch-in').value=1000;document.getElementById('batch-sl').value=1000;} calcMine(); }
+// ═══════════════════════════════════════
+// MINE TAB (original logic preserved)
+// ═══════════════════════════════════════
+const XPB=10_000_000,XEN_PRICE=0.0000000077,ETH_PRICE=2000;
+const E0=3671530,MR=0.97715997,GD=1,EFB=0.0001,EDB=200,GRANK_PCT=0.04;
 
-function calcMine() {
-  const day = Math.max(1, parseInt(document.getElementById('day-in').value) || 1);
-  const batches = Math.max(1, parseInt(document.getElementById('batch-in').value) || 1);
-  const comp = Math.max(0, parseInt(document.getElementById('comp-in').value) || 0);
-  const price = parseFloat(document.getElementById('price-in').value) || 0.10;
+function t(id){document.getElementById(id).classList.toggle('open')}
+function toggleGrank(){const el=document.getElementById('grank-explain'),btn=document.querySelector('.grank-toggle');if(el.style.display==='none'){el.style.display='block';btn.textContent='▲ HOW IT WORKS'}else{el.style.display='none';btn.textContent='▼ HOW IT WORKS'}}
+function fmt(n){return n>=1e9?(n/1e9).toFixed(2)+'B':n>=1e6?(n/1e6).toFixed(2)+'M':n>=1e3?(n/1e3).toFixed(2)+'K':n.toFixed(2)}
+function usd(n){if(n>=1e6)return'$'+(n/1e6).toFixed(2)+'M';if(n>=1e3)return'$'+(n/1e3).toFixed(2)+'K';if(n<0.01)return'$'+n.toFixed(4);return'$'+n.toFixed(2)}
+function s2p(v){return parseFloat((Math.pow(10,(v/1000)*4-2)).toFixed(6))}
+function p2s(p){return Math.round(((Math.log10(p)+2)/4)*1000)}
+function gb(){return Math.max(1,parseInt(document.getElementById('batch-in').value)||1)}
+function gl(){return Math.min(888,Math.max(1,parseInt(document.getElementById('lock-in').value)||1))}
+function gp(){return parseFloat(document.getElementById('price-in').value)||0.10}
+function getVol(){return parseInt(document.getElementById('grank-sl').value)||200}
+function calcMult(d){return 1+9*Math.pow(d/888,3)}
 
-  const state = getProtocolState(day);
-  const totalBatches = batches + comp;
-  const yourShare = batches / totalBatches;
-  const yourGold = state.dailyEmission * yourShare;
-  const goldValue = yourGold * price;
+function setMax(x){if(x==='lock'){document.getElementById('lock-in').value=888;document.getElementById('lock-sl').value=888}else{document.getElementById('batch-in').value=1000;document.getElementById('batch-sl').value=1000}calc()}
+function onBatchSl(){document.getElementById('batch-in').value=document.getElementById('batch-sl').value;calc()}
+function onBatch(){document.getElementById('batch-sl').value=Math.min(gb(),1000);calc()}
+function onLockSl(){document.getElementById('lock-in').value=document.getElementById('lock-sl').value;calc()}
+function onLock(){document.getElementById('lock-sl').value=Math.min(gl(),888);calc()}
+function onPriceSl(){document.getElementById('price-in').value=s2p(parseInt(document.getElementById('price-sl').value));calc()}
+function onPriceIn(){document.getElementById('price-sl').value=p2s(gp());calc()}
+function onGrankSl(){document.getElementById('grank-vol-label').textContent=getVol()+' batches/day';calc()}
 
-  const ethFee = batches * state.costPerBatch;
-  const ethFeeUSD = ethFee * ETH_PRICE;
-  const xenBurned = batches * XPB;
-  const xenCostUSD = xenBurned * XEN_PRICE;
-  const totalCost = ethFeeUSD + xenCostUSD;
-  const roi = totalCost > 0 ? (goldValue - totalCost) / totalCost : 0;
-  const roiStr = (roi >= 0 ? '+' : '') + (roi * 100).toFixed(1) + '%';
+function calc(){
+  const b=gb(),l=gl(),p=gp(),m=calcMult(l);
+  const gold=E0*Math.pow(MR,GD-1)*(b/(b+EDB))*m,goldUSD=gold*p;
+  const ef=b*EFB,ethCostUSD=ef*ETH_PRICE,xenBurned=b*XPB,xenCostUSD=xenBurned*XEN_PRICE,totalCostUSD=ethCostUSD+xenCostUSD;
+  const vol=getVol(),avgOpen=vol*200,dailyGrank=(b/(b+avgOpen))*vol*EFB*GRANK_PCT;
+  const grankETH=dailyGrank*l,grankUSD=grankETH*ETH_PRICE,totalUSD=goldUSD+grankUSD;
+  const roi=(goldUSD-totalCostUSD)/totalCostUSD,roiFull=(totalUSD-totalCostUSD)/totalCostUSD;
+  const pl=p>=1?'$'+p.toFixed(2):p<0.001?'$'+p.toFixed(6):p<0.1?'$'+p.toFixed(4):'$'+p.toFixed(3);
+  document.getElementById('mult-badge').textContent=m.toFixed(2)+'× multiplier';
+  document.getElementById('xen-equiv').textContent='= '+(b*XPB).toLocaleString()+' XEN ('+usd(xenCostUSD)+')';
+  document.getElementById('hero-total').textContent=usd(totalUSD);
+  document.getElementById('hero-sub').textContent='GOLD '+usd(goldUSD)+' + gRank '+usd(grankUSD);
+  document.getElementById('hb-gold').textContent=usd(goldUSD);
+  document.getElementById('hb-grank').textContent=usd(grankUSD);
+  document.getElementById('hb-cost').textContent=usd(totalCostUSD);
+  document.getElementById('grank-eth').textContent=grankETH.toFixed(4)+' ETH ('+usd(grankUSD)+')';
+  document.getElementById('grank-sub').textContent='≈ '+dailyGrank.toFixed(6)+' ETH/day × '+l+' days';
+  document.getElementById('r-gold').textContent=fmt(gold)+' GOLD';
+  document.getElementById('r-eth').textContent=ef.toFixed(4)+' ETH ('+usd(ethCostUSD)+')';
+  document.getElementById('r-roi').textContent=(roi>=0?'+':'')+(roi*100).toFixed(1)+'%';
+  document.getElementById('r-roi').className='s-val '+(roi>=0?'sv-pos':'sv-neg');
+  document.getElementById('r-roi-full').textContent=(roiFull>=0?'+':'')+(roiFull*100).toFixed(1)+'%';
+  document.getElementById('r-roi-full').className='s-val '+(roiFull>=0?'sv-pos':'sv-neg');
+  document.getElementById('d-price').textContent=pl;
+  document.getElementById('d-mult').textContent=m.toFixed(2)+'×';
+  document.getElementById('d-day').textContent='Day '+(GD+l);
+  document.getElementById('d-xen').textContent=fmt(xenBurned)+' XEN';
+  document.getElementById('d-xenusd').textContent=usd(xenCostUSD);
+}
+document.getElementById('price-sl').value=p2s(0.10);
+calc();
 
-  // Status bar
-  document.getElementById('m-minted').textContent = pct(state.progress);
-  document.getElementById('m-supply').textContent = fmt(state.minted) + ' / 160.75M';
-  document.getElementById('m-cost').textContent = state.costPerBatch.toFixed(6) + ' ETH/batch';
-  document.getElementById('m-emission').textContent = fmt(state.dailyEmission) + ' GOLD/day';
+// ═══════════════════════════════════════
+// STAKE TAB
+// ═══════════════════════════════════════
+const TIERS=[{d:8,l:"8d",e:"⚡"},{d:28,l:"28d",e:"🌙"},{d:90,l:"90d",e:"🔥"},{d:369,l:"369d",e:"⚔"},{d:888,l:"888d",e:"🛡"},{d:1689,l:"1689d",e:"👑"},{d:3888,l:"3888d",e:"💎"}];
+const POOL_POW=1.65, RANK_DECAY=0.0008, START_RANK=1e9;
 
-  // Hero card
-  document.getElementById('m-hero-gold').textContent = fmt(yourGold) + ' GOLD';
-  document.getElementById('m-hero-sub').textContent = pct(yourShare) + ' of today\'s ' + fmt(state.dailyEmission) + ' emission';
-  document.getElementById('m-hb-val').textContent = usd(goldValue);
-  document.getElementById('m-hb-cost').textContent = usd(totalCost);
-  document.getElementById('m-hb-roi').textContent = roiStr;
-  document.getElementById('m-hb-roi').className = 'hb-val ' + (roi >= 0 ? 'sv-pos' : 'sv-neg');
+function renderStake(){
+  const raw=TIERS.map(t=>Math.pow(t.d,POOL_POW)),tot=raw.reduce((a,b)=>a+b,0);
+  const pcts=raw.map(w=>(w/tot)*100);
+  const colors=["#504838","#6B5F4E","#7A6E58","#8B7D62","#B8A070","#C8A960","#E8D48B"];
+  let g='';
+  TIERS.forEach((t,i)=>{
+    g+=`<div class="tier-card" style="border-color:${colors[i]}33" onclick="selTier(${i})">
+      <div class="tier-emoji">${t.e}</div>
+      <div class="tier-label" style="color:${colors[i]}">${t.l}</div>
+      <div class="tier-days">${t.d<365?t.d+' days':(t.d/365).toFixed(1)+' yrs'}</div>
+      <div class="tier-pct" style="color:${colors[i]}">${pcts[i].toFixed(1)}%</div>
+      <div class="tier-of">of fees</div>
+    </div>`;
+  });
+  document.getElementById('tier-grid').innerHTML=g;
 
-  // Summary rows
-  document.getElementById('m-share').textContent = pct(yourShare);
-  document.getElementById('m-total-em').textContent = fmt(state.dailyEmission) + ' GOLD';
-  document.getElementById('m-cost-per').textContent = '$' + (totalCost / Math.max(yourGold, 0.001)).toFixed(4) + '/GOLD';
-  document.getElementById('m-eth-fee').textContent = ethFee.toFixed(4) + ' ETH (' + usd(ethFeeUSD) + ')';
-  document.getElementById('m-xen-burn').textContent = fmt(xenBurned) + ' XEN';
-  document.getElementById('m-xen-cost').textContent = usd(xenCostUSD);
-
-  // Treasury split
-  document.getElementById('m-to-bnb').textContent = pct(state.bnbPct) + ' → ' + usd(ethFeeUSD * state.bnbPct);
-  document.getElementById('m-to-vault').textContent = pct(state.vaultPct) + ' → ' + usd(ethFeeUSD * state.vaultPct);
-  document.getElementById('m-to-stakers').textContent = pct(state.stakerPct) + ' of fees';
-  document.getElementById('m-to-miners').textContent = pct(state.minerPct) + ' of fees';
-
-  // XEN sub
-  document.getElementById('xen-equiv').textContent = '= ' + commas(xenBurned) + ' XEN (' + usd(xenCostUSD) + ')';
+  // Scenario table
+  const entries=[0,90,365,730,1095,1825,2555];
+  let tbl='<thead><tr><th>Entry</th><th>Rank</th><th>Parity $</th><th>Multiple</th></tr></thead><tbody>';
+  entries.forEach((d,i)=>{
+    const r=START_RANK*Math.exp(-RANK_DECAY*d),p=(START_RANK*100)/r;
+    const lbl=d===0?"Day 1":d<365?`D${d}`:`Y${(d/365).toFixed(1)}`;
+    const c=p>500?"var(--pink)":p>200?"var(--gold)":"var(--teal)";
+    tbl+=`<tr><td style="color:${i===0?'var(--purp)':'var(--dim)'};font-weight:${i===0?700:400}">${lbl}</td>
+      <td style="color:var(--gold)">${(r/1e6).toFixed(0)}M</td>
+      <td style="color:${c};font-weight:700">$${Math.round(p).toLocaleString()}</td>
+      <td style="color:var(--dim)">${(p/100).toFixed(1)}x</td></tr>`;
+  });
+  tbl+='</tbody>';
+  document.getElementById('scenario-tbl').innerHTML=tbl;
+  calcStake();
 }
 
-// ═══ STAKE CALCULATIONS ═══
-function buildTierGrid() {
-  const grid = document.getElementById('tier-grid');
-  grid.innerHTML = TIERS.map((t, i) => `
-    <div class="tier-card ${i===selectedTier?'selected':''}" onclick="selectTier(${i})">
-      <div class="tier-emoji">${t.emoji}</div>
-      <div class="tier-label" style="color:${t.color}">${t.label}</div>
-      <div class="tier-days">${t.days < 365 ? t.days+' days' : (t.days/365).toFixed(1)+' yrs'}</div>
-      <div class="tier-pct" style="color:${t.color}">${(tierPcts[i]*100).toFixed(1)}%</div>
-      <div class="tier-pctlabel">of fees</div>
+function selTier(i){document.querySelectorAll('.tier-card').forEach((c,j)=>c.classList.toggle('sel',j===i))}
+
+function onEntry(){
+  const d=parseInt(document.getElementById('entry-sl').value);
+  document.getElementById('entry-day-label').textContent=d===0?'Day 1':`Day ${d}`;
+  calcStake();
+}
+
+function calcStake(){
+  const d=parseInt(document.getElementById('entry-sl').value)||0;
+  const amt=parseFloat(document.getElementById('stake-amt').value)||10000;
+  const price=parseFloat(document.getElementById('stake-price').value)||0.10;
+  const rank=START_RANK*Math.exp(-RANK_DECAY*d);
+  const sw=rank*amt;
+  const d1sw=START_RANK*amt;
+  const parityCost=(START_RANK*100)/rank;
+
+  document.getElementById('stake-rank').textContent=Math.round(rank).toLocaleString();
+  document.getElementById('stake-rank-sub').textContent=d===0?'Day 1 rank · maximum share weight':`Day ${d} rank · ${(rank/START_RANK*100).toFixed(1)}% of Day 1`;
+  document.getElementById('share-weight').textContent=(sw/1e9).toFixed(2)+'B';
+  document.getElementById('share-sub').textContent=`${Math.round(rank).toLocaleString()} × ${amt.toLocaleString()} GOLD`;
+  document.getElementById('parity-cost').textContent='$'+Math.round(parityCost*price).toLocaleString();
+  document.getElementById('parity-sub').textContent=`${(parityCost/100).toFixed(1)}x more than Day 1 · ${Math.round(parityCost).toLocaleString()} GOLD needed`;
+}
+
+// ═══════════════════════════════════════
+// DASHBOARD TAB (tokenomics simulator)
+// ═══════════════════════════════════════
+let DP={decay:.22,stakerS:.8,stakerE:.15,costEsc:2.8,apr:.038,years:25,bnbS:.85,bnbE:0,bnbMid:.35,bnbSteep:10};
+const CAP=160750000;
+
+function simDash(){
+  const steps=DP.years*12,data=[];
+  let m=0,v=0,st=0,cY=0,cD=0,gB=0,yC=null,bC=null;
+  for(let i=0;i<=steps;i++){
+    const t=i/12,pr=m/CAP,rem=CAP-m;
+    const em=rem*(1-Math.exp(-DP.decay/12));m+=em;
+    const cost=.00005*Math.pow(DP.costEsc,pr),ethIn=em*cost;
+    const s1=1/(1+Math.exp(-12*(pr-.4))),sPct=DP.stakerS+(DP.stakerE-DP.stakerS)*s1;
+    const s2=1/(1+Math.exp(-DP.bnbSteep*(pr-DP.bnbMid))),bPct=DP.bnbS+(DP.bnbE-DP.bnbS)*s2;
+    const eB=ethIn*bPct,eV=ethIn*(1-bPct);v+=eV;st=v;
+    const yld=st*(DP.apr/12);cY+=yld;cD+=eB;
+    const burned=cost>0?(eB+yld)/cost:0;gB+=burned;
+    const circ=Math.max(0,m-gB),nav=circ>0?v/circ:0;
+    if(!yC&&yld>eB&&i>2)yC=i;if(!bC&&(1-bPct)>bPct&&i>0)bC=i;
+    data.push({month:i,year:t,label:t%1===0?`Y${Math.floor(t)}`:"",minted:m/1e6,emission:em/1e3,prog:pr*100,
+      sPct:sPct*100,mPct:(1-sPct)*100,bPct:bPct*100,vPct:(1-bPct)*100,
+      mYield:yld,mDirect:eB,cumY:cY,cumD:cD,vault:v,cost:cost*1e6,
+      circ:circ/1e6,burned:gB/1e6,nav:nav*1e6});
+  }
+  return{data,yC,bC};
+}
+
+function buildSVG(data,lines,opts){
+  const W=700,H=opts.h||180,p={t:14,r:18,b:28,l:54};
+  const cW=W-p.l-p.r,cH=H-p.t-p.b;
+  const vs=opts.stack?data.map(d=>lines.reduce((s,l)=>s+(d[l.k]||0),0)):lines.flatMap(l=>data.map(d=>d[l.k]||0));
+  const mxY=Math.max(...vs)*1.12||1;
+  const xP=i=>p.l+(i/Math.max(data.length-1,1))*cW;
+  const yP=v=>p.t+cH-(v/mxY)*cH;
+  const fY=opts.fmtY||(v=>v>=1e6?(v/1e6).toFixed(1)+"M":v>=1e3?(v/1e3).toFixed(1)+"K":v>=1?v.toFixed(1):v.toFixed(2));
+  const uid="c"+Math.random().toString(36).slice(2,5);
+  const pd=(k,b)=>data.map((d,i)=>{const val=b?(d[b]||0)+(d[k]||0):(d[k]||0);return`${i===0?"M":"L"}${xP(i).toFixed(1)},${yP(val).toFixed(1)}`;}).join("");
+  const ad=(k,b)=>{const top=pd(k,b);if(b){const bot=[...data].reverse().map((d,i)=>`L${xP(data.length-1-i).toFixed(1)},${yP(d[b]||0).toFixed(1)}`).join("");return top+bot+"Z";}return top+`L${xP(data.length-1).toFixed(1)},${yP(0).toFixed(1)}L${xP(0).toFixed(1)},${yP(0).toFixed(1)}Z`;};
+  let defs=lines.map(l=>`<linearGradient id="${uid}-${l.k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${l.c}" stop-opacity="0.25"/><stop offset="100%" stop-color="${l.c}" stop-opacity="0.02"/></linearGradient>`).join("");
+  let grid=Array.from({length:4},(_,i)=>mxY*((i+1)/4)).map(gv=>`<line x1="${p.l}" x2="${W-p.r}" y1="${yP(gv)}" y2="${yP(gv)}" stroke="rgba(148,100,255,0.08)" stroke-width="1"/><text x="${p.l-8}" y="${yP(gv)+4}" fill="rgba(200,190,230,0.2)" font-size="8" text-anchor="end" font-family="var(--mono)">${fY(gv)}</text>`).join("");
+  grid+=`<line x1="${p.l}" x2="${W-p.r}" y1="${yP(0)}" y2="${yP(0)}" stroke="rgba(148,100,255,0.08)" stroke-width="1"/>`;
+  let ticks=data.filter(d=>d.label&&d.month%24===0).map(d=>`<text x="${xP(data.indexOf(d))}" y="${H-6}" fill="rgba(200,190,230,0.2)" font-size="8" text-anchor="middle" font-family="var(--mono)">${d.label}</text>`).join("");
+  let anno="";
+  if(opts.anno){const aX=xP(opts.anno.month);anno=`<line x1="${aX}" x2="${aX}" y1="${p.t}" y2="${p.t+cH}" stroke="var(--purp)" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/><text x="${aX+5}" y="${p.t+12}" fill="var(--purp)" font-size="7" font-family="var(--mono)" font-weight="600">${opts.anno.label}</text>`;}
+  let paths="";
+  if(opts.stack){if(lines.length>=2)paths+=`<path d="${ad(lines[1].k,lines[0].k)}" fill="url(#${uid}-${lines[1].k})"/>`;paths+=`<path d="${ad(lines[0].k)}" fill="url(#${uid}-${lines[0].k})"/>`;paths+=`<path d="${pd(lines[0].k)}" fill="none" stroke="${lines[0].c}" stroke-width="2"/>`;if(lines.length>=2)paths+=`<path d="${pd(lines[1].k,lines[0].k)}" fill="none" stroke="${lines[1].c}" stroke-width="2"/>`;}
+  else lines.forEach(l=>{if(opts.area)paths+=`<path d="${ad(l.k)}" fill="url(#${uid}-${l.k})"/>`;paths+=`<path d="${pd(l.k)}" fill="none" stroke="${l.c}" stroke-width="2" stroke-linejoin="round"/>`;});
+  const yLabel=`<text x="12" y="${p.t+cH/2}" fill="rgba(200,190,230,0.2)" font-size="8" text-anchor="middle" font-family="var(--mono)" transform="rotate(-90,12,${p.t+cH/2})">${opts.yL||""}</text>`;
+  const legend=lines.map(l=>`<span><i style="background:${l.c}"></i>${l.n}</span>`).join("");
+  return`<div class="chart"><div class="ch-title">${opts.title}</div>${opts.sub?`<div class="ch-sub">${opts.sub}</div>`:""}<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block;margin-top:6px"><defs>${defs}</defs>${grid}${ticks}${anno}${paths}${yLabel}</svg><div class="ch-legend">${legend}</div></div>`;
+}
+
+function renderDash(){
+  const{data,yC,bC}=simDash();
+  const f=data[data.length-1];
+  const ycY=yC?(yC/12).toFixed(1):"—",bcY=bC?(bC/12).toFixed(1):"—";
+  const ycA=yC?{month:yC,label:`YIELD TAKEOVER Y${ycY}`}:null;
+  const bcA=bC?{month:bC,label:`VAULT > BNB Y${bcY}`}:null;
+
+  let h=`
+  <div class="dash-intro">
+    <div class="tagline">Burn XEN to mine GOLD. Stake GOLD to earn ETH. The protocol's treasury stakes ETH and uses the yield to buy & burn GOLD — forever. Supply only goes down.</div>
+  </div>
+  <div class="pillars">
+    <div class="pillar"><div class="pillar-head"><div class="pillar-num" style="background:var(--teal);color:#0a0618">1</div><div class="pillar-title" style="color:var(--teal)">MINE</div></div><div class="pillar-desc">Burn XEN → mint GOLD. Cost rises as supply approaches the 160.75M cap.</div></div>
+    <div class="pillar"><div class="pillar-head"><div class="pillar-num" style="background:var(--gold);color:#0a0618">2</div><div class="pillar-title" style="color:var(--gold)">STAKE</div></div><div class="pillar-desc">Lock GOLD in 7 payout tiers. Longer locks = bigger share. Ranking rewards Day 1.</div></div>
+    <div class="pillar"><div class="pillar-head"><div class="pillar-num" style="background:var(--pink);color:#0a0618">3</div><div class="pillar-title" style="color:var(--pink)">BURN</div></div><div class="pillar-desc">Treasury stakes ETH, uses yield to buy & burn GOLD forever. Principal untouched.</div></div>
+  </div>
+  <div class="dash-stats">
+    <div class="dash-stat"><div class="ds-label">⛏ Supply</div><div class="ds-val" style="color:var(--gold)">${f.minted.toFixed(1)}M</div><div class="ds-sub">${f.prog.toFixed(0)}% minted</div></div>
+    <div class="dash-stat"><div class="ds-label">🔥 Burned</div><div class="ds-val" style="color:var(--pink)">${f.burned.toFixed(2)}M</div><div class="ds-sub">${f.circ.toFixed(1)}M circulating</div></div>
+    <div class="dash-stat"><div class="ds-label">🏦 Vault</div><div class="ds-val" style="color:var(--teal)">${f.vault.toFixed(1)} ETH</div><div class="ds-sub">permanently staked</div></div>
+    <div class="dash-stat"><div class="ds-label">♾ Forever BNB</div><div class="ds-val" style="color:var(--purp)">Y${ycY}</div><div class="ds-sub">yield > direct burn</div></div>
+  </div>
+  <div class="explain"><div class="explain-t">TWO PARALLEL CURVES</div><div class="explain-b">
+    <span style="color:var(--gold)">Split 1 — Staker vs Miner:</span> 80% of fees go to stakers early, shifting to miners as supply matures.<br>
+    <span style="color:var(--pink)">Split 2 — BNB vs Vault:</span> 85% to aggressive buy & burn early, shifting to permanent vault over time.
+  </div></div>`;
+
+  h+=buildSVG(data,[{k:"sPct",n:"Stakers",c:"#facc15"},{k:"mPct",n:"Miners",c:"#34d399"}],{title:"STAKER vs MINER SPLIT",sub:"Who earns ETH fees",yL:"%",h:160});
+  h+=buildSVG(data,[{k:"bPct",n:"Buy & Burn",c:"#f472b6"},{k:"vPct",n:"Vault",c:"#facc15"}],{title:"BUY & BURN vs VAULT",sub:"How protocol ETH is deployed",yL:"%",h:160,anno:bcA});
+  h+=buildSVG(data,[{k:"emission",n:"Monthly (K)",c:"#facc15"}],{title:"TOKEN EMISSION",sub:"Asymptotic decay toward 160.75M cap",yL:"K tokens",area:true});
+  h+=buildSVG(data,[{k:"cost",n:"Cost (μETH)",c:"#fb923c"}],{title:"MINING COST",sub:"Exponential escalation",yL:"μETH",h:150,area:true});
+  h+=`<div class="explain"><div class="explain-t">THE TREASURY: HOW TITANX SHOULD HAVE WORKED</div><div class="explain-b">TitanX spent $17M in aggressive buy & burn within months — massive hype, empty treasury. GoldForge starts with the same aggression but <span style="color:var(--gold)">gradually shifts ETH into a permanent staking vault</span>. You get the hype AND the endowment.</div></div>`;
+  h+=buildSVG(data,[{k:"mYield",n:"From Yield (forever)",c:"#34d399"},{k:"mDirect",n:"Direct BNB (tapering)",c:"#f472b6"}],{title:"MONTHLY BUY & BURN",sub:"Direct burns taper. Yield burns rise. Crossover = self-sustaining.",yL:"ETH/mo",h:190,anno:ycA});
+  h+=buildSVG(data,[{k:"cumY",n:"From Yield",c:"#34d399"},{k:"cumD",n:"Direct",c:"#f472b6"}],{title:"CUMULATIVE BUY & BURN",sub:"Green stream never stops",yL:"ETH",h:190,stack:true,anno:ycA});
+  h+=buildSVG(data,[{k:"vault",n:"Vault ETH",c:"#facc15"}],{title:"VAULT GROWTH",sub:"ETH permanently staked — the endowment",yL:"ETH",h:170,area:true});
+  h+=buildSVG(data,[{k:"minted",n:"Minted (M)",c:"rgba(200,190,230,0.2)"},{k:"circ",n:"Circulating (M)",c:"#facc15"}],{title:"CIRCULATING SUPPLY",sub:"Minted minus burned — gap widens",yL:"M",h:170});
+  h+=buildSVG(data,[{k:"nav",n:"NAV (μETH)",c:"#fb923c"}],{title:"NAV PER TOKEN",sub:"Vault ETH per circulating GOLD",yL:"μETH",h:170,area:true});
+
+  // Advanced toggle
+  h+=`<div class="adv-toggle"><button class="adv-btn" id="dashAdvBtn" onclick="toggleDashAdv()">SHOW ADVANCED PARAMETERS</button></div>
+  <div class="adv-panel" id="dashAdvPanel">
+    <div class="adv-section" style="color:var(--gold)">EMISSION & COST</div>
+    <div class="adv-grid">
+      <div class="ap"><div class="ap-head"><span class="ap-lbl">Emission Decay</span><span class="ap-val" id="dv-decay">${DP.decay.toFixed(2)}</span></div><input type="range" min="0.08" max="0.5" step="0.01" value="${DP.decay}" oninput="updDP('decay',this.value)"><div class="hint">0.22 = ~50% by Y3</div></div>
+      <div class="ap"><div class="ap-head"><span class="ap-lbl">Cost Escalation</span><span class="ap-val" id="dv-costEsc">${DP.costEsc.toFixed(1)}x</span></div><input type="range" min="1.5" max="6" step="0.1" value="${DP.costEsc}" oninput="updDP('costEsc',this.value)"></div>
+      <div class="ap"><div class="ap-head"><span class="ap-lbl">ETH Staking APR</span><span class="ap-val" id="dv-apr">${(DP.apr*100).toFixed(1)}%</span></div><input type="range" min="0.015" max="0.08" step="0.005" value="${DP.apr}" oninput="updDP('apr',this.value)"></div>
+      <div class="ap"><div class="ap-head"><span class="ap-lbl">Simulation</span><span class="ap-val" id="dv-years">${DP.years}y</span></div><input type="range" min="5" max="40" step="1" value="${DP.years}" oninput="updDP('years',this.value)"></div>
     </div>
-  `).join('');
+    <div class="adv-sep"></div>
+    <div class="adv-section" style="color:var(--gold)">STAKER vs MINER SPLIT</div>
+    <div class="adv-grid">
+      <div class="ap"><div class="ap-head"><span class="ap-lbl">Staker % Early</span><span class="ap-val" id="dv-stakerS">${(DP.stakerS*100).toFixed(0)}%</span></div><input type="range" min="0.5" max="0.95" step="0.05" value="${DP.stakerS}" oninput="updDP('stakerS',this.value)"></div>
+      <div class="ap"><div class="ap-head"><span class="ap-lbl">Staker % Late</span><span class="ap-val" id="dv-stakerE">${(DP.stakerE*100).toFixed(0)}%</span></div><input type="range" min="0.05" max="0.4" step="0.05" value="${DP.stakerE}" oninput="updDP('stakerE',this.value)"></div>
+    </div>
+    <div class="adv-sep"></div>
+    <div class="adv-section" style="color:var(--pink)">BUY & BURN vs VAULT SPLIT</div>
+    <div class="adv-grid">
+      <div class="ap"><div class="ap-head"><span class="ap-lbl">BNB % Early</span><span class="ap-val" id="dv-bnbS">${(DP.bnbS*100).toFixed(0)}%</span></div><input type="range" min="0.5" max="0.95" step="0.05" value="${DP.bnbS}" oninput="updDP('bnbS',this.value)"><div class="hint">85% = TitanX blitz</div></div>
+      <div class="ap"><div class="ap-head"><span class="ap-lbl">BNB % Late</span><span class="ap-val" id="dv-bnbE">${(DP.bnbE*100).toFixed(0)}%</span></div><input type="range" min="0" max="0.3" step="0.05" value="${DP.bnbE}" oninput="updDP('bnbE',this.value)"><div class="hint">0% = full endowment</div></div>
+      <div class="ap"><div class="ap-head"><span class="ap-lbl">Crossover Point</span><span class="ap-val" id="dv-bnbMid">${(DP.bnbMid*100).toFixed(0)}%</span></div><input type="range" min="0.15" max="0.6" step="0.05" value="${DP.bnbMid}" oninput="updDP('bnbMid',this.value)"></div>
+      <div class="ap"><div class="ap-head"><span class="ap-lbl">Transition Speed</span><span class="ap-val" id="dv-bnbSteep">${DP.bnbSteep}</span></div><input type="range" min="4" max="20" step="1" value="${DP.bnbSteep}" oninput="updDP('bnbSteep',this.value)"></div>
+    </div>
+  </div>`;
+
+  h+=`<div style="text-align:center;font-size:8px;color:rgba(148,100,255,0.15);font-family:var(--mono);margin-top:16px">GOLDFORGE TOKENOMICS MODEL — SIMULATION ONLY — NOT FINANCIAL ADVICE</div>`;
+
+  document.getElementById('dash-content').innerHTML=h;
 }
 
-function selectTier(i) {
-  selectedTier = i;
-  buildTierGrid();
-  calcStake();
+const DPFMT={decay:v=>parseFloat(v).toFixed(2),costEsc:v=>parseFloat(v).toFixed(1)+'x',apr:v=>(parseFloat(v)*100).toFixed(1)+'%',years:v=>v+'y',
+  stakerS:v=>(parseFloat(v)*100).toFixed(0)+'%',stakerE:v=>(parseFloat(v)*100).toFixed(0)+'%',
+  bnbS:v=>(parseFloat(v)*100).toFixed(0)+'%',bnbE:v=>(parseFloat(v)*100).toFixed(0)+'%',bnbMid:v=>(parseFloat(v)*100).toFixed(0)+'%',bnbSteep:v=>parseFloat(v).toFixed(0)};
+
+function updDP(k,v){
+  DP[k]=parseFloat(v);
+  const el=document.getElementById('dv-'+k);if(el)el.textContent=DPFMT[k](v);
+  clearTimeout(window._drt);
+  window._drt=setTimeout(()=>{
+    const wasOpen=document.getElementById('dashAdvPanel').classList.contains('show');
+    renderDash();
+    if(wasOpen){document.getElementById('dashAdvPanel').classList.add('show');document.getElementById('dashAdvBtn').classList.add('on');document.getElementById('dashAdvBtn').textContent='HIDE PARAMETERS';}
+  },200);
 }
 
-function onEntry() { document.getElementById('entry-sl').value = Math.min(parseInt(document.getElementById('entry-day').value)||1, 3888); calcStake(); }
-function onEntrySl() { document.getElementById('entry-day').value = document.getElementById('entry-sl').value; calcStake(); }
-function onPoolSl() {
-  const v = parseInt(document.getElementById('pool-sl').value);
-  document.getElementById('pool-eth').value = (v / 10).toFixed(1);
-  calcStake();
+function toggleDashAdv(){
+  const p=document.getElementById('dashAdvPanel'),b=document.getElementById('dashAdvBtn');
+  p.classList.toggle('show');b.classList.toggle('on');
+  b.textContent=p.classList.contains('show')?'HIDE PARAMETERS':'SHOW ADVANCED PARAMETERS';
 }
-
-function calcStake() {
-  const tier = TIERS[selectedTier];
-  const amt = Math.max(1, parseFloat(document.getElementById('stake-amt').value) || 1);
-  const price = parseFloat(document.getElementById('stake-price').value) || parseFloat(document.getElementById('price-in').value) || 0.10;
-  const entryDay = Math.max(1, parseInt(document.getElementById('entry-day').value) || 1);
-  const poolETH = Math.max(0.1, parseFloat(document.getElementById('pool-eth').value) || 1);
-
-  const stakeUSD = amt * price;
-  document.getElementById('stake-usd').textContent = '= ' + usd(stakeUSD) + ' staked';
-
-  // Rank at entry day
-  const rank = RANK_START * Math.exp(-RANK_DECAY * (entryDay - 1));
-  const rankPctOfMax = (rank / RANK_START) * 100;
-
-  // Share weight
-  const weight = rank * amt;
-
-  // Assume total pool weight (simplified: 1000 other stakers averaging rank*5000 GOLD)
-  const avgOtherRank = RANK_START * Math.exp(-RANK_DECAY * (entryDay * 0.5)); // avg entered halfway
-  const otherWeight = avgOtherRank * 5000 * 1000; // 1000 stakers × 5000 GOLD avg
-  const totalWeight = weight + otherWeight;
-  const yourPoolShare = weight / totalWeight;
-
-  // Payout per cycle
-  const payoutPerCycle = poolETH * yourPoolShare;
-  const payoutPerCycleUSD = payoutPerCycle * ETH_PRICE;
-
-  // How many cycles you catch (tier days / cycle length)
-  // Cycle length = tier days (you catch 1 full cycle payout)
-  // But if staking for max (3888), you catch all shorter cycles too
-  // Simplified: you earn 1 payout for your chosen tier
-  const cyclesCaught = 1; // simplified for now
-  const totalETH = payoutPerCycle * cyclesCaught;
-  const totalETHusd = totalETH * ETH_PRICE;
-
-  // Day 1 parity
-  const day1Rank = RANK_START;
-  const day1Weight = day1Rank * amt;
-  const goldForParity = (day1Rank / rank) * amt;
-  const costForParity = goldForParity * price;
-  const multiplier = day1Rank / rank;
-
-  // Update UI
-  document.getElementById('st-rank').textContent = commas(Math.round(rank));
-  document.getElementById('st-rank-sub').textContent = `Day ${entryDay} · ${rankPctOfMax.toFixed(1)}% of max rank`;
-
-  document.getElementById('st-weight').textContent = fmtRank(weight);
-  document.getElementById('st-weight-sub').textContent = commas(Math.round(rank)) + ' × ' + commas(amt) + ' GOLD';
-
-  document.getElementById('st-payout').textContent = payoutPerCycle.toFixed(4) + ' ETH';
-  document.getElementById('st-payout-sub').textContent = usd(payoutPerCycleUSD) + ' · ' + pct(yourPoolShare) + ' of pool';
-
-  document.getElementById('st-tier').textContent = tier.emoji + ' ' + tier.label + ' (' + (tier.days < 365 ? tier.days + ' days' : (tier.days/365).toFixed(1) + ' yrs') + ')';
-  document.getElementById('st-alloc').textContent = (tierPcts[selectedTier] * 100).toFixed(1) + '% of all staker fees';
-  document.getElementById('st-lock').textContent = tier.days + ' days';
-  document.getElementById('st-cycles').textContent = cyclesCaught.toString();
-  document.getElementById('st-total-eth').textContent = totalETH.toFixed(4) + ' ETH (' + usd(totalETHusd) + ')';
-
-  document.getElementById('st-parity-cost').textContent = usd(costForParity);
-  document.getElementById('st-parity-gold').textContent = commas(Math.round(goldForParity)) + ' GOLD';
-  document.getElementById('st-parity-mult').textContent = multiplier.toFixed(1) + 'x more than Day 1';
-}
-
-// ═══ INIT ═══
-document.getElementById('price-sl').value = p2s(0.10);
-buildTierGrid();
-calcMine();
-calcStake();
 </script>
 </body>
 </html>

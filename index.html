@@ -80,7 +80,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:12px 3
 
 /* Help */
 .hb{width:13px;height:13px;border-radius:50%;border:1px solid var(--border);background:var(--card);font-size:7px;color:var(--dim);cursor:pointer;display:flex;align-items:center;justify-content:center}
-.ht{font-size:8px;color:var(--dim);background:var(--card);border-radius:4px;padding:5px 7px;margin-bottom:5px;line-height:1.4;display:none;border:1px solid var(--border)}.ht.open{display:block}
+.ht{font-size:10px;color:var(--dim);background:var(--card);border-radius:6px;padding:8px 10px;margin-bottom:8px;line-height:1.6;display:none;border:1px solid var(--border)}.ht.open{display:block}.ht b{color:var(--text);font-weight:700}
 
 /* Stat boxes */
 .sr{display:flex;gap:6px;margin-bottom:14px}
@@ -200,7 +200,7 @@ footer{text-align:center;font-size:7px;color:var(--dim3);letter-spacing:2px;padd
 
 <!-- ═══ MINE ═══ -->
 <div class="page active" id="page-mine">
-  <div class="page-header"><h1>MINE</h1><p>Burn XEN → Mint GOLD · Longer locks earn exponentially more</p></div>
+  <div class="page-header"><h1>MINE</h1><p>Burn XEN → Mint GOLD · 21M hard cap · Longer locks earn exponentially more</p></div>
   <div class="stb">
     <div class="stp"><div class="stl">MINTED</div><div class="stv" style="color:var(--purple)" id="m-mt">0%</div></div>
     <div class="stp"><div class="stl">SUPPLY</div><div class="stv" style="color:var(--gold)" id="m-sp">—</div></div>
@@ -214,10 +214,10 @@ footer{text-align:center;font-size:7px;color:var(--dim3);letter-spacing:2px;padd
   </div>
   <div class="roi-bar"><div class="roi-badge roi-pos" id="mr">+0% ROI</div><div class="roi-label">RETURN ON INVESTMENT</div></div>
   <div class="ig">
-    <div class="ib ib-pr"><div class="ib-lbl lv">PROTOCOL DAY <button class="hb" onclick="t('hd')">?</button></div><div class="ht" id="hd">Day 1=launch. Higher=more minted, costlier.</div><div class="ri"><div class="rl">Day</div><input class="ni" type="number" id="di" value="1" min="1" max="5000" oninput="oD()"></div><input type="range" class="sl" id="ds" min="1" max="5000" value="1" oninput="oDS()"><div class="se"><span>1</span><span>5000</span></div></div>
-    <div class="ib ib-pk"><div class="ib-lbl lp">BATCHES <button class="hb" onclick="t('hb1')">?</button></div><div class="ht" id="hb1">Each burns 10M XEN. More=bigger share.</div><div class="ri"><div class="rl">Qty</div><input class="ni" type="number" id="bi" value="10" min="1" max="1000" oninput="oB()"><button class="mx" onclick="sM('b')">MAX</button></div><input type="range" class="sl" id="bs" min="1" max="1000" value="10" oninput="oBS()"><div class="se"><span>1</span><span>1K</span></div><div class="isub" id="xe">= 100M XEN</div></div>
-    <div class="ib ib-gd"><div class="ib-lbl lg">MINER LENGTH <button class="hb" onclick="t('hl1')">?</button></div><div class="ht" id="hl1">Cubic multiplier. 1d=1×, 369d≈1.65×, 888d=10×.</div><div class="ri"><div class="rl">Days</div><input class="ni" type="number" id="li" value="369" min="1" max="888" oninput="oL()"><button class="mx" onclick="sM('l')">MAX</button></div><input type="range" class="sl" id="ls" min="1" max="888" value="369" oninput="oLS()"><div class="se"><span>1d (1×)</span><span>888d (10×)</span></div><div class="mb" id="mmb">1.65×</div></div>
-    <div class="ib ib-tl"><div class="ib-lbl lt">COMPETITION + PRICE</div><div class="ri"><div class="rl">Others</div><input class="ni" type="number" id="ci" value="200" min="0" max="50000" oninput="oC()"></div><input type="range" class="sl" id="cs" min="0" max="10000" value="200" oninput="oCS()"><div class="se"><span>Just you</span><span>10K</span></div><div style="margin-top:6px" class="ri"><div class="rl">GOLD $</div><input class="ni" style="color:var(--teal)" type="number" id="pi" value="0.10" step="0.001" min="0.001" oninput="oP()"></div></div>
+    <div class="ib ib-pr"><div class="ib-lbl lv">PROTOCOL DAY <button class="hb" onclick="t('hd')">?</button></div><div class="ht" id="hd">Simulates different protocol ages. <b>Day 1</b> = launch (cheap mining, high emission). <b>Day 1095</b> (Y3) = ~50% minted. <b>Day 3650</b> (Y10) = ~89% minted. <b>Day 5000</b> (Y14) = ~95% minted — mining is nearly done, only crumbs left. Move right to see how mining gets harder and more expensive over time.</div><div class="ri"><div class="rl">Day</div><input class="ni" type="number" id="di" value="1" min="1" max="5000" oninput="oD()"></div><input type="range" class="sl" id="ds" min="1" max="5000" value="1" oninput="oDS()"><div class="se"><span>Day 1 (launch)</span><span>Day 5000 (95% minted)</span></div></div>
+    <div class="ib ib-pk"><div class="ib-lbl lp">BATCHES <button class="hb" onclick="t('hb1')">?</button></div><div class="ht" id="hb1">Each batch burns 10M XEN and costs an ETH fee. More batches = you get a bigger % of today's GOLD emission. But each batch costs ETH, so more batches = higher total cost. Find the sweet spot where your ROI is still positive.</div><div class="ri"><div class="rl">Qty</div><input class="ni" type="number" id="bi" value="10" min="1" max="1000" oninput="oB()"><button class="mx" onclick="sM('b')">MAX</button></div><input type="range" class="sl" id="bs" min="1" max="1000" value="10" oninput="oBS()"><div class="se"><span>1 batch</span><span>1,000 batches</span></div><div class="isub" id="xe">= 100M XEN</div></div>
+    <div class="ib ib-gd"><div class="ib-lbl lg">MINER LENGTH <button class="hb" onclick="t('hl1')">?</button></div><div class="ht" id="hl1">Lock your miner for longer to earn a multiplier on your GOLD. The curve is cubic — flat at first, then rockets near max. <b>1 day = 1×</b> (no bonus). <b>369 days ≈ 1.65×</b> (65% more GOLD). <b>888 days = 10×</b> (10x more GOLD for same cost!). Always go longer if you can.</div><div class="ri"><div class="rl">Days</div><input class="ni" type="number" id="li" value="369" min="1" max="888" oninput="oL()"><button class="mx" onclick="sM('l')">MAX</button></div><input type="range" class="sl" id="ls" min="1" max="888" value="369" oninput="oLS()"><div class="se"><span>1d (1× no bonus)</span><span>888d (10× max!)</span></div><div class="mb" id="mmb">1.65×</div></div>
+    <div class="ib ib-tl"><div class="ib-lbl lt">COMPETITION + PRICE <button class="hb" onclick="t('hcp')">?</button></div><div class="ht" id="hcp"><b>Competition:</b> How many batches other miners create today. You split the daily emission with everyone. More competition = smaller slice for you. On quiet days you get more GOLD. On viral days everyone fights for scraps.<br><br><b>GOLD Price:</b> Estimated market price for ROI calculation. Higher price = your mined GOLD is worth more = better ROI. At launch this will pull from the DEX automatically.</div><div class="ri"><div class="rl">Other batches</div><input class="ni" type="number" id="ci" value="200" min="0" max="50000" oninput="oC()"></div><input type="range" class="sl" id="cs" min="0" max="10000" value="200" oninput="oCS()"><div class="se"><span>Just you (easy!)</span><span>10K (war zone)</span></div><div style="margin-top:6px" class="ri"><div class="rl">GOLD $</div><input class="ni" style="color:var(--teal)" type="number" id="pi" value="0.10" step="0.001" min="0.001" oninput="oP()"></div></div>
   </div>
   <div style="text-align:center;margin-bottom:8px"><button class="db" onclick="toggleDet('md')">▼ DETAILS</button></div>
   <div class="dp" id="md">
@@ -251,9 +251,9 @@ footer{text-align:center;font-size:7px;color:var(--dim3);letter-spacing:2px;padd
     <div class="sb" style="background:var(--pink-bg);border:1px solid var(--pink-bdr)"><div class="sl2" style="color:var(--pink)">PARITY</div><div class="sv2" style="color:var(--pink)" id="sp1">$100</div><div class="ss2" style="color:var(--pink);opacity:.4" id="sp1s">1.0x</div></div>
   </div>
   <div class="ig">
-    <div class="ib ib-gd"><div class="ib-lbl lg">GOLD TO STAKE</div><div class="ri"><div class="rl">Amount</div><input class="ni" type="number" id="sa" value="10000" min="1" oninput="cS()"></div><div class="ri"><div class="rl">Price $</div><input class="ni" style="color:var(--teal)" type="number" id="sx" value="0.10" step="0.01" min="0.001" oninput="cS()"></div></div>
-    <div class="ib ib-pr"><div class="ib-lbl lv">ENTRY DAY <button class="hb" onclick="t('he1')">?</button></div><div class="ht" id="he1">Rank=1B Day 1, decays daily. Later=need more GOLD.</div><div class="ri"><div class="rl">Day</div><input class="ni" type="number" id="ed" value="1" min="1" max="3888" oninput="oE()"></div><input type="range" class="sl" id="es" min="1" max="3888" value="1" oninput="oES()"><div class="se"><span>1</span><span>3888</span></div></div>
-    <div class="ib ib-tl" style="grid-column:span 2"><div class="ib-lbl lt">ETH IN TIER POOL (per cycle)</div><div class="ri"><div class="rl">ETH</div><input class="ni" type="number" id="pe" value="10" step="0.1" min="0.1" oninput="cS()"></div><input type="range" class="sl" id="ps" min="1" max="500" value="100" oninput="oPS()"><div class="se"><span>0.1 quiet</span><span>50 viral</span></div></div>
+    <div class="ib ib-gd"><div class="ib-lbl lg">GOLD TO STAKE <button class="hb" onclick="t('hsa')">?</button></div><div class="ht" id="hsa">How much GOLD you want to lock. More GOLD = higher share weight = bigger cut of the ETH payout pool. The price field is for estimating your dollar value — at launch it'll pull from the DEX.</div><div class="ri"><div class="rl">Amount</div><input class="ni" type="number" id="sa" value="10000" min="1" oninput="cS()"></div><div class="ri"><div class="rl">Price $</div><input class="ni" style="color:var(--teal)" type="number" id="sx" value="0.10" step="0.01" min="0.001" oninput="cS()"></div></div>
+    <div class="ib ib-pr"><div class="ib-lbl lv">ENTRY DAY <button class="hb" onclick="t('he1')">?</button></div><div class="ht" id="he1">Your rank starts at <b>1 Billion</b> on Day 1 and decays every day. The later you enter, the lower your rank. Lower rank = you need to stake MORE GOLD to get the same payout share as Day 1 stakers. This is what rewards early believers — Day 1 stakers with $100 might need someone entering on Year 3 to stake $300+ for the same weight.</div><div class="ri"><div class="rl">Day</div><input class="ni" type="number" id="ed" value="1" min="1" max="3888" oninput="oE()"></div><input type="range" class="sl" id="es" min="1" max="3888" value="1" oninput="oES()"><div class="se"><span>Day 1 (max rank)</span><span>Day 3888 (10.6 yrs)</span></div></div>
+    <div class="ib ib-tl" style="grid-column:span 2"><div class="ib-lbl lt">ETH IN TIER POOL <button class="hb" onclick="t('hpe')">?</button></div><div class="ht" id="hpe">How much ETH is in your tier's payout pool per cycle. This comes from miner fees — more active mining = bigger pools. On quiet days this might be 1-5 ETH. During viral periods it could be 20-50+ ETH. Higher pool = bigger payouts for everyone staking in that tier.</div><div class="ri"><div class="rl">ETH per cycle</div><input class="ni" type="number" id="pe" value="10" step="0.1" min="0.1" oninput="cS()"></div><input type="range" class="sl" id="ps" min="1" max="500" value="100" oninput="oPS()"><div class="se"><span>0.1 ETH (quiet)</span><span>50 ETH (viral)</span></div></div>
   </div>
   <div style="text-align:center;margin-bottom:8px"><button class="db" onclick="toggleDet('sd')">▼ LATE ENTRY TABLE</button></div>
   <div class="dp" id="sd"><table class="tbl"><thead><tr><th>WHEN</th><th>RANK</th><th>PARITY $</th><th>MULT</th></tr></thead><tbody id="ltbl"></tbody></table></div>
@@ -265,7 +265,7 @@ footer{text-align:center;font-size:7px;color:var(--dim3);letter-spacing:2px;padd
   <div class="dash-wrap" id="dash-app"></div>
 </div>
 
-<footer>160,750,000 GOLD · ONE TOKEN PER TROY OZ OF EARTH'S REMAINING GOLD · NOT FINANCIAL ADVICE</footer>
+<footer>21,000,000 GOLD · HARD CAP · SAME SCARCITY AS BITCOIN · NOT FINANCIAL ADVICE</footer>
 
 <script>
 // ═══ THEME ═══
@@ -275,7 +275,7 @@ function toggleDet(i){document.getElementById(i).classList.toggle('open')}
 function showTab(t){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));document.getElementById('page-'+t).classList.add('active');document.querySelector(`[onclick="showTab('${t}')"]`).classList.add('active');if(t==='dash')renderDash()}
 
 // ═══ CONSTANTS ═══
-const C=160750000,XPB=1e7,XP=0.0000000077,EP=2000,BC=0.0001,CE=2.8,DK=0.22;
+const C=21000000,XPB=1e7,XP=0.0000000077,EP=2000,BC=0.0001,CE=2.8,DK=0.22;
 const BS=0.85,BE=0,BM=0.35,BST=10,SS=0.80,SE=0.15;
 const TI=[{d:8,l:"8d",e:"⚡",c:"pk"},{d:28,l:"28d",e:"🌙",c:"pr"},{d:90,l:"90d",e:"🔥",c:"og"},{d:369,l:"369d",e:"⚔",c:"gd"},{d:888,l:"888d",e:"🛡",c:"tl"},{d:1689,l:"1689d",e:"👑",c:"pr"},{d:3888,l:"3888d",e:"💎",c:"gd"}];
 const cMap={pk:'var(--pink)',pr:'var(--purple)',og:'var(--orange)',gd:'var(--gold)',tl:'var(--teal)'};
@@ -309,7 +309,7 @@ function cM(){
   document.getElementById('mp').textContent=usd(tc);document.getElementById('mps').textContent=ef.toFixed(4)+' ETH + '+fmt(xb)+' XEN';
   document.getElementById('me').textContent=fmt(gold)+' GOLD';document.getElementById('mes').textContent='worth '+usd(gv);
   const re=document.getElementById('mr');re.textContent=(roi>=0?'+':'')+(roi*100).toFixed(1)+'% ROI';re.className='roi-badge '+(roi>=0?'roi-pos':'roi-neg');
-  document.getElementById('m-mt').textContent=pct(st.p);document.getElementById('m-sp').textContent=fmt(st.m)+'/160.75M';
+  document.getElementById('m-mt').textContent=pct(st.p);document.getElementById('m-sp').textContent=fmt(st.m)+'/21M';
   document.getElementById('m-cb').textContent=st.cb.toFixed(6);document.getElementById('m-em').textContent=fmt(st.dl)+'/d';
   document.getElementById('mmb').textContent=m.toFixed(2)+'× multiplier';document.getElementById('xe').textContent='= '+co(xb)+' XEN';
   document.getElementById('d1').textContent=ef.toFixed(4)+' ETH ('+usd(eu)+')';document.getElementById('d2').textContent=fmt(xb);
